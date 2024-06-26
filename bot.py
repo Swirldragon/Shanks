@@ -16,3 +16,6 @@ Bot = Client('Bot',
                 "root": "plugins"
             }
             )
+
+bot = Bot()
+bot.run()
