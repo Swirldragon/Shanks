@@ -1,2 +1,3 @@
 # --- For-Bot-Working --------- #
 Pyrogram
+loguru
