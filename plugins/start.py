@@ -1,3 +1,4 @@
+from bot import Bot
 from pyrogram import Client, filters
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
