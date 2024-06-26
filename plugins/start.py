@@ -14,12 +14,14 @@ photos = ( "https://graph.org/file/e93290b99f1a87211ee7c.jpg",
            "https://graph.org/file/4523cccaf531c8fcbdc79.jpg",)
 
 START_TEXT = "Hey {}!\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets."
+ACCEPTED_TEXT = "Hey {user}\n\nYour Request For {chat} Is Accepted ✅"
 
 button = [[        
         InlineKeyboardButton('😊 Help', callback_data = "help"),
         InlineKeyboardButton("🔒 Settings", callback_data = "setting")
     ]]
 keyboard = InlineKeyboardMarkup([[button]])
+
 @Bot.on_message(filters.command("start") & filters.private) 
 async def start_command(client: Client, message: Message):
     image = random.choice(photos)
@@ -28,3 +30,13 @@ async def start_command(client: Client, message: Message):
     name = user.first_name
     chat_id = message.from_user.id
     await message.reply_photo(image, START_TEXT.format(message.from_user.id), disable_web_page_preview=True, reply_markup=keyboard)
+
+#Auto-ReqAccept Function
+
+@Bot.on_chat_join_request()
+async def req_accept(client: Client, message: Message):
+    user_id = message.from_user.id
+    chat_id = message.chat.id
+    await client.approve_chat_join_request(chat_id, user_id)
+    try: await client.send_message(user_id, ACCEPTED_TEXT.format(user=message.from_user.mention, chat=message.chat.title))
+    except Exception as e: print(e)
