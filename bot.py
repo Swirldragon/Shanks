@@ -1,13 +1,26 @@
-from config import API_ID, API_HASH, BOT_TOKEN
+from config import API_ID, API_HASH, BOT_TOKEN, LOGGER
 
+from aiohttp import web
+from plugins import web_server
+
+import pyromod.listen
 from pyrogram import Client
+from pyrogram.enums import ParseMode
+import sys
+from datetime import datetime
 
 class Bot:
   def __init__(self):
-    super().__init__("Bot",
-                     api_id=API_ID,
-                     api_hash=API_HASH,
-                     bot_token=BOT_TOKEN)
+    super().__init__(
+            name="Bot",
+            api_hash=API_HASH,
+            api_id=API_ID,
+            plugins={
+                "root": "plugins"
+            },
+            bot_token=TG_BOT_TOKEN
+        )
+        self.LOGGER = LOGGER
     
   async def start(self):
      await super().start()
