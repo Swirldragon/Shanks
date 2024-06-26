@@ -1,4 +1,6 @@
 # --- For-Bot-Working --------- #
 Pyrogram
 loguru
+# --- For-Web-Response ------- #
+aiohttp
 python-dotenv
