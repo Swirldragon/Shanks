@@ -6,3 +6,5 @@ TgCrypto
 # --- For-Web-Response ------- #
 aiohttp
 python-dotenv
+# --- For-Database ------- #
+mysql-connector-python
