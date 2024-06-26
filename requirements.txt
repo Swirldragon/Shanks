@@ -1,3 +1,4 @@
 # --- For-Bot-Working --------- #
 Pyrogram
 loguru
+dotenv
