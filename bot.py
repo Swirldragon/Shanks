@@ -2,7 +2,7 @@ from config import API_ID, API_HASH, BOT_TOKEN
 
 from pyrogram import Client
 
-class bot:
+class Bot:
   def __init__(self):
     super().__init__("Bot",
                      api_id=API_ID,
