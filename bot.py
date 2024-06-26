@@ -1,4 +1,4 @@
-from config import API_HASH, APP_ID, LOGGER, BOT_TOKEN, PORT
+from config import API_HASH, API_ID, LOGGER, BOT_TOKEN, PORT
 
 from pyrogram import Client
 
