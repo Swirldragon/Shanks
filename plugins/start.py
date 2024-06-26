@@ -13,6 +13,12 @@ photos = ( "https://graph.org/file/e93290b99f1a87211ee7c.jpg",
            "https://graph.org/file/e358de4b9807c4c5a1cd6.jpg",
            "https://graph.org/file/4523cccaf531c8fcbdc79.jpg",)
 
+START_TEXT = "Hey {}!\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets."
+
+button = [[        
+        InlineKeyboardButton('😊 Help', callback_data = "help"),
+        InlineKeyboardButton("🔒 Settings", callback_data = "setting")
+    ]]
 
 @Bot.on_message(filters.command("start") & filters.private) 
 async def start_command(client: Client, message: Message):
@@ -20,13 +26,5 @@ async def start_command(client: Client, message: Message):
     user = await client.get_users(message.from_user.id)
     username = user.username
     name = user.first_name
-    await message.reply(photo=image, caption=f"Hey [{name}](https://t.me/{username})\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets",
-                        reply_markup = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("😊 About Me", callback_data = "about"),
-                    InlineKeyboardButton("🔒 Close", callback_data = "close")
-                ]
-            ]
-        )
-                        )                  
+    chat_id = message.from_user.id
+    Bot.send_photo(chat_id, image, caption=START_TEXT, reply_markup=pyrogram.InlineKeyboardMarkup([[button]]))
