@@ -1,3 +1,16 @@
-from bot import Bot
+from config import API_HASH, API_ID, LOGGER, BOT_TOKEN, PORT
 
-Bot().run()
+from pyrogram import Client
+
+class Bot(Client):
+    def __init__(self):
+        super().__init__("my_bot",
+                         api_id=API_ID,
+                         api_hash=API_HASH, 
+                         bot_token=BOT_TOKEN)
+        
+    async def start(self):
+        await super().start()
+        
+    async def stop(self, *args):
+        await super().stop()
