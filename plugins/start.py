@@ -42,6 +42,6 @@ async def start_command(client: Client, message: Message):
     user = await client.get_users(message.from_user.id)
     username = user.username
     name = user.first_name
-    await message.reply(photo=image, caption=f"Hey [{name}](https://t.me/{username}) I'm alive"
+    await message.reply(photo=image, caption=f"Hey [{name}](https://t.me/{username})\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets",
                            reply_markup=InlineKeyboardMarkup(buttons),
                           )
