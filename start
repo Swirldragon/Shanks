@@ -1,6 +1,0 @@
-echo "started"
-rm -rf Rename
-git clone https://github.com/Dra-Sama/Rename.git
-cd Rename
-pip install --quiet -r requirements.txt
-python3 -m main.py
