@@ -19,8 +19,8 @@ class Bot:
                 "root": "plugins"
             },
             bot_token=TG_BOT_TOKEN
-        )
-        self.LOGGER = LOGGER
+    )
+    self.LOGGER = LOGGER
     
   async def start(self):
      await super().start()
