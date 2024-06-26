@@ -35,7 +35,7 @@ class Database:
                 password=self.password,
                 read_timeout=self.timeout,
                 port=self.port,
-                user="self.user,
+                user=self.user,
                 write_timeout=self.timeout,
             )
             
