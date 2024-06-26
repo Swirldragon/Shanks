@@ -6,7 +6,7 @@ from loguru import logger
 
 charset = "utf8mb4"
 cursor = "pymysql.cursors.DictCursor"
-db = "defaultdb"
+databasez = "defaultdb"
 host = "shanks-justatestsubject-c98a.h.aivencloud.com"
 password = "AVNS_uxSiv4oYViwH83p8Lbe"
 port = 26463
@@ -20,7 +20,7 @@ class Database:
         self.host = host
         self.user = user
         self.password = password
-        self.database = db
+        self.database = databasez
         self.charset = charset
         self.port = port
         self.timeout = timeout
@@ -118,4 +118,4 @@ class Database:
         self.cursor.execute("SELECT * FROM users WHERE id=%s", (id,))
         return self.cursor.fetchone()
 
-db = Database(charset, cursor, db, host, password, timeout, user, cursor, "Rename")
+DB = Database(charset, cursor, databasez, host, password, timeout, user, cursor, "Rename")
