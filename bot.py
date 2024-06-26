@@ -27,7 +27,7 @@ class Bot(Client):
         self.uptime = datetime.now()
         
         self.set_parse_mode(ParseMode.HTML)
-        self.LOGGER(__name__).info(f"Bot Running..!)
+        self.LOGGER(__name__).info(f"Bot Running..!")
         self.LOGGER(__name__).info(f"Bot Run")
         self.username = usr_bot_me.username
         #web-response
