@@ -29,7 +29,7 @@ class Database:
             write_timeout=timeout,
         )
         try:
-            cursor = connection.cursor()
+            cursor = self.connection.cursor()
             cursor.execute("""CREATE TABLE users (
                            id INT PRIMARY KEY,
                            join_date DATE,
