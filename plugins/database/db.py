@@ -40,9 +40,8 @@ class Database:
                            )
                            """)
             self.connection.commit()
-        finally:
-            cursor.close()
-            self.connection.close()
+        except Error as e:
+            logger(f"Error: {e}")
 
     def new_user(self, id):
         return {
