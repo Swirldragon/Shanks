@@ -19,7 +19,7 @@ button = [[
         InlineKeyboardButton('😊 Help', callback_data = "help"),
         InlineKeyboardButton("🔒 Settings", callback_data = "setting")
     ]]
-
+keyboard = InlineKeyboardMarkup([[button]])
 @Bot.on_message(filters.command("start") & filters.private) 
 async def start_command(client: Client, message: Message):
     image = random.choice(photos)
@@ -27,4 +27,4 @@ async def start_command(client: Client, message: Message):
     username = user.username
     name = user.first_name
     chat_id = message.from_user.id
-    Bot.send_photo(chat_id, image, caption=START_TEXT, reply_markup=pyrogram.InlineKeyboardMarkup([[button]]))
+    Bot.send_photo(chat_id, image, caption=START_TEXT, reply_markup=keyboard)
