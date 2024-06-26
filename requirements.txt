@@ -8,3 +8,5 @@ aiohttp
 python-dotenv
 # --- For-Database ------- #
 mysql-connector-python
+cryptography
+pymysql
