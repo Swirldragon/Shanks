@@ -39,11 +39,10 @@ class Database:
                            caption TEXT
                            )
                            """)
-            cnx.commit()
+            self.connection.commit()
         finally:
             cursor.close()
-            cnx.close()
-            connection.close()
+            self.connection.close()
 
     def new_user(self, id):
         return {
