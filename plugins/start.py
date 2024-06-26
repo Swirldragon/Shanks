@@ -27,4 +27,4 @@ async def start_command(client: Client, message: Message):
     username = user.username
     name = user.first_name
     chat_id = message.from_user.id
-    Bot.send_photo(chat_id, image, caption=START_TEXT, reply_markup=keyboard)
+    await message.reply_text(image, START_TEXT.format(message.from_user.id), disable_web_page_preview=True, reply_markup=keyboard)
