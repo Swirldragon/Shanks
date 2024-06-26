@@ -1,26 +1,55 @@
 import datetime
 import mysql.connector
 from mysql.connector import Error
+import pymysql
+from loguru import logger
+
+charset = "utf8mb4"
+cursor = "pymysql.cursors.DictCursor"
+db = "defaultdb"
+host = "shanks-justatestsubject-c98a.h.aivencloud.com"
+password = "AVNS_uxSiv4oYViwH83p8Lbe"
+port = 26463
+user = "avnadmin"
+timeout = 10
 
 class Database:
-    def __init__(self, host, user, password, database):
+    def __init__(self, charset, cursor, db, host, password, port, user, timeout):
         self.connection = None
-        self.cursor = None
+        self.cursor = cursor
         self.host = host
         self.user = user
         self.password = password
-        self.database = database
+        self.database = db
+        self.charset = charset
+        self.port = port
+        self.timeout = timeout
 
         try:
-            self.connection = mysql.connector.connect(
+            self.connection = pymysql.connect(
+                charset=self.charset,
+                connect_timeout=self.timeout,
+                cursorclass=self.cursor,
+                db=self.database",
                 host=self.host,
-                user=self.user,
                 password=self.password,
-                database=self.database
+                read_timeout=self.timeout,
+                port=self.port,
+                user="self.user,
+                write_timeout=self.timeout,
             )
-            self.cursor = self.connection.cursor()
+            
         except Error as e:
-            print(f"Error: {e}")
+            logger.info(f"Error: {e}")
+            
+        try:
+            cursor = connection.cursor()
+            cursor.execute("CREATE TABLE mytest (id INTEGER PRIMARY KEY)")
+            cursor.execute("INSERT INTO mytest (id) VALUES (1), (2)")
+            cursor.execute("SELECT * FROM mytest")
+            
+        except Error as e:
+            logger.info(f"Error: {e}")
 
     def new_user(self, id):
         return {
@@ -89,4 +118,4 @@ class Database:
         self.cursor.execute("SELECT * FROM users WHERE id=%s", (id,))
         return self.cursor.fetchone()
 
-db = Database(Config.MYSQL_HOST, Config.MYSQL_USER, Config.MYSQL_PASSWORD, "Rename")
+db = Database(charset, cursor, db, host, password, timeout, user, cursor, "Rename")
