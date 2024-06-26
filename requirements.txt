@@ -1,6 +1,7 @@
 # --- For-Bot-Working --------- #
 Pyrogram
 loguru
+pyromod==1.5
 # --- For-Web-Response ------- #
 aiohttp
 python-dotenv
