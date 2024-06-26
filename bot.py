@@ -1,7 +1,7 @@
 from config import API_ID, API_HASH, BOT_TOKEN, LOGGER
 
 from aiohttp import web
-from plugins import web_server
+import web_server
 
 import pyromod.listen
 from pyrogram import Client
