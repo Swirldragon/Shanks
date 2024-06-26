@@ -2,7 +2,7 @@ from pyrogram import __version__
 from bot import Bot
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-AUTO-TEXT = "☆ Auto-ReqAccept:\n\n↳ Add Me In Your Channel To Use\n↳ I Auto Accept The Users To Channel\n\n↳ Made By @Wizard_Bots."
+AUTO-TEXT == "☆ Auto-ReqAccept:\n\n↳ Add Me In Your Channel To Use\n↳ I Auto Accept The Users To Channel\n\n↳ Made By @Wizard_Bots."
 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
