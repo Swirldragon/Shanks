@@ -1,4 +1,4 @@
 # --- For-Bot-Working --------- #
 Pyrogram
 loguru
-dotenv
+python-dotenv
