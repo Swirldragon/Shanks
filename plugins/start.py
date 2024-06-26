@@ -13,7 +13,7 @@ photos = ( "https://graph.org/file/e93290b99f1a87211ee7c.jpg",
            "https://graph.org/file/4523cccaf531c8fcbdc79.jpg",)
 
 
-@Bot.on_message(filters.command('start') & filters.private & subscribed)
+@Bot.on_message(filters.command("start") & filters.private) 
 async def start_command(client: Client, message: Message):
     image = random.choice(photos)
     user = await client.get_users(message.from_user.id)
