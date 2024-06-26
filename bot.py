@@ -1,5 +1,12 @@
-from config import API_HASH, APP_ID, LOGGER, BOT_TOKEN, PORT
+import pyromod.listen
+from pyrogram import Client
+from pyrogram.enums import ParseMode
+import sys
 from datetime import datetime
+
+from aiohttp import web
+import web_server
+from config import API_HASH, APP_ID, LOGGER, BOT_TOKEN, PORT
 
 class Bot(Client):
     def __init__(self):
