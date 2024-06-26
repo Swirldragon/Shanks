@@ -118,4 +118,4 @@ class Database:
         self.cursor.execute("SELECT * FROM users WHERE id=%s", (id,))
         return self.cursor.fetchone()
 
-DB = Database(charset, cursor, databasez, host, password, timeout, user, cursor, "Rename")
+DB = Database(charset, cursor, databasez, host, password, timeout, user, cursor)
