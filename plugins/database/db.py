@@ -30,7 +30,7 @@ class Database:
                 charset=self.charset,
                 connect_timeout=self.timeout,
                 cursorclass=self.cursor,
-                db=self.database",
+                db=self.database,
                 host=self.host,
                 password=self.password,
                 read_timeout=self.timeout,
