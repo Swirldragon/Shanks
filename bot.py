@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
 
-bot = Client("bot",
+Bot = Client("bot",
              api_id=API_ID,
              api_hash=API_HASH,
              bot_token=BOT_TOKEN)
