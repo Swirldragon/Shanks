@@ -1,0 +1,43 @@
+{
+    "name": "Rename",
+    "description": "Read manga from your favourites websites on telegram.",
+    "keywords": [
+        "manga",
+        "pyrogram",
+        "pdf",
+        "telegram",
+        "bot"
+    ],
+    "stack": "container",
+    "repository": "https://github.com/Dra-Sama/Rename",
+    "success_url": "/welcome",
+    "env": {
+        "API_ID": {
+            "description": "Get this value from https://my.telegram.org/apps",
+            "value": "",
+            "required": true
+        },
+        "API_HASH": {
+            "description": "Get this value from https://my.telegram.org/apps",
+            "value": "",
+            "required": true
+        },
+        "BOT_TOKEN": {
+            "description": "Get this value from @BotFather in telegram",
+            "value":  ""
+            "required": true
+        },
+    },
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "Eco"
+        }
+        },
+    "image": "heroku/python",
+    "addons": [
+        {
+        "plan": "heroku-postgresql"
+        }
+    ]
+}
