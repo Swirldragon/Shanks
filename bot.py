@@ -1,4 +1,4 @@
-
+from config import env_vars
 from aiohttp import web
 import web_server
 
