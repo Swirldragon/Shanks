@@ -1,4 +1,3 @@
-from config import API_ID, API_HASH, BOT_TOKEN, LOGGER
 
 from aiohttp import web
 import web_server
@@ -10,7 +9,9 @@ import sys
 from datetime import datetime
 
 Bot = Client('Bot',
-             bot_token=BOT_TOKEN,
+             api_id=int(env_vars.get('API_ID')),
+             api_hash=env_vars.get('API_HASH'),
+             bot_token=env_vars.get('BOT_TOKEN'),
              plugins={
                 "root": "plugins"
             }
