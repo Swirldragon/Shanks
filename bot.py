@@ -9,21 +9,11 @@ from pyrogram.enums import ParseMode
 import sys
 from datetime import datetime
 
-class Bot:
-  def __init__(self):
-    super().__init__(
-            name="Bot",
-            api_hash=API_HASH,
-            api_id=API_ID,
-            plugins={
+Bot = Client('Bot',
+             api_id=API_ID,
+             api_hash=API_HASH,
+             bot_token=BOT_TOKEN,
+             plugins={
                 "root": "plugins"
-            },
-            bot_token=TG_BOT_TOKEN
-    )
-    self.LOGGER = LOGGER
-    
-  async def start(self):
-     await super().start()
-     
-  async def stop(self, *args):
-     await super().stop()
+            }
+            )
