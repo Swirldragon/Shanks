@@ -1,6 +1,13 @@
+from config import API_ID, API_HASH, BOT_TOKEN
+
 from pyrogram import Client, filters
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
+
+bot = Client("bot",
+             api_id=API_ID,
+             api_hash=API_HASH,
+             bot_token=BOT_TOKEN)
 
 photos = ( "https://graph.org/file/e93290b99f1a87211ee7c.jpg",
            "https://graph.org/file/ccf9d8a22e8220990850d.jpg",
