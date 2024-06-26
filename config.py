@@ -1,10 +1,14 @@
-import os
-import json
+import telegram
 
-env_file = "env.json"
-if os.path.exists(env_file):
-    with open(env_file) as f:
-        env_vars = json.loads(f.read())
-else:
-    env_vars = dict(os.environ)
+# Create a Telegram bot instance
+bot = telegram.Bot(token='YOUR_BOT_TOKEN')
 
+# Set up logging to a Telegram chat
+logging_chat_id = 'YOUR_LOGGING_CHAT_ID'
+bot.send_message(chat_id=logging_chat_id, text='Bot started')
+
+# Handle updates
+def handle_update(update):
+    bot.send_message(chat_id=logging_chat_id, text=f'Received update: {update}')
+
+bot.start_polling()
