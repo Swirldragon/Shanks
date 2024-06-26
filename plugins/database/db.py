@@ -11,45 +11,39 @@ host = "shanks-justatestsubject-c98a.h.aivencloud.com"
 password = "AVNS_uxSiv4oYViwH83p8Lbe"
 port = 26463
 user = "avnadmin"
-timeout = 10
+
 
 class Database:
-    def __init__(self, charset, cursor, db, host, password, port, user, timeout):
-        self.connection = None
-        self.cursor = cursor
-        self.host = host
-        self.user = user
-        self.password = password
-        self.database = databasez
-        self.charset = charset
-        self.port = port
-        self.timeout = timeout
-
-        try:
-            self.connection = pymysql.connect(
-                charset=self.charset,
-                connect_timeout=self.timeout,
-                cursorclass=self.cursor,
-                db=self.database,
-                host=self.host,
-                password=self.password,
-                read_timeout=self.timeout,
-                port=self.port,
-                user=self.user,
-                write_timeout=self.timeout,
-            )
-            
-        except Error as e:
-            logger.info(f"Error: {e}")
-            
+    def __init__(self):
+        timeout = 10
+        self.connection = pymysql.connect(
+            charset="utf8mb4",
+            connect_timeout=timeout,
+            cursorclass=pymysql.cursors.DictCursor,
+            db="defaultdb",
+            host="shanks-justatestsubject-c98a.h.aivencloud.com",
+            password="AVNS_uxSiv4oYViwH83p8Lbe",
+            read_timeout=timeout,
+            port=26463,
+            user="avnadmin",
+            write_timeout=timeout,
+        )
         try:
             cursor = connection.cursor()
-            cursor.execute("CREATE TABLE mytest (id INTEGER PRIMARY KEY)")
-            cursor.execute("INSERT INTO mytest (id) VALUES (1), (2)")
-            cursor.execute("SELECT * FROM mytest")
-            
-        except Error as e:
-            logger.info(f"Error: {e}")
+            cursor.execute("""CREATE TABLE users (
+                           id INT PRIMARY KEY,
+                           join_date DATE,
+                           apply_caption BOOLEAN,
+                           upload_as_doc BOOLEAN,
+                           thumbnail BLOB,
+                           caption TEXT
+                           )
+                           """)
+            cnx.commit()
+        finally:
+            cursor.close()
+            cnx.close()
+            connection.close()
 
     def new_user(self, id):
         return {
@@ -118,4 +112,4 @@ class Database:
         self.cursor.execute("SELECT * FROM users WHERE id=%s", (id,))
         return self.cursor.fetchone()
 
-DB = Database(charset, cursor, databasez, host, password, timeout, user, cursor)
+DB = Database()
