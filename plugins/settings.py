@@ -12,13 +12,13 @@ from bot import Bot
 @Bot.on_message(filters.command("settings") & filters.private) 
 async def show_settings(client: Client, message: Message):
     usr_id = message.chat.id
-    user_data = await db.get_user_data(usr_id)
+    user_data = db.get_user_data(usr_id)
     if not user_data:
-        await m.edit("Failed to fetch your data from database!")
+        await message.edit("Failed to fetch your data from database!")
         return
-    upload_as_doc = user_data.get("upload_as_doc", True)
+    upload_as_doc = user_data.get("upload_as_doc", False)
     caption = user_data.get("caption", None)
-    apply_caption = user_data.get("apply_caption", True)
+    apply_caption = user_data.get("apply_caption", False)
     thumbnail = user_data.get("thumbnail", None)
     buttons_markup = [
         [types.InlineKeyboardButton(f"𝚄𝙿𝙻𝙾𝙰𝙳𝙴𝙳 𝙰𝚂 𝙳𝙾𝙲𝚄𝙼𝙴𝙽𝚃 {'✅' if upload_as_doc else '🗑️'}",
