@@ -1,6 +1,6 @@
 from random import choice
 from plugins.start import photos
-from plugins.database.db import DB
+from plugins.database.db import db
 
 import asyncio
 from pyrogram import types, errors, Client, filters
