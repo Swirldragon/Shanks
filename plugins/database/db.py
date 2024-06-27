@@ -112,4 +112,4 @@ class Database:
         self.cursor.execute("SELECT * FROM users WHERE id=%s", (id,))
         return self.cursor.fetchone()
 
-DB = Database()
+db = Database()
