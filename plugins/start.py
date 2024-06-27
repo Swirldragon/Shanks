@@ -44,3 +44,9 @@ async def req_accept(client: Client, message: Message):
 async def start_process(client: Client, message: Message):
            image = random.choice(photos)
            await message.reply_photo(photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=message.from_user.id)
+
+
+@Bot.on_callback_query()
+async def cb_help(client: Bot, query: CallbackQuery):
+           data = query.data
+           if data == "help":
