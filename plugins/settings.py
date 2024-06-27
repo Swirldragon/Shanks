@@ -4,6 +4,7 @@ from plugins.database.db import DB
 
 import asyncio
 from pyrogram import types, errors
+from bot import Bot
 
 @Bot.on_message(filters.command("settings") & filters.private) 
 async def show_settings(client: Client, message: Message):
