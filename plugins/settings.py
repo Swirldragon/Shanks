@@ -14,7 +14,7 @@ async def show_settings(client: Client, message: Message):
     usr_id = message.chat.id
     user_data = db.get_user_data(usr_id)
     if not user_data:
-        await message.edit("Failed to fetch your data from database!")
+        await message.reply_text("Failed to fetch your data from database!")
         return
     upload_as_doc = user_data.get("upload_as_doc", False)
     caption = user_data.get("caption", None)
