@@ -3,8 +3,11 @@ from plugins.start import photos
 from plugins.database.db import DB
 
 import asyncio
-from pyrogram import types, errors
+from pyrogram import types, errors, Client, filters
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
+
 from bot import Bot
+
 
 @Bot.on_message(filters.command("settings") & filters.private) 
 async def show_settings(client: Client, message: Message):
