@@ -35,7 +35,7 @@ class Database:
                            join_date DATE,
                            apply_caption BOOLEAN,
                            upload_as_doc BOOLEAN,
-                           thumbnail BLOB,
+                           thumbnail TEXT,
                            caption TEXT
                            )
                            """)
@@ -47,7 +47,7 @@ class Database:
         return {
             'id': id,
             'join_date': datetime.date.today().isoformat(),
-            'apply_caption': True,
+            'apply_caption': False,
             'upload_as_doc': False,
             'thumbnail': None,
             'caption': None
