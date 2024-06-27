@@ -29,7 +29,7 @@ async def start_command(client: Client, message: Message):
     username = user.username
     name = user.first_name
     chat_id = message.from_user.id
-    await message.reply_photo(image, START_TEXT.format(message.from_user.id), disable_web_page_preview=True, reply_markup=keyboard)
+    await message.reply_photo(photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=message.from_user.id)
 
 #Auto-ReqAccept Function
 
