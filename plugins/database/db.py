@@ -28,21 +28,23 @@ class Database:
             user="avnadmin",
             write_timeout=timeout,
         )
+        self.cursor = self.connection.cursor()  # Initialize cursor here
+        self.create_table_if_not_exists()
+        
+    def create_table_if_not_exists(self):
         try:
-            cursor = self.connection.cursor()
-            cursor.execute("""CREATE TABLE users (
-                           id INT PRIMARY KEY,
-                           join_date DATE,
-                           apply_caption BOOLEAN,
-                           upload_as_doc BOOLEAN,
-                           thumbnail TEXT,
-                           caption TEXT
-                           )
-                           """)
+            self.cursor.execute("""CREATE TABLE IF NOT EXISTS users (
+                                join_date DATE,
+                                apply_caption BOOLEAN,
+                                upload_as_doc BOOLEAN,
+                                thumbnail TEXT,
+                                caption TEXT
+                                )
+                                """)
             self.connection.commit()
-        except Error as e:
+        except pymysql.Error as e:
             logger(f"Error: {e}")
-
+                                
     def new_user(self, id):
         return {
             'id': id,
