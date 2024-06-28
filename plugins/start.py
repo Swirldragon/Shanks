@@ -20,7 +20,7 @@ button = [[
     ]]
 keyboard = InlineKeyboardMarkup([[button]])
 
-@Bot.on_message(filters.command("start") & filters.private) 
+@Bot.on_message(filters=filters.command(['start'])) 
 async def start_command(client: Client, message: Message):
     image = random.choice(photos)
     user = await client.get_users(message.from_user.id)
@@ -40,7 +40,7 @@ async def req_accept(client: Client, message: Message):
     except Exception as e: print(e)
 
 
-@Bot.on_message(filters.command("start") & filters.group) 
+@Bot.on_message(filters=filters.command(['start']) & filters.group) 
 async def start_process(client: Client, message: Message):
            image = random.choice(photos)
            await message.reply_photo(photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=message.from_user.id)
