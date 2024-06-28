@@ -22,21 +22,21 @@ keyboard = InlineKeyboardMarkup([[button]])
 
 @Bot.on_message(filters=filters.command(['start'])) 
 async def start_command(client: Client, message: Message):
-    image = random.choice(photos)
-    user = await client.get_users(message.from_user.id)
-    username = user.username
-    name = user.first_name
-    await client.send_photo(chat_id=message.from_user.id, photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
-
+           image = random.choice(photos)
+           if not message.from_user:
+                      return await message.reply_text("I don't know about you sir :(")
+           await add_user_to_database(client, message)
+           await client.send_photo(chat_id=message.from_user.id, photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
+        
 #Auto-ReqAccept Function
 
 @Bot.on_chat_join_request()
 async def req_accept(client: Client, message: Message):
-    user_id = message.from_user.id
-    chat_id = message.chat.id
-    await client.approve_chat_join_request(chat_id, user_id)
-    try: await client.send_message(user_id, ACCEPTED_TEXT.format(user=message.from_user.mention, chat=message.chat.title))
-    except Exception as e: print(e)
+           user_id = message.from_user.id
+           chat_id = message.chat.id
+           await client.approve_chat_join_request(chat_id, user_id)
+           try: await client.send_message(user_id, ACCEPTED_TEXT.format(user=message.from_user.mention, chat=message.chat.title))
+           except Exception as e: print(e)
 
 
 @Bot.on_message(filters=filters.command(['start']) & filters.group) 
