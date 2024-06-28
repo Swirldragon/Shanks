@@ -1,4 +1,4 @@
-from YorForger import LOAD, LOGGER, NO_LOAD
+from bot import LOAD, LOGGER, NO_LOAD
 
 
 def __list_all_modules():
