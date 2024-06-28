@@ -1,8 +1,4 @@
 from pyrogram import Client
-import logging
-import os
-import sys
-
 
 
 API_ID = 18208497
