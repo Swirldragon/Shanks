@@ -7,7 +7,6 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 photos = ( "https://graph.org/file/0c85bf7ce08bbb2bdd7b4.jpg",
            "https://graph.org/file/f99c470a76c65a1e1232d.jpg",
            "https://graph.org/file/ffbc541990d0489cbb538.jpg",
-           "https://graph.org/file/4ac10607462346840a323.jpg",
            "https://graph.org/file/c3baa04ca9365e4e11dac.jpg",)
 
 START_TEXT = "Hey {}!\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets."
