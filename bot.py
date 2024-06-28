@@ -1,8 +1,20 @@
 from pyrogram import Client
+import logging
+import os
+import sys
 
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.FileHandler('log.txt'),
+              logging.StreamHandler()],
+    level=logging.INFO)
+
+LOGGER = logging.getLogger(__name__)
 
 API_ID = 18208497
 API_HASH = "b9f8cdba86d3406944419974334e34d5"
 BOT_TOKEN = "5170934938:AAHWTgb6FH676fzS-JI3lxxomESplXS8ai0"
+NO_LOAD = os.environ.get("NO_LOAD", "translation").split()
+LOAD = os.environ.get("LOAD", "").split
 
 Bot = Client(name='Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN,  plugins={"root": "plugins"})
