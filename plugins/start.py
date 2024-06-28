@@ -24,7 +24,7 @@ async def start_command(client: Client, message: Message):
     username = user.username
     name = user.first_name
     chat_id = message.from_user.id
-    await message.reply_photo(photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=chat_id)
+    await message.send_photo(photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
 
 #Auto-ReqAccept Function
 
@@ -40,7 +40,7 @@ async def req_accept(client: Client, message: Message):
 @Bot.on_message(filters=filters.command(['start']) & filters.group) 
 async def start_process(client: Client, message: Message):
            image = random.choice(photos)
-           await message.reply_photo(photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button), reply_to_message_id=message.from_user.id)
+           await message.send_photo(photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
 
 
 @Bot.on_callback_query()
