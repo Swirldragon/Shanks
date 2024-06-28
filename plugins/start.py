@@ -50,3 +50,4 @@ async def start_process(client: Client, message: Message):
 async def cb_help(client: Bot, query: CallbackQuery):
            data = query.data
            if data == "help":
+                      pass
