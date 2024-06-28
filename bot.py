@@ -3,13 +3,7 @@ import logging
 import os
 import sys
 
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler('log.txt'),
-              logging.StreamHandler()],
-    level=logging.INFO)
 
-LOGGER = logging.getLogger(__name__)
 
 API_ID = 18208497
 API_HASH = "b9f8cdba86d3406944419974334e34d5"
