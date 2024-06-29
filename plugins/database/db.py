@@ -3,15 +3,9 @@ import mysql.connector
 from mysql.connector import Error
 import pymysql
 from loguru import logger
+import sqlite3
 
-charset = "utf8mb4"
-cursor = "pymysql.cursors.DictCursor"
-databasez = "defaultdb"
-host = "shanks-justatestsubject-c98a.h.aivencloud.com"
-password = "AVNS_uxSiv4oYViwH83p8Lbe"
-port = 26463
-user = "avnadmin"
-
+conn = sqlite3.connect('user_data.db')
 
 class Database:
     def __init__(self):
@@ -33,12 +27,13 @@ class Database:
         
     def create_table_if_not_exists(self):
         try:
-            self.cursor.execute("""CREATE TABLE IF NOT EXISTS users (
-                                join_date DATE,
-                                apply_caption BOOLEAN,
-                                upload_as_doc BOOLEAN,
-                                thumbnail TEXT,
-                                caption TEXT
+            self.cursor.execute("""
+                                CREATE TABLE IF NOT EXISTS users (
+                                user_id INTEGER PRIMARY KEY,
+                                thumbnail BLOB,
+                                file_caption TEXT,
+                                email TEXT,
+                                password TEXT
                                 )
                                 """)
             self.connection.commit()
