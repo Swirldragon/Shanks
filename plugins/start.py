@@ -19,14 +19,12 @@ button = [[
         InlineKeyboardButton('* Help *', url= "https://t.me/ShanksXRobot?start=help"),
         InlineKeyboardButton("* Settings *", callback_data = "setting")
     ]]
-keyboard = InlineKeyboardMarkup([[button]])
+
+
 
 @Bot.on_message(filters=filters.command(['start'])) 
 async def start_command(client: Client, message: Message):
            image = random.choice(photos)
-           if not message.from_user:
-                      return await message.reply_text("I don't know about you sir :(")
-           await add_user_to_database(client, message)
            await client.send_photo(chat_id=message.from_user.id, photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
         
 #Auto-ReqAccept Function
@@ -45,9 +43,3 @@ async def start_process(client: Client, message: Message):
            image = random.choice(photos)
            await client.send_photo(chat_id=message.from_user.id, photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
 
-
-@Bot.on_callback_query()
-async def cb_help(client: Bot, query: CallbackQuery):
-           data = query.data
-           if data == "help":
-                      pass
