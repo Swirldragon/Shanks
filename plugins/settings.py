@@ -46,7 +46,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         InlineKeyboardButton("MEGA PASSWORD", callback_data = "megapass"),
                    ]
                 ]
-            )     
+            )
+        )
         
                         
 """"""""""" @Bot.on_message(filters.command("settings") & filters.private) 
