@@ -1,0 +1,64 @@
+"""""" from pyrogram import Client, filters
+from pyrogram.types import Message
+import mysql.connector
+
+# Define the bot token
+API_ID = 123456
+API_HASH = "your_api_hash"
+BOT_TOKEN = "your_bot_token"
+
+# Define the MySQL database connection
+db_username = "your_db_username"
+db_password = "your_db_password"
+db_host = "your_db_host"
+db_name = "your_db_name"
+
+# Create the bot
+app = Client("my_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+
+# Create a MySQL connection
+cnx = mysql.connector.connect(
+    user=db_username,
+    password=db_password,
+    host=db_host,
+    database=db_name
+)
+cursor = cnx.cursor()
+
+@app.on_message(filters.command("start"))
+async def start(client, message: Message):
+    user_id = message.from_user.id
+    cursor.execute("INSERT INTO users (user_id) VALUES (%s)", (user_id,))
+    cnx.commit()
+    await message.reply("Welcome! I'll save your information.")
+
+@app.on_message(filters.photo)
+async def save_thumbnail(client, message: Message):
+    user_id = message.from_user.id
+    thumbnail = await message.download()
+    cursor.execute("UPDATE users SET thumbnail = %s WHERE user_id = %s", (thumbnail, user_id))
+    cnx.commit()
+    await message.reply("Thumbnail saved!")
+
+@app.on_message(filters.caption)
+async def save_file_caption(client, message: Message):
+    user_id = message.from_user.id
+    file_caption = message.caption
+    cursor.execute("UPDATE users SET file_caption = %s WHERE user_id = %s", (file_caption, user_id))
+    cnx.commit()
+    await message.reply("File caption saved!")
+
+@app.on_message(filters.text)
+async def save_email_or_password(client, message: Message):
+    user_id = message.from_user.id
+    text = message.text
+    if "@" in text:
+        cursor.execute("UPDATE users SET email = %s WHERE user_id = %s", (text, user_id))
+        cnx.commit()
+        await message.reply("Email saved!")
+    else:
+        cursor.execute("UPDATE users SET password = %s WHERE user_id = %s", (text, user_id))
+        cnx.commit()
+        await message.reply("Password saved!")
+
+app.run()  """"""
