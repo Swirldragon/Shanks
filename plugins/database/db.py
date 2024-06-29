@@ -5,6 +5,7 @@ from pyrogram.types import Message
 
 ADMINS = 1880221341
 timeout = 10
+
 # Create a MySQL connection
 cnx = pymysql.connect(
     charset="utf8mb4",
