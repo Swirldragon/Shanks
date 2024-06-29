@@ -7,7 +7,7 @@ ADMINS = 1880221341
 timeout = 10
 
 # Create a MySQL connection
-cnx = pymysql.connect(
+conn = pymysql.connect(
     charset="utf8mb4",
     connect_timeout=timeout,
     cursorclass=pymysql.cursors.DictCursor,
