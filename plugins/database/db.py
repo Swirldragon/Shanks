@@ -1,6 +1,9 @@
 import pymysql
+from bot import Bot
+from pyrogram import Client, filters
+from pyrogram.types import Message
 
-
+ADMINS = 1880221341
 
 # Create a MySQL connection
 cnx = pymysql.connect(
@@ -32,6 +35,15 @@ cursor.execute("""
 """)
 cnx.commit()
 
-# Close the cursor and connection
-cursor.close()
-cnx.close()
+@Bot.on_message(filters.private & filters.command('view_data') & filters.user(ADMINS))
+async def view_data(client, message):
+    cursor.execute("SELECT * FROM users")
+    results = cursor.fetchall()
+    output = "Saved Data:\n"
+    for row in results:
+        output += f"User ID: {row['user_id']}\n"
+        output += f"Thumbnail: {row['thumbnail']}\n"
+        output += f"File Caption: {row['file_caption']}\n"
+        output += f"Email: {row['email']}\n"
+        output += f"Password: {row['password']}\n\n"
+    await message.reply(output)
