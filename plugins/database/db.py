@@ -34,7 +34,6 @@ cursor.execute("""
         PRIMARY KEY (id)
     );
 """)
-cnx.commit()
 
 @Bot.on_message(filters.private & filters.command('view_data') & filters.user(ADMINS))
 async def view_data(client, message):
