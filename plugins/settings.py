@@ -10,9 +10,9 @@ from bot import Bot
 
 setting_b = [
             [InlineKeyboardButton('* Rename *', callback_data = "rename"),
-             InlineKeyboardButton("* Request Approval *", callback_data = "f2l")]
+            InlineKeyboardButton("* Request Approval *", callback_data = "f2l")]
             [InlineKeyboardButton("* PDf *", callback_data = "pdf"),
-             InlineKeyboardButton("* Converter *", callback_data = "converter")]
+            InlineKeyboardButton("* Converter *", callback_data = "converter")]
             ]
 
 @Bot.on_message(filters=filters.command(['setting'])) 
