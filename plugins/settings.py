@@ -8,6 +8,12 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 
 from bot import Bot
 
+[
+        [InlineKeyboardButton("ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink)], 
+        [InlineKeyboardButton("ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2", url=client.invitelink2)], 
+        [InlineKeyboardButton("ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3", url=client.invitelink3)], 
+        [InlineKeyboardButton("ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 4", url=client.invitelink4)],
+    ]
 setting_b = [
             [InlineKeyboardButton("* Rename *", callback_data = "rename"),
             InlineKeyboardButton("* Request Approval *", callback_data = "f2l")]
