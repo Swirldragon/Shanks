@@ -19,6 +19,9 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         [InlineKeyboardButton("𝚂𝙴𝚃 𝚃𝙷𝚄𝙼𝙱𝙽𝙰𝙸𝙻", callback_data = "setThumbnail")],
                         [InlineKeyboardButton("MEGA EMAIL", callback_data = "megaemail")],
                         [InlineKeyboardButton("MEGA PASSWORD", callback_data = "megapass")],
+                        [InlineKeyboardButton("Auto Rename", callback_data = "auto_rename")],
+                        [InlineKeyboardButton("Close", callback_data = "close")],
                 ]
             )
         )
+  
