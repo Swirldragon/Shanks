@@ -8,7 +8,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
     data = query.data
     if data == "help" or "back":
           await query.message.edit_text(
-              text = "<b>List of modules:</b>",
+            text = "<b>List of modules:</b>",
             disable_web_page_preview = True,
             reply_markup = InlineKeyboardMarkup(
                 [
