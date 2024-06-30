@@ -14,8 +14,8 @@ ACCEPTED_TEXT = "Hey {user}\n\nYour Request For {chat} Is Accepted ✅"
 GROUP_TEXT = "<b>Hey {}!\n\nShanks here, use [/help](https://t.me/ShanksXRobot?start=help) to know my cmds.</b>"
 
 button = [[        
-        InlineKeyboardButton('* Help *', url= "https://t.me/ShanksXRobot?start=help"),
-        InlineKeyboardButton("* Settings *", callback_data = "setting")
+        InlineKeyboardButton('* Help *', callback_data = "help"),
+        InlineKeyboardButton("* Settings *", url = "https://t.me/ShanksXRobot?start=setting")
     ]]
 
 
