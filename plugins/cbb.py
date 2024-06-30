@@ -2,7 +2,6 @@ from pyrogram import __version__
 from bot import Bot
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
-AUTO_TEXT = ""
       
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
