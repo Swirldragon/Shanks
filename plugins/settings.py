@@ -10,9 +10,6 @@ from bot import Bot
 
 setting_b = [
             [InlineKeyboardButton("* Rename *", callback_data = "rename")],
-            [InlineKeyboardButton("* Request Approval *", callback_data = "ra")],
-            [InlineKeyboardButton("* PDf *", callback_data = "pdf")],
-            [InlineKeyboardButton("* Converter *", callback_data = "converter")],
             [InlineKeyboardButton("* Close *", callback_data = "close")],
             ]
 
