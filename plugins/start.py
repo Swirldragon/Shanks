@@ -9,15 +9,19 @@ photos = ( "https://graph.org/file/ffbc541990d0489cbb538.jpg",
            "https://graph.org/file/4ac10607462346840a323.jpg",
            "https://graph.org/file/0c85bf7ce08bbb2bdd7b4.jpg",)
 
-START_TEXT = "Hey {}!\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets."
-ACCEPTED_TEXT = "Hey {user}\n\nYour Request For {chat} Is Accepted ✅"
-GROUP_TEXT = "<b>Hey {}!\n\nShanks here, use [/help](https://t.me/ShanksXRobot?start=help) to know my cmds.</b>"
+START_TEXT = "<b>Hey {}!\n\nI'm A Multi-Function Bot, i can rename files and can do many useful stuff click on Help button to know my secrets.</b>"
+ACCEPTED_TEXT = "<b>Hey {user}\n\nYour Request For {chat} Is Accepted ✅</b>"
+GROUP_TEXT = "<b>Hey {}!\n\nShanks here, use [/start](https://t.me/ShanksXRobot?start=start) to know my cmds.</b>"
 
 button = [[        
         InlineKeyboardButton('* Help *', callback_data = "help"),
         InlineKeyboardButton("* Settings *", url = "https://t.me/ShanksXRobot?start=setting")
     ]]
 
+button = [[        
+        InlineKeyboardButton('* Start Now *', url = "https://t.me/ShanksXRobot?start=start"),
+        InlineKeyboardButton("* Channel *", url = "https://t.me/Wizard_Bots")
+    ]]
 
 
 @Bot.on_message(filters=filters.command(['start'])) 
