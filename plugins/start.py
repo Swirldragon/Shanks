@@ -24,10 +24,6 @@ button = [[
 async def start_command(client: Client, message: Message):
            image = random.choice(photos)
            user_id = message.from_user.id
-           cursor.execute('SELECT * FROM users WHERE user_id = ?', (user_id,))
-           if cursor.fetchone() is None:
-                      cursor.execute('INSERT INTO users (user_id) VALUES (?)', (user_id,))
-                      conn.commit()
            await client.send_photo(chat_id=message.from_user.id, photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
         
 #Auto-ReqAccept Function
