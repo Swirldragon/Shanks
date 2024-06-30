@@ -13,6 +13,7 @@ setting_b = [
             [InlineKeyboardButton("* Request Approval *", callback_data = "ra")],
             [InlineKeyboardButton("* PDf *", callback_data = "pdf")],
             [InlineKeyboardButton("* Converter *", callback_data = "converter")],
+            [InlineKeyboardButton("* Close *", callback_data = "close")],
             ]
 
 @Bot.on_message(filters=filters.command(['setting'])) 
