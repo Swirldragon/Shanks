@@ -1,4 +1,4 @@
-from random import choice
+import random
 from plugins.start import photos
 #from plugins.database.db import *
 
