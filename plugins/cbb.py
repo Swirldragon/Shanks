@@ -27,8 +27,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 disable_web_page_preview = True,
                 reply_markup = InlineKeyboardMarkup(
                       [
-                            InlineKeyboardButton("CLOSE", callback_data = "close"),
-                            InlineKeyboardButton("BACK", callback_data = "back")
+                            [
+                                  InlineKeyboardButton("CLOSE", callback_data = "close"),
+                                  InlineKeyboardButton("BACK", callback_data = "back")
+                            ]      
                       ]
                 )
           )
@@ -39,8 +41,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 disable_web_page_preview = True,
                 reply_markup = InlineKeyboardMarkup(
                       [
-                            InlineKeyboardButton("CLOSE", callback_data = "close"),
-                            InlineKeyboardButton("BACK", callback_data = "back")
+                            [
+                                  InlineKeyboardButton("CLOSE", callback_data = "close"),
+                                  InlineKeyboardButton("BACK", callback_data = "back")
+                            ]      
                       ]
                 )
           )
