@@ -82,7 +82,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             pass
         elif data == "auto_rename":
             pass
-        elif data == "close:
+        elif data == "close":
             await query.message.delete()
             try:
                 await query.message.reply_to_message.delete()
