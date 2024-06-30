@@ -6,7 +6,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
     data = query.data
-    if data == "help" and "back":
+    if data == "help" or "back":
           await query.message.edit_text(
               text = "<b>List of modules:</b>",
             disable_web_page_preview = True,
@@ -22,12 +22,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
         )
     elif data == "ab_rename":
           await query.message.edit_text(
-                text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto With using <code>/rename</code> Function.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>.\n\nMega: This Rename The Files At Mega Account Folders. It Can Rename Whole Files In Folder at Time. Use <code>/mega</code>./n/n To Set Caption, Thumbnail, Mega Email and Password Use <code>/setting</code>\n\nMade By @Wizard_Bots.</b>",
+                text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto With using <code>/rename</code> Function.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>.\n\n•Mega: This Rename The Files At Mega Account Folders. It Can Rename Whole Files In Folder at Time. Use <code>/mega</code>.\n\n To Set Caption, Thumbnail, Mega Email and Password Use <code>/setting</code>\n\nMade By @Wizard_Bots.</b>",
                 disable_web_page_preview = True,
                 reply_markup = InlineKeyboardMarkup(
                       [
-                            [InlineKeyboardButton("CLOSE", callback_data = "close")],
-                            [InlineKeyboardButton("BACK", callback_data = "back")]
+                            InlineKeyboardButton("CLOSE", callback_data = "close"),
+                            InlineKeyboardButton("BACK", callback_data = "back")
                       ]
                 )
           )
@@ -38,8 +38,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 disable_web_page_preview = True,
                 reply_markup = InlineKeyboardMarkup(
                       [
-                            [InlineKeyboardButton("CLOSE", callback_data = "close")],
-                            [InlineKeyboardButton("BACK", callback_data = "back")]
+                            InlineKeyboardButton("CLOSE", callback_data = "close"),
+                            InlineKeyboardButton("BACK", callback_data = "back")
                       ]
                 )
           )
