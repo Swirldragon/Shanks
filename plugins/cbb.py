@@ -6,7 +6,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
     data = query.data
-    if data == "help":
+    if data == "help" and "back":
           await query.message.edit_text(
               text = "<b>List of modules:</b>",
             disable_web_page_preview = True,
@@ -26,7 +26,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 disable_web_page_preview = True,
                 reply_markup = InlineKeyboardMarkup(
                       [
-                            [InlineKeyboardButton("CLOSE", callback_data = "close")]
+                            [InlineKeyboardButton("CLOSE", callback_data = "close")],
+                            [InlineKeyboardButton("BACK", callback_data = "back")]
                       ]
                 )
           )
@@ -37,13 +38,14 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 disable_web_page_preview = True,
                 reply_markup = InlineKeyboardMarkup(
                       [
-                            [InlineKeyboardButton("CLOSE", callback_data = "close")]
+                            [InlineKeyboardButton("CLOSE", callback_data = "close")],
+                            [InlineKeyboardButton("BACK", callback_data = "back")]
                       ]
                 )
           )
                              
     elif data == "rename": 
-        await query.message.edit_text(
+          await query.message.edit_text(
             text = "<b>Your Rename Settings:</b>",
             disable_web_page_preview = True,
             reply_markup = InlineKeyboardMarkup(
@@ -59,18 +61,18 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             )
         )
         
-        if data == "upload_as_doc":
-            pass
-        elif data == "setCustomCaption":
-            pass
-        elif data == "setThumbnail":
-            pass
-        elif data == "megaemail":
-            pass
-        elif data == "megapass":
-            pass
-        elif data == "auto_rename":
-            pass
+    elif data == "upload_as_doc":
+          pass
+    elif data == "setCustomCaption":
+          pass
+    elif data == "setThumbnail":
+          pass
+    elif data == "megaemail":
+          pass
+    elif data == "megapass":
+          pass
+    elif data == "auto_rename":
+          pass
         
     elif data == "close":
         await query.message.delete()
