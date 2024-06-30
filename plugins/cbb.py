@@ -7,8 +7,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 async def cb_handler(client: Bot, query: CallbackQuery):
     data = query.data
     if data == "help":
-        await query.message.edit_text(
-            text = "<b>List of modules:</b>",
+          await query.message.edit_text(
+              text = "<b>List of modules:</b>",
             disable_web_page_preview = True,
             reply_markup = InlineKeyboardMarkup(
                 [
@@ -20,39 +20,28 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 ]
             )
         )
-        
-        if data == "ab_rename":
-              await query.message.edit_text(
-                    text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto With using <code>/rename</code> Function.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>./n/nMega: This Rename The Files At Mega Account Folders. It Can Rename Whole Files In Folder at Time. Use <code>/mega</code>./n/n To Set Caption, Thumbnail, Mega Email and Password Use <code>/setting</code>\n\nMade By @Wizard_Bots.</b>",
-                    disable_web_page_preview = True,
-                    reply_markup = InlineKeyboardMarkup(
-                          [
-                                [InlineKeyboardButton("CLOSE", callback_data = "close")]
-                          ]
-                    )
-              )
-              
-        elif data == "ra":
-              await query.message.edit_text(
-                    text = "<b>☆ Auto-ReqAccept:\n\n Add Me In Your Channel To Use\n I Auto Accept The Users To Channel\n\n Made By @Wizard_Bots.</b>",
-                    disable_web_page_preview = True,
-                    reply_markup = InlineKeyboardMarkup(
-                          [
-                                [InlineKeyboardButton("CLOSE", callback_data = "close")]
-                          ]
-                    )
-              )
-        elif data == "pdf":
-              pass
-        elif data == "converter":
-              pass
-        elif data == "close":
-              await query.message.delete()
-              try:
-                    await query.message.reply_to_message.delete() 
-              except:
-                    pass
-                                  
+    elif data == "ab_rename":
+          await query.message.edit_text(
+                text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto With using <code>/rename</code> Function.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>./n/nMega: This Rename The Files At Mega Account Folders. It Can Rename Whole Files In Folder at Time. Use <code>/mega</code>./n/n To Set Caption, Thumbnail, Mega Email and Password Use <code>/setting</code>\n\nMade By @Wizard_Bots.</b>",
+                disable_web_page_preview = True,
+                reply_markup = InlineKeyboardMarkup(
+                      [
+                            [InlineKeyboardButton("CLOSE", callback_data = "close")]
+                      ]
+                )
+          )
+          
+    elif data == "ra":
+          await query.message.edit_text(
+                text = "<b>☆ Auto-ReqAccept:\n\n Add Me In Your Channel To Use\n I Auto Accept The Users To Channel\n\n Made By @Wizard_Bots.</b>",
+                disable_web_page_preview = True,
+                reply_markup = InlineKeyboardMarkup(
+                      [
+                            [InlineKeyboardButton("CLOSE", callback_data = "close")]
+                      ]
+                )
+          )
+                             
     elif data == "rename": 
         await query.message.edit_text(
             text = "<b>Your Rename Settings:</b>",
@@ -82,12 +71,6 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             pass
         elif data == "auto_rename":
             pass
-        elif data == "close":
-            await query.message.delete()
-            try:
-                await query.message.reply_to_message.delete()
-            except:
-                pass
         
     elif data == "close":
         await query.message.delete()
