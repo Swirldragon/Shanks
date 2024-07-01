@@ -65,11 +65,7 @@ class Database:
     async def get_caption(self, id):
         user = await self.col.find_one({'id': int(id)})
         return user.get('caption', None)
-
-    async def get_user_data(self, id) -> dict:
-        user = await self.col.find_one({'id': int(id)})
-        return user or None
-        
+   
     async def set_mega_email(self, id, caption):
         await self.col.update_one({'id': id}, {'$set': {'megaemail': megaemail}})
         
@@ -90,6 +86,10 @@ class Database:
     async def get_auto(self, id):
         user = await self.col.find_one({'id': int(id)})
         return user.get('auto', True)
+        
+    async def get_user_data(self, id) -> dict:
+        user = await self.col.find_one({'id': int(id)})
+        return user or None
 
 
 db = Database(DB_URL, "Shanks")
