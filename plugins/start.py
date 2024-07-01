@@ -3,7 +3,7 @@ import random
 from pyrogram import Client, filters
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
-from plugins.database.db import cursor
+from database.db import add_user_to_database
 
 photos = ( "https://graph.org/file/ffbc541990d0489cbb538.jpg",
            "https://graph.org/file/4ac10607462346840a323.jpg",
@@ -28,6 +28,9 @@ gbutton = [[
 async def start_command(client: Client, message: Message):
            image = random.choice(photos)
            user_id = message.from_user.id
+           if not user_id:
+                      return await message.reply_text("I don't know about you sir :(")
+           await add_user_to_database(client, message)
            await client.send_photo(chat_id=message.from_user.id, photo=image, caption=START_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(button))
         
 #Auto-ReqAccept Function
