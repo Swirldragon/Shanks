@@ -14,7 +14,7 @@ setting_b = [
             ]
 
 @Bot.on_message(filters=filters.command(['setting'])) 
-async def on_setting(client: Client, message: Message):
+async def show_setting(client: Client, message: Message):
     image = random.choice(photos)
     await client.send_photo(chat_id=message.from_user.id, photo=image, caption="List of Setting:", reply_markup=InlineKeyboardMarkup(setting_b))
                      
