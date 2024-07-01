@@ -1,9 +1,9 @@
 import time
 import pymongo, os
-from config import DB_URI
+from config import DB_URL
 
 
-dbclient = pymongo.MongoClient(DB_URI)
+dbclient = pymongo.MongoClient(DB_URL)
 database = dbclient[Shanks]
 collection = database['premium-users']
 
