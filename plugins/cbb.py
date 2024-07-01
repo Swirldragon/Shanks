@@ -56,7 +56,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                 reply_markup = InlineKeyboardMarkup(
                       [
                             [InlineKeyboardButton("UPLOAD AS DOCUMENT", callback_data = "upload_as_doc")],
-                            [InlineKeyboardButton("CAPTION", callback_data = "setCustomCaption")],
+                            [InlineKeyboardButton("APPLY CAPTION", callback_data = "triggerApplyCaption")],
+                            [InlineKeyboardButton("SET CAPTION", callback_data = "setCustomCaption")],
                             [InlineKeyboardButton("THUMBNAIL", callback_data = "setThumbnail")],
                             [InlineKeyboardButton("MEGA EMAIL", callback_data = "megaemail")],
                             [InlineKeyboardButton("MEGA PASSWORD", callback_data = "megapass")],
@@ -78,7 +79,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
           pass
     elif data == "auto_rename":
           pass
-    elif data == "help":
+    elif data == "back":
           await query.message.edit_text(
                 text = "<b>List of modules:</b>",
                 disable_web_page_preview = True,
