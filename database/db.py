@@ -12,55 +12,57 @@ collection = database['premium-users']
 
 
 
-async def add_user(self, id):
-  user = self.new_user(id)
-  await self.col.insert_one(user)
-        
-async def is_user_exist(self, id):
-  user = await self.col.find_one({'id': int(id)})
-  return bool(user)
+async def present_user(user_id : int):
+    found = user_data.find_one({'_id': user_id})
+    return bool(found)
 
-async def total_users_count(self):
-  count = await self.col.count_documents({})
-  return count
+async def add_user(user_id: int):
+    user_data.insert_one({'_id': user_id})
+    return
 
-async def get_all_users(self):
-  return self.col.find({})
+async def full_userbase():
+    user_docs = user_data.find()
+    user_ids = []
+    for doc in user_docs:
+        user_ids.append(doc['_id'])
         
-async def delete_user(self, user_id):
-  await self.col.delete_many({'id': int(user_id)})
+    return user_ids
+
+async def del_user(user_id: int):
+    user_data.delete_one({'_id': user_id})
+    return
     
 async def set_apply_caption(self, id, apply_caption):
-  await self.col.update_one({'id': id}, {'$set': {'apply_caption': apply_caption}})
+  await col.update_one({'id': id}, {'$set': {'apply_caption': apply_caption}})
         
 async def get_apply_caption(self, id):
-  user = await self.col.find_one({'id': int(id)})
+  user = await col.find_one({'id': int(id)})
   return user.get('apply_caption', True)      
         
 async def set_upload_as_doc(self, id, upload_as_doc):
-  await self.col.update_one({'id': id}, {'$set': {'upload_as_doc': upload_as_doc}})
+  await col.update_one({'id': id}, {'$set': {'upload_as_doc': upload_as_doc}})
 
 async def get_upload_as_doc(self, id):
-  user = await self.col.find_one({'id': int(id)})
+  user = await col.find_one({'id': int(id)})
   return user.get('upload_as_doc', False)
 
 async def set_thumbnail(self, id, thumbnail):
-  await self.col.update_one({'id': id}, {'$set': {'thumbnail': thumbnail}})
+  await col.update_one({'id': id}, {'$set': {'thumbnail': thumbnail}})
         
 
 async def get_thumbnail(self, id):
-  user = await self.col.find_one({'id': int(id)})
+  user = await col.find_one({'id': int(id)})
   return user.get('thumbnail', None)
 
 async def set_caption(self, id, caption):
-  await self.col.update_one({'id': id}, {'$set': {'caption': caption}})
+  await col.update_one({'id': id}, {'$set': {'caption': caption}})
         
 async def get_caption(self, id):
-  user = await self.col.find_one({'id': int(id)})
+  user = await col.find_one({'id': int(id)})
   return user.get('caption', None)    
         
 async def get_user_data(self, id) -> dict:
-  user = await self.col.find_one({'id': int(id)})
+  user = await col.find_one({'id': int(id)})
   return user or None     
         
 async def add_premium(user_id, time_limit_months):
