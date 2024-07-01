@@ -1,11 +1,13 @@
 from pyrogram import __version__
 from bot import Bot
+from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from database.db import db
+from pulgins.settings import show_settings
 
       
 @Bot.on_callback_query()
-async def cb_handler(client: Bot, query: CallbackQuery, message: Message):
+async def cb_handler(client: Client, query: CallbackQuery, message: Message):
       usr_id = message.chat.id
       user_data = await db.get_user_data(usr_id)
       if not user_data:
@@ -71,7 +73,7 @@ async def cb_handler(client: Bot, query: CallbackQuery, message: Message):
                               [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
                               [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
                               [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
-                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
+                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "Thumbnail")],
                               [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
                               [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
                               [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
@@ -83,9 +85,49 @@ async def cb_handler(client: Bot, query: CallbackQuery, message: Message):
       elif data == "upload_as_doc":
             pass
       elif data == "setCustomCaption":
-            pass
+            await query.answer()
+            #making it 
+      elif data == "triggerApplyCaption":
+            await query.answer()
+            apply_caption = await db.get_apply_caption(query.from_user.id)
+            if not apply_caption:
+                  await db.set_apply_caption(query.from_user.id, True)
+            else:
+                  await db.set_apply_caption(query.from_user.id, False)
+            await show_settings(query.message)
+            
+      elif data == "Thumbnail":
+            thumbnail = await db.get_thumbnail(query.from_user.id)
+            if not thumbnail:
+                  await query.answer("YOU DIDN'T SET ANY CUSTOM THUMBNAIL!", show_alret=True)
+            else:
+                  await query.answer()
+                  await client.send_photo(query.message.chat.id, thumbnail, "CUSTOM THUMBNAIL",
+                                          reply_markup=types.InlineKeyboardMarkup(
+                                                [
+                                                      [InlineKeyboardButton("DELETE THUMBNAIL", callback_data="deleteThumbnail")]
+                                                ]
+                                          )
+                                         )
+      elif data == "deleteThumbnail":
+            await db.set_thumbnail(query.from_user.id, None)
+            await query.answer("OKAY, I DELETED YOUR CUSTOM THUMBNAIL. NOW I WILL APPLY DEFAULT THUMBNAIL.", show_alret=True)
+            await query.message.delete(True)
+
       elif data == "setThumbnail":
-            pass
+            await query.answer()
+            await client.message.edit("SEND ME ANY PHOTO TO SET THAT AS CUSTOM THUMBNAIL.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")        
+            from_user_thumb: "message" = await client.listen(query.message.chat.id)
+            if not from_user_thumb.photo:
+                  await client.message.edit("<b>PROCESS CANCELLED</b>")
+                  return await from_user_thumb.continue_propagation()
+            else:
+                  await db.set_thumbnail(query.from_user.id, from_user_thumb.photo.file_id)
+                  await client.message.edit("OKAY\nNOW I WILL APPLY THIS THUMBNAIL TO NEXT UPLOADS.",
+                                            reply_markup=types.InlineKeyboardMarkup(
+                                                  [[InlineKeyboardButton("RENAME SETTING",
+                                                                   callback_data="rename")]]
+                                            ))
       elif data == "megaemail":
             pass
       elif data == "megapass":
