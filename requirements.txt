@@ -15,3 +15,7 @@ PyPDF2
 Pillow
 # -- for pdf ---#
 pymupdf
+# -- for auto  rename --- #
+hachoir
+pytz
+psutil
