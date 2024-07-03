@@ -6,7 +6,9 @@ from bot import Bot
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client, message):
     # Check if the user sent a PDF file
-    if message.reply_to_message and message.reply_to_message.document and message.reply_to_message.document.mime_type == "application/pdf":
+    replied_message = message.reply_to_message
+    document = replied_message.document
+    if not document:
         pdf_file = await client.download_media(message.reply_to_message)
         pdf_reader = PyPDF2.PdfFileReader(pdf_file)
         num_pages = pdf_reader.numPages
