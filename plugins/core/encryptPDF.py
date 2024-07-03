@@ -10,7 +10,7 @@ async def encrypt_pdf(client, message):
     document = replied_message.document
     if document == True:
         pdf_file = await client.download_media(message.reply_to_message)
-        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
         num_pages = pdf_reader.numPages
         
         # Ask for password
@@ -34,7 +34,7 @@ async def encrypt_pdf(client, message):
         filename = filename_message.text + ".pdf"
         
         # Encrypt the PDF file
-        pdf_writer = PyPDF2.PdfFileWriter()
+        pdf_writer = PyPDF2.PdfReader()
         for page in range(num_pages):
             page_obj = pdf_reader.getPage(page)
             pdf_writer.addPage(page_obj)
