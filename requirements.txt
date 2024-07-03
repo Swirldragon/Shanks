@@ -13,3 +13,5 @@ motor
 # --- For Convertor ----- #
 PyPDF2
 Pillow
+# -- for pdf ---#
+pymupdf
