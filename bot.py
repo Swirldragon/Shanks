@@ -10,27 +10,3 @@ DB_URL = "mongodb+srv://shankswillson33:shankswillson33@cluster0.vshfo6u.mongodb
 
 Bot = Client(name='Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN,  plugins={"root": "plugins"})
 
-class Bot(Client):
-    def __init__(self):
-      super().__init__(
-            name="Bot",
-            api_hash=API_HASH,
-            api_id=APP_ID,
-            plugins={
-                "root": "plugins"
-            }
-        )
-      
-    async def start(self):
-      await super().start()
-      usr_bot_me = await self.get_me()
-      self.uptime = datetime.now()
-      #web-response
-      app = web.AppRunner(await web_server())
-      await app.setup()
-      bind_address = "0.0.0.0"
-      await web.TCPSite(app, bind_address, PORT).start()
-      
-    async def stop(self, *args):
-      await super().stop()
-      self.LOGGER(__name__).info("Bot stopped.")
