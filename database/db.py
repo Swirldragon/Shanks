@@ -92,4 +92,4 @@ class Database:
         return user or None
 
 
-db = Database(DB_URL, "Shanks")
+db = Database(DB_URL, "Cluster0")
