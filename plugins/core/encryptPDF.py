@@ -34,7 +34,7 @@ async def encrypt_pdf(client, message):
         filename = filename_message.text + ".pdf"
         
         # Encrypt the PDF file
-        pdf_writer = PyPDF2.PdfReader()
+        pdf_writer = PyPDF2.PdfWriter()
         for page in range(num_pages):
             page_obj = pdf_reader.getPage(page)
             pdf_writer.addPage(page_obj)
