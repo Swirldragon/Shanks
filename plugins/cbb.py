@@ -6,7 +6,7 @@ from database.db import db
 
       
 @Bot.on_callback_query()
-async def cb_handler(client: Client, query: CallbackQuery, message: Message):
+async def cb_handler(query: CallbackQuery, message: Message):
       usr_id = message.chat.id
       user_data = await db.get_user_data(usr_id)
       if not user_data:
@@ -101,7 +101,7 @@ async def cb_handler(client: Client, query: CallbackQuery, message: Message):
                   await query.answer("YOU DIDN'T SET ANY CUSTOM THUMBNAIL!", show_alret=True)
             else:
                   await query.answer()
-                  await client.send_photo(query.message.chat.id, thumbnail, "CUSTOM THUMBNAIL",
+                  await message.send_photo(query.message.chat.id, thumbnail, "CUSTOM THUMBNAIL",
                                           reply_markup=types.InlineKeyboardMarkup(
                                                 [
                                                       [InlineKeyboardButton("DELETE THUMBNAIL", callback_data="deleteThumbnail")]
@@ -115,14 +115,14 @@ async def cb_handler(client: Client, query: CallbackQuery, message: Message):
 
       elif data == "setThumbnail":
             await query.answer()
-            await client.message.edit("SEND ME ANY PHOTO TO SET THAT AS CUSTOM THUMBNAIL.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")        
+            await query.message.edit("SEND ME ANY PHOTO TO SET THAT AS CUSTOM THUMBNAIL.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")        
             from_user_thumb: "message" = await client.listen(query.message.chat.id)
             if not from_user_thumb.photo:
-                  await client.message.edit("<b>PROCESS CANCELLED</b>")
+                  await message.edit("<b>PROCESS CANCELLED</b>")
                   return await from_user_thumb.continue_propagation()
             else:
                   await db.set_thumbnail(query.from_user.id, from_user_thumb.photo.file_id)
-                  await client.message.edit("OKAY\nNOW I WILL APPLY THIS THUMBNAIL TO NEXT UPLOADS.",
+                  await query.message.edit("OKAY\nNOW I WILL APPLY THIS THUMBNAIL TO NEXT UPLOADS.",
                                             reply_markup=types.InlineKeyboardMarkup(
                                                   [[InlineKeyboardButton("RENAME SETTING",
                                                                    callback_data="rename")]]
