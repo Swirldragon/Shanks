@@ -8,7 +8,7 @@ async def decrypt_pdf(client, message):
     document = replied_message.document
     if document == True:
         pdf_file = await client.download_media(message.reply_to_message)
-        pdf_reader = PdfFileReader(pdf_file)
+        pdf_reader = PdfReader(pdf_file)
         
         # Ask for password
         await message.reply("Please enter the password to decrypt the PDF file. Type `/cancel` to cancel.")
@@ -21,7 +21,7 @@ async def decrypt_pdf(client, message):
         password = password_message.text
         
         # Decrypt the PDF file
-        pdf_writer = PdfFileWriter()
+        pdf_writer = PdfWriter()
         for page in range(pdf_reader.numPages):
             page_obj = pdf_reader.getPage(page)
             pdf_writer.addPage(page_obj)
