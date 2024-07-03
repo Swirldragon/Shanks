@@ -3,7 +3,7 @@ import random
 from pyrogram import Client, filters
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
-from database.db.add import add_user_to_database
+from database.add import add_user_to_database
 
 photos = ( "https://graph.org/file/ffbc541990d0489cbb538.jpg",
            "https://graph.org/file/4ac10607462346840a323.jpg",
