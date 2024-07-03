@@ -3,7 +3,6 @@ from bot import Bot
 from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from database.db import db
-from pulgins.settings import show_settings
 
       
 @Bot.on_callback_query()
