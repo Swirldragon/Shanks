@@ -10,3 +10,6 @@ python-dotenv
 pymongo
 dnspython
 motor
+# --- For Convertor ----- #
+PyPDF2
+Pillow
