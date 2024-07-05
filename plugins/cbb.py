@@ -89,12 +89,26 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                   await db.set_upload_as_doc(query.from_user.id, False)
             else:
                    await db.set_upload_as_doc(query.from_user.id, True)
-                   await show_settings(query.message)
+            await query.message.edit_text(
+                  text = "<b>Your Rename Settings:</b>",
+                  disable_web_page_preview = True,
+                  reply_markup = InlineKeyboardMarkup(
+                        [
+                              [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
+                              [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
+                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
+                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
+                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
+                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
+                              [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
+                              [InlineKeyboardButton("CLOSE", callback_data = "close")],
+                        ]
+                  ))
             
       elif data == "setCustomCaption":
             await query.answer()
             await query.message.edit("OKAY,\nSEND ME YOUR CUSTOM CAPTION.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")
-            user_input_msg: "Message" = message.reply_to_message
+            user_input_msg: "types.Message" = Message.reply_to_message
             if not user_input_msg.text:
                   await query.message.edit("<b>PROCESS CANCELLED..</b>")
                   return await user_input_msg.continue_propagation()
@@ -115,12 +129,23 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             apply_caption = await db.get_apply_caption(query.from_user.id)
             if not apply_caption:
                   await db.set_apply_caption(query.from_user.id, True)
-                  await query.answer("OHK! YOU APPLY CAPTAIN HAD ADDED.", show_alert=True)
-                  await query.message.delete(True)
             else:
                   await db.set_apply_caption(query.from_user.id, False)
-                  await query.answer("OHK! YOU APPLY CAPTAIN HAD REMOVED.", show_alert=True)
-                  await query.message.delete(True)
+            await query.message.edit_text(
+                  text = "<b>Your Rename Settings:</b>",
+                  disable_web_page_preview = True,
+                  reply_markup = InlineKeyboardMarkup(
+                        [
+                              [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
+                              [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
+                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
+                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
+                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
+                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
+                              [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
+                              [InlineKeyboardButton("CLOSE", callback_data = "close")],
+                        ]
+                  ))
             
       elif data == "Thumbnail":
             thumbnail = await db.get_thumbnail(query.from_user.id)
@@ -143,7 +168,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "setThumbnail":
             await query.answer()
             await query.message.edit("SEND ME ANY PHOTO TO SET THAT AS CUSTOM THUMBNAIL.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")        
-            from_user_thumb: "message" = await client.wait_for_message(query.message.chat.id)
+            from_user_thumb: "types.Message" = await Message.reply_to_message(query.message.chat.id)
             if not from_user_thumb.photo:
                   await message.edit("<b>PROCESS CANCELLED</b>")
                   return await from_user_thumb.continue_propagation()
