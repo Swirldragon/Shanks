@@ -66,21 +66,21 @@ class Database:
         user = await self.col.find_one({'id': int(id)})
         return user.get('caption', None)
    
-    async def set_mega_email(self, id, caption):
+    async def set_mega_email(self, id, megaemail):
         await self.col.update_one({'id': id}, {'$set': {'megaemail': megaemail}})
         
     async def get_mega_email(self, id):
         user = await self.col.find_one({'id': int(id)})
         return user.get('megaemail', None)
         
-    async def set_mega_password(self, id, caption):
+    async def set_mega_password(self, id, megapawword):
         await self.col.update_one({'id': id}, {'$set': {'megapassword': megapassword}})
         
     async def get_mega_password(self, id):
         user = await self.col.find_one({'id': int(id)})
         return user.get('megapawword', None)
         
-    async def set_auto(self, id, apply_caption):
+    async def set_auto(self, id, auto):
         await self.col.update_one({'id': id}, {'$set': {'auto': auto}})
         
     async def get_auto(self, id):
