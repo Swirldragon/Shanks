@@ -99,7 +99,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "Thumbnail":
             thumbnail = await db.get_thumbnail(query.from_user.id)
             if not thumbnail:
-                  await query.answer(text="YOU DIDN'T SET ANY CUSTOM THUMBNAIL!", show_alret=True)
+                  await query.answer(text="YOU DIDN'T SET ANY CUSTOM THUMBNAIL!", show_alert=True)
             else:
                   await query.answer()
                   await message.send_photo(query.message.chat.id, thumbnail, "CUSTOM THUMBNAIL",
