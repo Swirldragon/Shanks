@@ -8,7 +8,7 @@ async def encrypt_pdf(client, message):
     # Check if the user sent a PDF file
     replied_message = message.reply_to_message
     document = replied_message.document
-    if document == True:
+    if message.reply_to_message == True:
         pdf_file = await client.download_media(message.reply_to_message)
         pdf_reader = PyPDF2.PdfReader(pdf_file)
         num_pages = pdf_reader.numPages
