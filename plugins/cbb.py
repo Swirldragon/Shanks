@@ -6,8 +6,8 @@ from database.db import db
 
       
 @Bot.on_callback_query()
-async def cb_handler(query: CallbackQuery, message: Message):
-      usr_id = message.from_user.id
+async def cb_handler(client: Bot, query: CallbackQuery):
+      usr_id = client.from_user.id
       user_data = await db.get_user_data(usr_id)
       if not user_data:
             await message.edit("Failed to fetch your data from database!")
