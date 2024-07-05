@@ -19,7 +19,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       thumbnail = user_data.get("thumbnail", None)
       megaemail = user_data.get("megaemail", None)
       megapassword = user_data.get("megapassword", None)
-      auto = user_data.get("auto", None)
+      auto = user_data.get("auto", False)
       data = query.data
       if data == "help":
             await query.message.edit_text(
@@ -73,7 +73,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                               [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
                               [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
                               [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
-                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "Thumbnail")],
+                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
                               [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
                               [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
                               [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
@@ -83,10 +83,31 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             )
 
       elif data == "upload_as_doc":
-            pass
+            await query.answer()
+            upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
+            if upload_as_doc:
+                  await db.set_upload_as_doc(cb.from_user.id, False)
+             else:
+                   await db.set_upload_as_doc(cb.from_user.id, True)
+                   await show_settings(query.message)
+            
       elif data == "setCustomCaption":
             await query.answer()
-            #making it 
+            await query.message.edit("OKAY,\nSEND ME YOUR CUSTOM CAPTION.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")
+            user_input_msg: "Message" = await Client.listen(query.message.chat.id)
+            if not user_input_msg.text:
+                  await query.message.edit("<b>PROCESS CANCELLED..</b>")
+                  return await user_input_msg.continue_propagation()
+            if user_input_msg.text and user_input_msg.text.startswith("/"):
+                  await query.message.edit("<b>PROCESS CANCELLED</b>")
+                  return await user_input_msg.continue_propagation()
+            await db.set_caption(query.from_user.id, user_input_msg.text.markdown)
+            await query.message.edit("CUSTOM CAPTION ADDED SUCESSFULLY!",
+                                  reply_markup=types.InlineKeyboardMarkup(
+                                        [[InlineKeyboardButton("RENAME SETTINGS", 
+                                                               callback_data="rename"]]
+                                  ))
+
       elif data == "triggerApplyCaption":
             await query.answer()
             apply_caption = await db.get_apply_caption(query.from_user.id)
