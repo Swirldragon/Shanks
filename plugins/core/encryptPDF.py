@@ -5,7 +5,7 @@ from io import BytesIO
 from bot import Bot
 
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
-async def encrypt_pdf(client: Client, message: Message):
+async def encrypt_pdf(client: Client, message: Message, Bot):
     try:
         reply = message.reply_to_message
         pdf_file = await client.download_media(reply.document)
@@ -24,7 +24,7 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for new file name
         await message.reply("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
-        filename_message = await client.wait_for_message(chat_id=message.chat.id)
+        filename_message = await Bot.wait_for_message(chat_id=message.chat.id)
         
         if filename_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
