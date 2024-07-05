@@ -44,5 +44,5 @@ async def on_decrypt_pdf(client: Client, message: Message):
         
         # Reply to the original message with the decrypted PDF
         await message.reply_to_message.reply_document(decrypted_pdf, file_name=filename)
-    else:
+    elif message.reply_to_message == False:
         await message.reply("Please reply to a PDF file with the /decryptPDF command.")
