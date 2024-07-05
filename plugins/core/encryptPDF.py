@@ -7,11 +7,11 @@ from bot import Bot
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client: Client, message: Message):
     reply = message.reply_to_message
-    if not reply.document:
+    if reply.document == None:
         await message.reply_text("Please reply to a PDF file with the /encryptPDF command.")
         
     else:
-        pdf_file = await client.download_media(message.reply.document)
+        pdf_file = await client.download_media(reply.document)
         pdf_reader = PyPDF2.PdfReader(pdf_file)
         num_pages = pdf_reader.numPages
         
