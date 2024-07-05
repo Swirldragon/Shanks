@@ -104,9 +104,11 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             await db.set_caption(query.from_user.id, user_input_msg.text.markdown)
             await query.message.edit("CUSTOM CAPTION ADDED SUCESSFULLY!",
                                   reply_markup=types.InlineKeyboardMarkup(
-                                        [[InlineKeyboardButton("RENAME SETTINGS", 
-                                                               callback_data="rename"]]
-                                  ))
+                                        [
+                                              [InlineKeyboardButton("RENAME SETTINGS", callback_data="rename"]
+                                        ]
+                                  )
+                                    )
 
       elif data == "triggerApplyCaption":
             await query.answer()
