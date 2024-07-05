@@ -9,7 +9,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
 from database.db import *
 
-tokens_collection = database["tokens"]
+shanks_collection = database["shanks"]
 
 # Global dictionary to manage tokens in memory
 global_tokens = {}
@@ -41,7 +41,7 @@ def generate_token():
 # Save token with expiration time in the database
 def save_token(user_id, token, duration):
     expiration_time = time.time() + (duration * 3600)  # Convert hours to seconds
-    tokens_collection.update_one(
+    shanks_collection.update_one(
         {"_id": user_id},
         {"$set": {"token": token, "expires_at": expiration_time}},
         upsert=True
@@ -58,7 +58,7 @@ def verify_token_memory(user_id, token):
 
 def verify_token(user_id):
     # Verify token using the token stored in the database
-    token_data = tokens_collection.find_one({"_id": user_id})
+    token_data = shanks_collection.find_one({"_id": user_id})
     if token_data:
         expires_at = token_data["expires_at"]
         current_timestamp = time.time()  # Get the current time as a timestamp
@@ -70,7 +70,7 @@ async def get_token(message, user_id):
     new_token = generate_token()
     expiration_time = time.time() + (dr * 3600)  # Convert hours to seconds
     global_tokens[user_id] = {"token": new_token, "expires_at": expiration_time}
-    token_link = f"https://t.me/Manga_Downloaderx_bot?start={new_token}"
+    token_link = f"https://t.me/ShanksXRobot?start={new_token}"
     short_token_link = get_short(token_link)
     button = InlineKeyboardButton("Get Token", url=short_token_link)
     button2 = InlineKeyboardButton("Watch Tutorial", url="https://t.me/+KymUiadSyutiZjM1")
