@@ -94,7 +94,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "setCustomCaption":
             await query.answer()
             await query.message.edit("OKAY,\nSEND ME YOUR CUSTOM CAPTION.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")
-            user_input_msg: "Message" = await client.wait_for_message(query.message.chat.id)
+            user_input_msg: "Message" = message.reply_to_message
             if not user_input_msg.text:
                   await query.message.edit("<b>PROCESS CANCELLED..</b>")
                   return await user_input_msg.continue_propagation()
@@ -115,9 +115,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             apply_caption = await db.get_apply_caption(query.from_user.id)
             if not apply_caption:
                   await db.set_apply_caption(query.from_user.id, True)
+                  await query.answer("OHK! YOU APPLY CAPTAIN HAD ADDED.", show_alert=True)
+                  await query.message.delete(True)
             else:
                   await db.set_apply_caption(query.from_user.id, False)
-            await show_settings()
+                  await query.answer("OHK! YOU APPLY CAPTAIN HAD REMOVED.", show_alert=True)
+                  await query.message.delete(True)
             
       elif data == "Thumbnail":
             thumbnail = await db.get_thumbnail(query.from_user.id)
