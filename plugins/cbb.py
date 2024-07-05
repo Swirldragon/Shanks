@@ -87,7 +87,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
             if upload_as_doc:
                   await db.set_upload_as_doc(cb.from_user.id, False)
-             else:
+            else:
                    await db.set_upload_as_doc(cb.from_user.id, True)
                    await show_settings(query.message)
             
