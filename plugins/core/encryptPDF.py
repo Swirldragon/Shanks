@@ -47,7 +47,7 @@ async def encrypt_pdf(client: Client, message: Message):
         await message.reply_to_message.reply_document(encrypted_pdf, file_name=filename)
 
     
-    except:
+    except NoneType:
         await message.reply_text("Please reply to a PDF file with the /encryptPDF command.")
         
         
