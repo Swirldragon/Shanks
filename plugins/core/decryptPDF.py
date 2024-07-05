@@ -6,8 +6,8 @@ from bot import Bot
 
 @Bot.on_message(filters=filters.command(['decryptpdf']))
 async def decrypt_pdf(client: Client, message: Message):
-    if message.reply_to_message == True:
-        pdf_file = await client.download_media(message.reply_to_message)
+    if message.reply_to_download == True:
+        pdf_file = await client.download_media(message.reply_to_download)
         pdf_reader = PdfReader(pdf_file)
         
         # Ask for password
@@ -44,5 +44,5 @@ async def decrypt_pdf(client: Client, message: Message):
         
         # Reply to the original message with the decrypted PDF
         await message.reply_to_message.reply_document(decrypted_pdf, file_name=filename)
-    elif message.reply_to_message == False:
+    elif message.reply_to_download == False:
         await message.reply("Please reply to a PDF file with the /decryptPDF command.")
