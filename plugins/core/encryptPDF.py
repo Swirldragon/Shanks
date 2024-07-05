@@ -6,8 +6,9 @@ from bot import Bot
 
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client: Client, message: Message):
-    chat_id = message.from_user.id 
-    if await message.reply_to_message.copy(chat_id) == True:
+    chat_id = message.from_user.id
+    document = await message.reply_to_message.copy(chat_id)
+    if  document == True:
         pdf_file = await client.download_media(message.reply_to_message.copy(chat_id))
         pdf_reader = PyPDF2.PdfReader(pdf_file)
         num_pages = pdf_reader.numPages
@@ -46,5 +47,5 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Reply to the original message with the encrypted PDF
         await message.reply_to_message.reply_document(encrypted_pdf, file_name=filename)
-    elif message.reply_to_message.copy(chat_id) == False:
+    elif document == False:
         await message.reply("Please reply to a PDF file with the /encryptPDF command.")
