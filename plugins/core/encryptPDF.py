@@ -1,13 +1,11 @@
 from pyrogram import Client, filters
+from pyrogram.types import Message
 import PyPDF2
 from io import BytesIO
 from bot import Bot
 
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
-async def encrypt_pdf(client, message):
-    # Check if the user sent a PDF file
-    replied_message = message.reply_to_message
-    document = replied_message.document
+async def encrypt_pdf(client: Client, message: Message):
     if message.reply_to_message == True:
         pdf_file = await client.download_media(message.reply_to_message)
         pdf_reader = PyPDF2.PdfReader(pdf_file)
