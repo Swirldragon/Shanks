@@ -172,7 +172,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             await query.message.delete(True)
             
       elif data == "f_auto":
-            auto = await db.set_auto(query.from_user.id, False)
+            auto = await db.set_auto(query.from_user.id, None)
             await query.answer("OHKAY! YOU AUTO MODE HAD REMOVED.", show_alert=True)
             await query.message.delete(True)
             
