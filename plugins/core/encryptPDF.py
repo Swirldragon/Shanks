@@ -5,7 +5,7 @@ from io import BytesIO
 from bot import Bot
 
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
-async def encrypt_pdf(client: Client, message: Message, Bot):
+async def encrypt_pdf(client: Client, message: Message):
     try:
         reply = message.reply_to_message
         pdf_file = await client.download_media(reply.document)
