@@ -140,7 +140,7 @@ print(f"Extracted Episode Number: {episode_number}")
 async def auto_rename_files(client, message):
   user_id = message.from_user.id
   firstname = message.from_user.first_name
-  user_data = db.get_auto(user_id)
+  user_data = await db.get_auto(user_id)
   format_template = await db.get_caption(user_id)
   media_preference = await db.get_upload_as_doc(user_id)
   if user_data == True:
