@@ -17,7 +17,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       apply_caption = user_data.get("apply_caption", True)
       thumbnail = user_data.get("thumbnail", None)
       megaemail = user_data.get("megaemail", None)
-      megaepassword = user_data.get("megapassword", None)
+      megapassword = user_data.get("megapassword", None)
       auto = user_data.get("auto", None)
       data = query.data
       if data == "help":
