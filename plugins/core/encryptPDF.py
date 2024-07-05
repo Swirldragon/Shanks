@@ -13,7 +13,7 @@ async def encrypt_pdf(client: Client, message: Message):
     else:
         pdf_file = await client.download_media(reply.document)
         pdf_reader = PyPDF2.PdfReader(pdf_file)
-        num_pages = pdf_reader.numPages
+        num_pages = len(pdf_reader.pages)
         
         # Ask for password
         await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
