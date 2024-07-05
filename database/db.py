@@ -85,7 +85,7 @@ class Database:
         
     async def get_auto(self, id):
         user = await self.col.find_one({'id': int(id)})
-        return user.get('auto', True)
+        return user.get('auto', None)
         
     async def get_user_data(self, id) -> dict:
         user = await self.col.find_one({'id': int(id)})
