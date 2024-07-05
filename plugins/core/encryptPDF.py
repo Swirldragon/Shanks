@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client, filters, types
 from pyrogram.types import Message
 import PyPDF2
 from io import BytesIO
