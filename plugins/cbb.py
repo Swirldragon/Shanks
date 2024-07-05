@@ -3,7 +3,7 @@ from bot import Bot
 from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from database.db import db
-from.settings import show_settings
+from .settings import show_settings
 
       
 @Bot.on_callback_query()
@@ -13,9 +13,9 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       if not user_data:
             await message.edit("Failed to fetch your data from database!")
             return
-      upload_as_doc = user_data.get("upload_as_doc", True)
+      upload_as_doc = user_data.get("upload_as_doc", False)
       caption = user_data.get("caption", None)
-      apply_caption = user_data.get("apply_caption", True)
+      apply_caption = user_data.get("apply_caption", False)
       thumbnail = user_data.get("thumbnail", None)
       megaemail = user_data.get("megaemail", None)
       megapassword = user_data.get("megapassword", None)
@@ -111,7 +111,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                                          )
       elif data == "deleteThumbnail":
             await db.set_thumbnail(query.from_user.id, None)
-            await query.answer("OKAY, I DELETED YOUR CUSTOM THUMBNAIL. NOW I WILL APPLY DEFAULT THUMBNAIL.", show_alret=True)
+            await query.answer("OKAY, I DELETED YOUR CUSTOM THUMBNAIL. NOW I WILL APPLY DEFAULT THUMBNAIL.", show_alert=True)
             await query.message.delete(True)
 
       elif data == "setThumbnail":
