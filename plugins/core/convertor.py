@@ -1,4 +1,5 @@
 from pyrogram import Client, filters
+from pyrogram.types import Message
 import os
 import zipfile
 import PyPDF2
@@ -6,10 +7,10 @@ from PIL import Image
 from bot import Bot
 
 @Bot.on_message(filters=filters.command(['p2c'])) 
-async def convert_pdf_to_cbz(client, message):
-    if message.document.mime_type == "application/pdf":
+async def convert_pdf_to_cbz(client: Client, message: Message):
+    if message.reply_to_message == True:
         file_id = message.document.file_id
-        file = await client.download_media(message)
+        file = await client.download_media(message.reply_to_message)
         pdf_file = open(file, "rb")
         pdf_reader = PyPDF2.PdfFileReader(pdf_file)
         num_pages = pdf_reader.numPages
@@ -29,9 +30,9 @@ async def convert_pdf_to_cbz(client, message):
 
 @Bot.on_message(filters=filters.command(['c2p'])) 
 async def convert_cbz_to_pdf(client, message):
-    if message.document.mime_type == "application/zip":
+    if message.reply_to_message == True:
         file_id = message.document.file_id
-        file = await client.download_media(message)
+        file = await client.download_media(message.reply_to_message)
         cbz_file = zipfile.ZipFile(file, "r")
         images = []
         for name in cbz_file.namelist():
