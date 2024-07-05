@@ -84,17 +84,17 @@ async def cb_handler(client: Bot, query: CallbackQuery):
 
       elif data == "upload_as_doc":
             await query.answer()
-            upload_as_doc = await db.get_upload_as_doc(cb.from_user.id)
+            upload_as_doc = await db.get_upload_as_doc(query.from_user.id)
             if upload_as_doc:
-                  await db.set_upload_as_doc(cb.from_user.id, False)
+                  await db.set_upload_as_doc(query.from_user.id, False)
             else:
-                   await db.set_upload_as_doc(cb.from_user.id, True)
+                   await db.set_upload_as_doc(query.from_user.id, True)
                    await show_settings(query.message)
             
       elif data == "setCustomCaption":
             await query.answer()
             await query.message.edit("OKAY,\nSEND ME YOUR CUSTOM CAPTION.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")
-            user_input_msg: "Message" = await Client.listen(query.message.chat.id)
+            user_input_msg: "Message" = await client.wait_for_message(query.message.chat.id)
             if not user_input_msg.text:
                   await query.message.edit("<b>PROCESS CANCELLED..</b>")
                   return await user_input_msg.continue_propagation()
@@ -117,7 +117,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                   await db.set_apply_caption(query.from_user.id, True)
             else:
                   await db.set_apply_caption(query.from_user.id, False)
-            await show_settings(query.message)
+            await show_settings()
             
       elif data == "Thumbnail":
             thumbnail = await db.get_thumbnail(query.from_user.id)
@@ -140,7 +140,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "setThumbnail":
             await query.answer()
             await query.message.edit("SEND ME ANY PHOTO TO SET THAT AS CUSTOM THUMBNAIL.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")        
-            from_user_thumb: "message" = await client.listen(query.message.chat.id)
+            from_user_thumb: "message" = await client.wait_for_message(query.message.chat.id)
             if not from_user_thumb.photo:
                   await message.edit("<b>PROCESS CANCELLED</b>")
                   return await from_user_thumb.continue_propagation()
