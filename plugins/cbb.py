@@ -105,7 +105,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             await query.message.edit("CUSTOM CAPTION ADDED SUCESSFULLY!",
                                   reply_markup=types.InlineKeyboardMarkup(
                                         [
-                                              [InlineKeyboardButton("RENAME SETTINGS", callback_data="rename"]
+                                              [InlineKeyboardButton("RENAME SETTINGS", callback_data="rename")]
                                         ]
                                   )
                                     )
