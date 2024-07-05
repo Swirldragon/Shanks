@@ -19,3 +19,5 @@ pymupdf
 hachoir
 pytz
 psutil
+# --- For Token--#
+cloudscraper
