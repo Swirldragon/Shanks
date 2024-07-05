@@ -156,7 +156,26 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "megapass":
             pass
       elif data == "auto_rename":
-            pass
+            auto = await db.get_auto(query.from_user.id)
+            await query.message.edit_text(
+                  text=f"<b>Set Your Auto Rename Mode:/n/n Auto Mode: {auto}</b>",
+                  disable_web_page_preview = True,
+                  reply_markup = InlineKeyboardMarkup(
+                        [
+                              [InlineKeyboardButton("* TRUE *", callback_data = "t_auto")],
+                              [InlineKeyboardButton("* FALSE *", callback_data = "f_auto")],
+                        ]
+                  ))
+      elif data == "t_auto":
+            auto = await db.set_auto(query.from_user.id, True)
+            await query.answer("OHKAY! YOU AUTO MODE HAD ADDED.", show_alert=True)
+            await query.message.delete(True)
+            
+      elif data == "f_auto":
+            auto = await db.set_auto(query.from_user.id, False)
+            await query.answer("OHKAY! YOU AUTO MODE HAD REMOVED.", show_alert=True)
+            await query.message.delete(True)
+            
       elif data == "back":
             await query.message.edit_text(
                   text = "<b>List of modules:</b>",
