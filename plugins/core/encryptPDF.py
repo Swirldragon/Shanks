@@ -6,7 +6,8 @@ from bot import Bot
 
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client: Client, message: Message):
-    if not message.reply.document:
+    reply_obj = message.reply()
+    if not reply_obj.document:
         await message.reply("Please reply to a PDF file with the /encryptPDF command.")
         
     else:
