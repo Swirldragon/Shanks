@@ -9,6 +9,7 @@ user_states = {}
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client: Client, message: Message):
     reply = message.reply_to_message
+    user_id = message.from_user.id
     if reply:
         pdf_file = await client.download_media(reply.document)
         pdf_reader = PyPDF2.PdfReader(pdf_file)
