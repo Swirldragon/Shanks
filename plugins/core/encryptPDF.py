@@ -4,6 +4,8 @@ import PyPDF2
 from io import BytesIO
 from bot import Bot
 
+user_states = {}
+
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client: Client, message: Message):
     reply = message.reply_to_message
@@ -14,7 +16,8 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for password
         await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        password_message = await Bot.listen(filters.text & ~filters.command & filters.chat(message.chat.id))
+        user_states[user_id] = False
+        password_message = message.text
         
         if password_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
