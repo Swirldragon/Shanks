@@ -5,7 +5,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from database.db import db
 from .settings import show_settings
 
-      
+handler_dict = {}
+
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
       usr_id = query.from_user.id
@@ -108,7 +109,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "setCustomCaption":
             await query.answer()
             await query.message.edit("OKAY,\nSEND ME YOUR CUSTOM CAPTION.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")
-            user_input_msg: "types.Message" = Message.reply_to_message
+            handler_dict[user_id] = False
+            user_input_msg: "types.Message" = Message.text
             if not user_input_msg.text:
                   await query.message.edit("<b>PROCESS CANCELLED..</b>")
                   return await user_input_msg.continue_propagation()
