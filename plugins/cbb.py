@@ -109,7 +109,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "setCustomCaption":
             await query.answer()
             await query.message.edit("OKAY,\nSEND ME YOUR CUSTOM CAPTION.\n\nPRESS <code>/cancel</code> TO CANCEL PROCESS..")
-            handler_dict[user_id] = False
+            handler_dict[usr_id] = False
             user_input_msg: "types.Message" = Message.text
             if not user_input_msg.text:
                   await query.message.edit("<b>PROCESS CANCELLED..</b>")
