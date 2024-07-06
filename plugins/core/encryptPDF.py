@@ -14,7 +14,7 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for password
         await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        password_message = await client.wait_for_message(chat_id=message.chat.id, filters=types.MessageFilter.text)
+        password_message = await Bot.listen(filters.text & ~filters.command & filters.chat(message.chat.id))
         
         if password_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
@@ -24,7 +24,7 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for new file name
         await message.reply("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
-        filename_message = await Bot.wait_for_message(chat_id=message.chat.id)
+        filename_message = await wait_for_message(chat_id=message.chat.id)
         
         if filename_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
