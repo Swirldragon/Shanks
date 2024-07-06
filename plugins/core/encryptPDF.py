@@ -24,7 +24,7 @@ async def encrypt_pdf(client: Client, message: Message):
             await message.reply("Encryption process cancelled.")
             return
         
-        password = password_message.text
+        password = password_message
         
         # Ask for new file name
         await message.reply("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
@@ -35,7 +35,7 @@ async def encrypt_pdf(client: Client, message: Message):
             await message.reply("Encryption process cancelled.")
             return
         
-        filename = filename_message.text + ".pdf"
+        filename = filename_message + ".pdf"
         
         # Encrypt the PDF file
         pdf_writer = PyPDF2.PdfWriter()
