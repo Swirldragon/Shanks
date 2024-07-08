@@ -17,19 +17,19 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for password
         await message_reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        password_message = await c.listen(chat_id=chat_id, user_id=user_id)
+        password_message = "@Manga_Arena"
         
-        if password_message.text == "/cancel":
+        if password_message == "/cancel":
             await message.reply("Encryption process cancelled.")
             return
         
-        password = password_message.text
+        password = password_message
         
         # Ask for new file name
         await message.reply("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
-        filename_message = await c.listen(chat_id=chat_id, user_id=user_id)
+        filename_message = "ch - 12"
         
-        if filename_message.text == "/cancel":
+        if filename_message == "/cancel":
             await message.reply("Encryption process cancelled.")
             return
         
