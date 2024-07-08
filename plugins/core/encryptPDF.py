@@ -1,3 +1,4 @@
+from pyromod import Chat
 from pyromod.Chat import ask as ca
 from pyrogram import Client, filters
 from pyrogram.types import Message
