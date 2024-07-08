@@ -16,9 +16,8 @@ async def encrypt_pdf(client: Client, message: Message):
         num_pages = len(pdf_reader.pages)
         
         # Ask for password
-        await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        user_states[user_id] = False
-        password_message = message.text
+        await message.reply_text("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
+        password_message = message.reply_text(message.text)
         
         if password_message == "/cancel":
             await message.reply("Encryption process cancelled.")
@@ -27,9 +26,8 @@ async def encrypt_pdf(client: Client, message: Message):
         password = password_message
         
         # Ask for new file name
-        await message.reply("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
-        user_states[user_id] = False
-        filename_message = message.text
+        await message.reply_text("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
+        filename_message = message.reply_text(message.text)
         
         if filename_message == "/cancel":
             await message.reply("Encryption process cancelled.")
