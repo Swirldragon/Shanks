@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from pyromod import Client as c
-from pyromod import Client as m
+#from pyromod import Client as c
+#from pyromod import Client as m
 import PyPDF2
 from io import BytesIO
 from bot import Bot
