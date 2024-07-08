@@ -1,5 +1,6 @@
 from pyromod import listen
 from pyrogram.types import Message
+from pyrogram import Client, filters
 import PyPDF2
 from io import BytesIO
 from bot import Bot 
