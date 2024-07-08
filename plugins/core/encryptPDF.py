@@ -1,5 +1,4 @@
-from pyromod import Chat
-from pyrogram import Client, filters
+from pyromod import listen
 from pyrogram.types import Message
 import PyPDF2
 from io import BytesIO
@@ -14,8 +13,7 @@ async def encrypt_pdf(client: Client, message: Message):
         num_pages = len(pdf_reader.pages)
         
         # Ask for password
-        password_a = await chat.ask("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        password_message = password_a.text
+        password_message = await c.ask("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
         
         if password_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
@@ -24,8 +22,7 @@ async def encrypt_pdf(client: Client, message: Message):
         password = password_message.text
         
         # Ask for new file name
-        filename_a = await chat.ask("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
-        filename_message = filename_a.text
+        filename_message = await c.ask("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
         
         if filename_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
