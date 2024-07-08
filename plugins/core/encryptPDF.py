@@ -24,7 +24,7 @@ async def encrypt_pdf(client: Client, message: Message):
         password = password_message.text
         
         # Ask for new file name
-        filename_message = wait chat.ask('Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.', filters=filters.text)
+        filename_message = await chat.ask('Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.', filters=filters.text)
         
         if filename_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
