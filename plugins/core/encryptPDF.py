@@ -1,20 +1,23 @@
-from pyrogram import filters
-from pyromod import Client, Message
+from pyrogram import Client, filters
+from pyrogram.types import Message
+from pyromod import Client as c
+from pyromod import Client as m
 import PyPDF2
 from io import BytesIO
 from bot import Bot
 
 @Bot.on_message(filters.private & filters.command("encryptPDF"))
 async def encrypt_pdf(client: Client, message: Message):
-    try:
-        chat = message.chat
+    reply = message.reply_to_message
+    user_id = message.from_user.id
+    if reply:
         pdf_file = await client.download_media(reply.document)
         pdf_reader = PyPDF2.PdfReader(pdf_file)
         num_pages = len(pdf_reader.pages)
         
         # Ask for password
         await message_reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        password_message = await client.listen(chat_id=chat_id, user_id=user_id)
+        password_message = await c.listen(chat_id=chat_id, user_id=user_id)
         
         if password_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
@@ -24,7 +27,7 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for new file name
         await message.reply("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
-        filename_message = await client.listen(chat_id=chat_id, user_id=user_id)
+        filename_message = await c.listen(chat_id=chat_id, user_id=user_id)
         
         if filename_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
@@ -47,7 +50,7 @@ async def encrypt_pdf(client: Client, message: Message):
         await message.reply_to_message.reply_document(encrypted_pdf, file_name=filename)
 
     
-    except:
+    else:
         await message.reply_text("Please reply to a PDF file with the /encryptPDF command.")
         
         
