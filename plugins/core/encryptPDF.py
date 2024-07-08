@@ -1,4 +1,4 @@
-rom pyromod.Chat import ask as ca
+from pyromod.Chat import ask as ca
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import PyPDF2
