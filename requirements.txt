@@ -1,7 +1,7 @@
 # --- For-Bot-Working --------- #
 Pyrogram
 loguru
-pyromod==1.5
+pyromod
 TgCrypto
 # --- For-Web-Response ------- #
 aiohttp
