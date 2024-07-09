@@ -14,7 +14,7 @@ async def encrypt_pdf(client: Client, message: Message):
         
         # Ask for password
         await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        password_message =  await app.await_message()
+        password_message =  await Bot.await_message()
         
         if password_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
