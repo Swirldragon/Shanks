@@ -10,7 +10,7 @@ pymongo
 dnspython
 motor
 # --- For Convertor ----- #
-PyPDF2
+pypdf
 Pillow
 # -- for pdf ---#
 pymupdf
