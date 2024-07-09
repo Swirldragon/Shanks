@@ -11,6 +11,7 @@ dnspython
 motor
 # --- For Convertor ----- #
 pypdf
+PyPDF2
 Pillow
 # -- for pdf ---#
 pymupdf
