@@ -1,4 +1,3 @@
-from pyromod import listen
 from pyrogram.types import Message
 from pyrogram import Client, filters
 import PyPDF2
@@ -14,7 +13,8 @@ async def encrypt_pdf(client: Client, message: Message):
         num_pages = len(pdf_reader.pages)
         
         # Ask for password
-        password_message = await c.ask("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
+        await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
+        password_message =  await app.await_message()
         
         if password_message.text == "/cancel":
             await message.reply("Encryption process cancelled.")
