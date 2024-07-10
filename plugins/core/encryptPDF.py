@@ -12,24 +12,30 @@ async def encrypt_pdf(client: Client, message: Message):
         pdf_reader = PdfReader(pdf_file)
         num_pages = len(pdf_reader.pages)
         
-        # Ask for password
-        #await message.reply("Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.")
-        #password_message =  await Bot.await_message()
+        try:
+            password_message = await chat.ask(chat_id=message.from_user.id, "Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.", timeout=60)
+        except ListenerTimeout:
+            await message.reply('Sorry! Your Time Out.')
+            return
         
-        #if password_message.text == "/cancel":
-            #await message.reply("Encryption process cancelled.")
-            #return
+        if password_message.text == "/cancel":
+            await message.reply("Encryption process cancelled.")
+            return
         
-        password = "@M"
+        password = password_message.text
         
         # Ask for new file name
-        #filename_message = await c.ask("Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.")
+        try:
+            filename_message = await chat.ask(chat_id=message.from_user.id, "Please enter a new file name for the encrypted PDF file. Type `/cancel` to cancel.", timeout=60)
+        except ListenerTimeout:
+            await message.reply('Sorry! Your Time Out.')
+            return
         
-        #if filename_message.text == "/cancel":
-            #await message.reply("Encryption process cancelled.")
-            #return
+        if filename_message.text == "/cancel":
+            await message.reply("Encryption process cancelled.")
+            return
         
-        filename = "ch-100" + ".pdf"
+        filename = filename_message.text
         
         # Encrypt the PDF file
         pdf_writer = PdfWriter()
