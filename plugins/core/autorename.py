@@ -210,8 +210,8 @@ async def auto_rename_files(client, message):
         except Exception as e:
             # Mark the file as ignored
             del renaming_operations[file_id]
-            return await download_msg.edit(e)     
-
+            return await download_msg.edit(e)
+            
         duration = 0
         try:
             metadata = extractMetadata(createParser(file_path))
@@ -219,6 +219,7 @@ async def auto_rename_files(client, message):
                 duration = metadata.get('duration').seconds
         except Exception as e:
             print(f"Error getting duration: {e}")
+
 
         upload_msg = await download_msg.edit("Trying To Uploading.....")
         ph_path = None
@@ -242,7 +243,27 @@ async def auto_rename_files(client, message):
 
         try:
             type = media_type  # Use 'media_type' variable instead
-            if type == "document":
+            type2 = await db.get_upload_as_doc(user_id)
+            if type2:
+                await client.send_document(
+                    message.chat.id,
+                    document=file_path,
+                    thumb=ph_path,
+                    caption=caption,
+                    progress=progress_for_pyrogram,
+                    progress_args=("Upload Started.....", upload_msg, time.time())
+                )
+            elif not type2:
+                await client.send_video(
+                    message.chat.id,
+                    video=file_path,
+                    caption=caption,
+                    thumb=ph_path,
+                    duration=duration,
+                    progress=progress_for_pyrogram,
+                    progress_args=("Upload Started.....", upload_msg, time.time())
+                )
+            elif type == "document":
                 await client.send_document(
                     message.chat.id,
                     document=file_path,
@@ -285,7 +306,3 @@ async def auto_rename_files(client, message):
 
 # Remove the entry from renaming_operations after successful renaming
         del renaming_operations[file_id]
-
-
-
-
