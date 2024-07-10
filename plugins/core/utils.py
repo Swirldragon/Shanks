@@ -10,7 +10,7 @@ PROGRESS_BAR = """<b>\n
 ┣⪼ ⏳️ Dᴏɴᴇ : {0}%
 ┣⪼ 🚀 Sᴩᴇᴇᴅ: {3}/s
 ┣⪼ ⏰️ Eᴛᴀ: {4}
-┣⪼ 🥺 joine Plz: @Wizard_Bots
+┣⪼ 😎 @Wizard_Bots
 ╰━━━━━━━━━━━━━━━➣ </b>"""
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
