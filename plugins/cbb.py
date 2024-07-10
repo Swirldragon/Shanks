@@ -7,20 +7,16 @@ from .settings import show_settings
 
 handler_dict = {}
 
-@Bot.on_callback_query()
+@Client.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
       usr_id = query.from_user.id
-      user_data = await db.get_user_data(usr_id)
-      if not user_data:
-            await message.edit("Failed to fetch your data from database!")
-            return
-      upload_as_doc = user_data.get("upload_as_doc", False)
-      caption = user_data.get("caption", None)
-      apply_caption = user_data.get("apply_caption", False)
-      thumbnail = user_data.get("thumbnail", None)
-      megaemail = user_data.get("megaemail", None)
-      megapassword = user_data.get("megapassword", None)
-      auto = user_data.get("auto", False)
+      upload_as_doc = db.get_upload_as_doc(usr_id)
+      caption = await db.get_caption(usr_id)
+      apply_caption = await db.get_apply_caption(usr_id)
+      thumbnail = await db.get_thumbnail(usr_id)
+      megaemail = await db.get_mega_email(usr_id)
+      megapassword = await db.get_mega_password(usr_id)
+      auto = await db.get_auto(usr_id)
       data = query.data
       if data == "help":
             await query.message.edit_text(
@@ -39,7 +35,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
 
       elif data == "ab_rename":
             await query.message.edit_text(
-                  text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto With using <code>/rename</code> Function.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>.\n\n•Mega: This Rename The Files At Mega Account Folders. It Can Rename Whole Files In Folder at Time. Use <code>/mega</code>.\n\n To Set Caption, Thumbnail, Mega Email and Password Use <code>/setting</code>\n\nMade By @Wizard_Bots.</b>",
+                  text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto. To Setup This Function Use <code>/setting</code>.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>\n\nMade By @Wizard_Bots.</b>",
                   disable_web_page_preview = True,
                   reply_markup = InlineKeyboardMarkup(
                         [
@@ -65,7 +61,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                   )
             )
             
-      elif data == "rename": 
+      elif data == "rename":
+            upload_as_doc = db.get_upload_as_doc(usr_id)
             await query.message.edit_text(
                   text = "<b>Your Rename Settings:</b>",
                   disable_web_page_preview = True,
@@ -73,10 +70,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         [
                               [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
                               [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
-                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
-                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
-                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
-                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
+                              [InlineKeyboardButton(f"CHANGE THUMBNAIL", callback_data = "Thumbnail")],
                               [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
                               [InlineKeyboardButton("CLOSE", callback_data = "close")],
                         ]
@@ -84,27 +78,26 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             )
 
       elif data == "upload_as_doc":
-            await query.answer()
-            upload_as_doc = await db.get_upload_as_doc(query.from_user.id)
-            if upload_as_doc:
-                  await db.set_upload_as_doc(query.from_user.id, False)
-            else:
-                   await db.set_upload_as_doc(query.from_user.id, True)
+            upload_as_doc = db.get_upload_as_doc(usr_id)
             await query.message.edit_text(
-                  text = "<b>Your Rename Settings:</b>",
+                  text = f"<b>Your Mode: {'Documents' if upload_as_doc else 'Video'}</b>",
                   disable_web_page_preview = True,
                   reply_markup = InlineKeyboardMarkup(
                         [
-                              [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
-                              [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
-                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
-                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
-                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
-                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
-                              [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
-                              [InlineKeyboardButton("CLOSE", callback_data = "close")],
+                              [InlineKeyboardButton(" Document ", callback_data = "updTrue")],
+                              [InlineKeyboardButton(" Video ", callback_data = "updFlase")],
                         ]
                   ))
+            
+      elif data == "updFlase":
+            auto = await db.set_upload_as_doc(query.from_user.id, None)
+            await query.answer("OHKAY! YOU WILL VIDEO FORMAT.", show_alert=True)
+            await query.message.delete(True)
+            
+      elif data == "updTrue":
+            auto = await db.set_upload_as_doc(query.from_user.id, True)
+            await query.answer("OHKAY! YOU WILL DOCUMENT FORMAT.", show_alert=True)
+            await query.message.delete(True)
             
       elif data == "setCustomCaption":
             await query.answer()
@@ -140,10 +133,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         [
                               [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
                               [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
-                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
-                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
-                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
-                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
+                              [InlineKeyboardButton(f"CHANGE THUMBNAIL", callback_data = "Thumbnail")],
                               [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
                               [InlineKeyboardButton("CLOSE", callback_data = "close")],
                         ]
