@@ -245,12 +245,11 @@ async def auto_rename_files(client, message):
             type = media_type  # Use 'media_type' variable instead
             type2 = await db.get_upload_as_doc(user_id)
             if type2:
-                await client.send_video(
+                await client.send_document(
                     message.chat.id,
-                    video=file_path,
-                    caption=caption,
+                    document=file_path,
                     thumb=ph_path,
-                    duration=duration,
+                    caption=caption,
                     progress=progress_for_pyrogram,
                     progress_args=("Upload Started.....", upload_msg, time.time())
                 )
