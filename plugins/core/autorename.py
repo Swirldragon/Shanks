@@ -154,6 +154,7 @@ async def auto_rename_files(client, message):
     elif message.video:
       file_id = message.video.file_id
       file_name = f"{message.video.file_name}.mp4"
+      type = await db.get_upload_as_doc(user_id)  
       media_type = media_preference or "video"  # Use preferred media type or default to video
     elif message.audio:
       file_id = message.audio.file_id
@@ -231,7 +232,7 @@ async def auto_rename_files(client, message):
         if c_thumb:
             ph_path = await client.download_media(c_thumb)
             print(f"Thumbnail downloaded successfully. Path: {ph_path}")
-        elif media_type == "video" and message.video.thumbs:
+        elif not type or message.video.thumbs:
             ph_path = await client.download_media(message.video.thumbs[0].file_id)
 
         if ph_path:
