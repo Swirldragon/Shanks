@@ -7,7 +7,7 @@ from .settings import show_settings
 
 handler_dict = {}
 
-@Client.on_callback_query()
+@Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
       usr_id = query.from_user.id
       upload_as_doc = db.get_upload_as_doc(usr_id)
@@ -70,6 +70,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         [
                               [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
                               [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
+                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
+                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
+                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
+                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
                               [InlineKeyboardButton(f"CHANGE THUMBNAIL", callback_data = "Thumbnail")],
                               [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
                               [InlineKeyboardButton("CLOSE", callback_data = "close")],
@@ -133,6 +137,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         [
                               [InlineKeyboardButton(f"UPLOAD AS DOCUMENT {'✅' if upload_as_doc else '🗑️'}", callback_data = "upload_as_doc")],
                               [InlineKeyboardButton(f"APPLY CAPTION {'✅' if apply_caption else '🗑️'}", callback_data = "triggerApplyCaption")],
+                              [InlineKeyboardButton(f"SET CAPTION {'🗑️' if caption else '✅'}", callback_data = "setCustomCaption")],
+                              [InlineKeyboardButton(f"{'CHANGE' if thumbnail else 'SET'} THUMBNAIL", callback_data = "setThumbnail")],
+                              [InlineKeyboardButton(f"MEGA EMAIL {'✅' if megaemail else '🗑️'}", callback_data = "megaemail")],
+                              [InlineKeyboardButton(f"MEGA PASSWORD {'✅' if megapassword else '🗑️'}", callback_data = "megapass")],
                               [InlineKeyboardButton(f"CHANGE THUMBNAIL", callback_data = "Thumbnail")],
                               [InlineKeyboardButton(f"AUTO RENAME {'✅' if auto else '🗑️'}", callback_data = "auto_rename")],
                               [InlineKeyboardButton("CLOSE", callback_data = "close")],
