@@ -4,6 +4,14 @@ from pytz import timezone
 from bot import *
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+PROGRESS_BAR = """<b>\n
+╭━━━━❰ᴘʀᴏɢʀᴇss ʙᴀʀ❱━➣
+┣⪼ 🗃️ Sɪᴢᴇ: {1} | {2}
+┣⪼ ⏳️ Dᴏɴᴇ : {0}%
+┣⪼ 🚀 Sᴩᴇᴇᴅ: {3}/s
+┣⪼ ⏰️ Eᴛᴀ: {4}
+┣⪼ 🥺 joine Plz: @Wizard_Bots
+╰━━━━━━━━━━━━━━━➣ </b>"""
 
 async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
@@ -22,7 +30,7 @@ async def progress_for_pyrogram(current, total, ud_type, message, start):
             ''.join(["⬢" for i in range(math.floor(percentage / 5))]),
             ''.join(["⬡" for i in range(20 - math.floor(percentage / 5))])
         )            
-        tmp = progress + Txt.PROGRESS_BAR.format( 
+        tmp = progress + PROGRESS_BAR.format( 
             round(percentage, 2),
             humanbytes(current),
             humanbytes(total),
@@ -79,5 +87,4 @@ async def send_log(Bot, u):
             f"**--Nᴇᴡ Uꜱᴇʀ Sᴛᴀʀᴛᴇᴅ Tʜᴇ Bᴏᴛ--**\n\nUꜱᴇʀ: {u.mention}\nIᴅ: `{u.id}`\nUɴ: @{u.username}\n\nDᴀᴛᴇ: {date}\nTɪᴍᴇ: {time}\n\nBy: {b.mention}"
         )
         
-
 
