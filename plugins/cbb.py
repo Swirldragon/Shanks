@@ -3,13 +3,12 @@ from bot import Bot
 from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from database.db import db
-from .settings import show_settings
+from .settings import setting_b
 
-handler_dict = {}
 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
-      usr_id = query.from_user.id
+      user_id = query.from_user.id
       data = query.data
       if data == "help":
             await query.message.edit_text(
@@ -67,6 +66,51 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         ]
                   )
             )
+      elif data == "caption":
+            caption = await db.get_caption(user_id)
+            await query.message.edit_text(
+                  text = f"Your Caption : {caption}" if caption else "You Havenot Set Caption.\nSet It By /setcaption.",
+                  disable_web_page_preview = True,
+                  reply_markup = InlineKeyboardMarkup(
+                        [
+                              [InlineKeyboardButton("* Back *", callback_data = "s_back")],
+                              [InlineKeyboardButton("* Close *", callback_data = "close")],
+                              [InlineKeyboardButton(f"* Delete *" if caption else pass, callback_data = "c_delete")],
+                        ]          
+                  ))
+      elif data == "c_delete":
+            await db.set_caption(user_id, caption=None)
+            await query.answer("YOUR CAPTION DELETED.", show_alert=True)
+            
+      elif data == "s_back":
+            await query.message.edit_text(
+                  text = "List of Setting:",
+                  disable_web_page_preview = True,
+                  reply_markup = InlineKeyboardMarkup(setting_b)
+            )
+            
+      elif data == "thumbnail":
+            thumb = await db.get_thumbnail(user_id)
+            if thumb:
+                  await query.message.edit_text(
+                        text = "Your Thumbnail:",
+                        disable_web_page_preview = True,
+                        reply_markup = InlineKeyboardMarkup(
+                              [
+                                    InlineKeyboardButton("* View *", callback_data = "t_view"),
+                                    InlineKeyboardButton("* Delete *", callback_data = "t_delete")
+                              ]
+                        ))
+            else:
+                  await query.answer("YOU HAVENOT SET THUMBNAIL.", show_alert=True)
+                  
+      elif data == "t_view":
+            thumb = await db.get_thumbnail(user_id)
+            await client.send_photo(chat_id=user_id, photo=thumb)
+            
+      elif data == "t_delete":
+            await db.get_thumbnail(user_id, caption=None)
+            await query.answer("YOUR THUMBNALI DELETED.", show_alert=True)
             
       elif data == "close":
             await query.message.delete()
