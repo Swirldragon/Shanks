@@ -6,7 +6,7 @@ from database.db import db
 setting_b = [
             [InlineKeyboardButton("* Caption *", callback_data = "caption")],
             [InlineKeyboardButton("* Thumbnail *", callback_data = "thumbnail")],
-            [InlineKeyboardButton("* Auto Mode *", callback_data = "auto")]
+            [InlineKeyboardButton("* Auto Mode *", callback_data = "auto")],
             [InlineKeyboardButton("* Close *", callback_data = "close")],
             ]
 
