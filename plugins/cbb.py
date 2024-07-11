@@ -105,8 +105,10 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         disable_web_page_preview = True,
                         reply_markup = InlineKeyboardMarkup(
                               [
-                                    InlineKeyboardButton("* View *", callback_data = "t_view"),
-                                    InlineKeyboardButton("* Delete *", callback_data = "t_delete")
+                                          [
+                                                      InlineKeyboardButton("* View *", callback_data = "t_view"),
+                                                      InlineKeyboardButton("* Delete *", callback_data = "t_delete")
+                                          ]
                               ]
                         ))
             else:
