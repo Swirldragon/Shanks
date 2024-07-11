@@ -46,4 +46,4 @@ async def addthumbs(client: Client, message: Message):
 @Bot.on_message(filters=filters.command(['mode']))
 async def on_set_mode(client: Client, message: Message):
 	mode = await db.get_mode(message.from_user.id)
-	await message.reply(f"<b>Your File Mode: {"Video" if mode else "Document"}"</b>, reply_markup=InlineKeyboardMarkup(mode_S))
+	await message.reply(f"<b>Your File Mode: {"Video" if mode else "Document"}</b>", reply_markup=InlineKeyboardMarkup(mode_S))
