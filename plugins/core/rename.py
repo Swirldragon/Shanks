@@ -1,4 +1,5 @@
 import time, os
+from PIL import Image
 from pyrogram import Client, filters, enums
 from pyrogram.types import Message
 from .utils import progress_for_pyrogram, humanbytes, convert
