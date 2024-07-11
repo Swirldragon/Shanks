@@ -31,14 +31,13 @@ async def on_set_caption(client: Client, message: Message):
 @Bot.on_message(filters.private & filters.photo)
 async def addthumbs(client: Client, message: Message):
 	user_id = message.from_user.id
-            thumb = db.get_thumbnail(user_id)
+        thumb = db.get_thumbnail(user_id)
 	if thumb:
-                        await db.remove_thumbnail(user_id)
-                        file_id = str(message.photo.file_id)
-                        await db.set_thumbnail(user_id, file_id)
-                        return await message.reply("Your Thumbnali Have Been Change")
-            else:
-                        
+		await db.remove_thumbnail(user_id)
+                file_id = str(message.photo.file_id)
+                await db.set_thumbnail(user_id, file_id)
+                return await message.reply("Your Thumbnali Have Been Change")
+        else:
 		file_id = str(message.photo.file_id)
 		await db.set_thumbnail(message.chat.id , file_id)
 		return await message.reply(f"Your Thumbnali Have Been Set")
