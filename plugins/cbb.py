@@ -119,9 +119,31 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             await client.send_photo(chat_id=user_id, photo=thumb)
             
       elif data == "t_delete":
-            await db.get_thumbnail(user_id, caption=None)
+            await db.set_thumbnail(user_id, caption=None)
             await query.answer("YOUR THUMBNALI DELETED.", show_alert=True)
-            
+                  
+      elif data == "auto":
+            auto = await db.get_auto(user_id)
+            await query.message.edit_text(
+                        text = f"Your Auto Mode: {"True" if auto else "False"}",
+                        disable_web_page_preview = True,
+                        reply_markup = InlineKeyboardMarkup(
+                              [
+                                          [
+                                                      InlineKeyboardButton("* True *", callback_data = "t_auto"),
+                                                      InlineKeyboardButton("* Flase *", callback_data = "f_auto")
+                                          ]
+                              ]
+                        ))
+
+      elif data == "t_auto":
+            await db.set_auto(user_id, True)
+            await query.answer("YOUR AUTO MODE ON.", show_alert=True)
+
+      elif data == "f_auto":
+            await db.set_auto(user_id, None)
+            await query.answer("YOUR AUTO MODE OFF.", show_alert=True)
+                  
       elif data == "close":
             await query.message.delete()
             try:
