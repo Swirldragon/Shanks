@@ -35,7 +35,7 @@ async def rename_files(bot: Bot, msg: Message):
   
   c_thumb = await db.get_thumbnail(user_id)
   if c_thumb:
-    ph_path = await client.download_media(c_thumb)
+    ph_path = await bot.download_media(c_thumb)
     print(f"Thumbnail downloaded successfully. Path: {ph_path}")
   elif msg.video.thumbs:
     ph_path = await bot.download_media(msg.video.thumbs[0].file_id)
