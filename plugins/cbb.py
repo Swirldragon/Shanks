@@ -3,8 +3,13 @@ from bot import Bot
 from pyrogram import Client
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from database.db import db
-from .settings import setting_b
 
+setting_b = [
+            [InlineKeyboardButton("* Caption *", callback_data = "caption")],
+            [InlineKeyboardButton("* Thumbnail *", callback_data = "thumbnail")],
+            [InlineKeyboardButton("* Auto Mode *", callback_data = "auto")]
+            [InlineKeyboardButton("* Close *", callback_data = "close")],
+            ]
 
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
