@@ -15,6 +15,12 @@ setting_b = [
             [InlineKeyboardButton("* Close *", callback_data = "close")],
             ]
 
+mode_S = [
+	[InlineKeyboardButton("* Video *", callback_data = "video")],
+        [InlineKeyboardButton("* Document *", callback_data = "doc")],
+	[InlineKeyboardButton("* Close *", callback_data = "close")],
+       ]
+
 @Bot.on_message(filters=filters.command(['setting'])) 
 async def show_settings(client: Client, message: Message):
     image = random.choice(photos)
@@ -35,4 +41,9 @@ async def on_set_thumb(client: Client, message: Message):
 @Bot.on_message(filters.private & filters.photo)
 async def addthumbs(client: Client, message: Message):
 	await db.set_thumbnail(message.from_user.id, file_id=message.photo.file_id)
-	awaitmessage.reply("You have set thumb")
+	await message.reply("You have set thumb")
+
+@Bot.on_message(filters=filters.command(['mode']))
+async def on_set_mode(client: Client, message: Message):
+	mode = await db.get_mode(message.from_user.id)
+	await message.reply(f"<b>Your File Mode: {"Video" if mode else "Document"}", reply_markup=InlineKeyboardMarkup(mode_S)
