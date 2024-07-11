@@ -47,11 +47,14 @@ async def rename_files(bot: Bot, msg: Message):
     img.resize((320, 320))
     img.save(ph_path, "JPEG")  
 
-        
+  type = await db.get_mode(user_id)      
   await sts.edit("Trying to Uploading")
   c_time = time.time()
   try:
-    await bot.send_document(msg.chat.id, document=downloaded, thumb=ph_path, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))        
+    if type:
+      await bot.send_video(msg.chat.id, video=downloaded, thumb=ph_path, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))
+    else:
+      await bot.send_document(msg.chat.id, document=downloaded, thumb=ph_path, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))        
   except Exception as e:  
     return await sts.edit(f"Error {e}")                       
   try:
