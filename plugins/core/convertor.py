@@ -11,23 +11,27 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
     if message.reply_to_message:
         reply = message.reply_to_message
         media = reply.document
-        og_media = getattr(reply, reply.media.value)
+        
         file = await client.download_media(media)
         await message.reply_text("Downloading ......")
+        
         pdf_file = open(file, "rb")
-        pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+        pdf_reader = PyPDF2.PdfReader(pdf_file)
         num_pages = pdf_reader.numPages
         images = []
+        
         for page in range(num_pages):
             page_obj = pdf_reader.getPage(page)
             image = page_obj.convert("JPEG")
             images.append(image)
         cbz_file = zipfile.ZipFile("output.cbz", "w")
+        
         for i, image in enumerate(images):
             image.save(f"page_{i+1}.jpg", "JPEG")
             cbz_file.write(f"page_{i+1}.jpg")
         cbz_file.close()
         await client.send_document(message.chat.id, "output.cbz")
+        
     else:
         await message.reply("Please send a PDF file with reply.")
 
