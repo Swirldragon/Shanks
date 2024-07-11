@@ -45,10 +45,10 @@ class Database:
         user = await self.col.find_one({'id': int(id)})
         return user.get('apply_caption', True)
 
-    async def set_upload_as_doc(self, id, upload_as_doc):
+    async def set_mode(self, id, upload_as_doc):
         await self.col.update_one({'id': id}, {'$set': {'upload_as_doc': upload_as_doc}})
 
-    async def get_upload_as_doc(self, id):
+    async def get_mode(self, id):
         user = await self.col.find_one({'id': int(id)})
         return user.get('upload_as_doc', False)
 
