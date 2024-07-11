@@ -89,6 +89,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "c_delete":
             await db.set_caption(user_id, caption=None)
             await query.answer("YOUR CAPTION DELETED.", show_alert=True)
+            await query.message.delete()
             
       elif data == "s_back":
             await query.message.edit_text(
@@ -117,10 +118,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "t_view":
             thumb = await db.get_thumbnail(user_id)
             await client.send_photo(chat_id=user_id, photo=thumb)
+            await query.message.delete()
             
       elif data == "t_delete":
             await db.set_thumbnail(user_id, caption=None)
             await query.answer("YOUR THUMBNALI DELETED.", show_alert=True)
+            await query.message.delete()
                   
       elif data == "auto":
             auto = await db.get_auto(user_id)
@@ -139,10 +142,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "t_auto":
             await db.set_auto(user_id, True)
             await query.answer("YOUR AUTO MODE ON.", show_alert=True)
-
+            await query.message.delete()
+                  
       elif data == "f_auto":
             await db.set_auto(user_id, None)
             await query.answer("YOUR AUTO MODE OFF.", show_alert=True)
+            await query.message.delete()
                   
       elif data == "close":
             await query.message.delete()
