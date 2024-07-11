@@ -18,14 +18,14 @@ async def rename_files(bot: Bot, msg: Message):
   elif reply.video:
     file_id = msg.video.file_id
     
-   if file_id in renaming_operations:
-        elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
-        if elapsed_time < 10:
-            print("File is being ignored as it is currently being renamed or was renamed recently.")
-            return  # Exit the handler if the file is being ignored
+  if file_id in renaming_operations:
+    elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
+    if elapsed_time < 10:
+      print("File is being ignored as it is currently being renamed or was renamed recently.")
+      return  # Exit the handler if the file is being ignored
 
     # Mark the file as currently being renamed
-    renaming_operations[file_id] = datetime.now()
+  renaming_operations[file_id] = datetime.now()
 
   CAPTION = await db.get_caption(user_id)
   if len(msg.command) < 2 or not reply:
