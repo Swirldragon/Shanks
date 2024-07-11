@@ -5,12 +5,28 @@ from pyrogram.types import Message
 from .utils import progress_for_pyrogram, humanbytes, convert
 from bot import Bot 
 from database.db import db
+from datetime import datetime
 
+renaming_operation = {}
 
 @Bot.on_message(filters=filters.command(["rename"]))
 async def rename_files(bot: Bot, msg: Message):
   user_id = msg.from_user.id
   reply = msg.reply_to_message
+  if reply.document:
+    file_id = msg.document.file_id
+  elif reply.video:
+    file_id = msg.video.file_id
+    
+   if file_id in renaming_operations:
+        elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
+        if elapsed_time < 10:
+            print("File is being ignored as it is currently being renamed or was renamed recently.")
+            return  # Exit the handler if the file is being ignored
+
+    # Mark the file as currently being renamed
+    renaming_operations[file_id] = datetime.now()
+
   CAPTION = await db.get_caption(user_id)
   if len(msg.command) < 2 or not reply:
     return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")   
@@ -64,3 +80,5 @@ async def rename_files(bot: Bot, msg: Message):
   except:
     pass
   await sts.delete()
+
+  del renaming_operations[file_id]
