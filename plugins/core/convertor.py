@@ -9,6 +9,7 @@ from bot import Bot
 @Bot.on_message(filters=filters.command(['p2c'])) 
 async def convert_pdf_to_cbz(client: Client, message: Message):
     if message.reply_to_message:
+        reply = message.reply_to_message
         media = reply.document
         og_media = getattr(reply, reply.media.value)
         file = await client.download_media(media)
