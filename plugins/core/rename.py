@@ -33,12 +33,12 @@ async def rename_files(bot: Bot, msg: Message):
   
   DOWNLOAD_LOCATION = f"downloads/{new_name}"
   
-  c_thumb = await db.get_thumbnail(message.chat.id)
+  c_thumb = await db.get_thumbnail(user_id)
   if c_thumb:
     ph_path = await client.download_media(c_thumb)
     print(f"Thumbnail downloaded successfully. Path: {ph_path}")
   elif not type or msg.video.thumbs:
-    ph_path = await bot.download_media(message.video.thumbs[0].file_id)
+    ph_path = await bot.download_media(msg.video.thumbs[0].file_id)
     
   if ph_path:
     Image.open(ph_path).convert("RGB").save(ph_path)
