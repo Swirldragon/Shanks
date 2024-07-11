@@ -9,8 +9,8 @@ from bot import Bot
 @Bot.on_message(filters=filters.command(['p2c'])) 
 async def convert_pdf_to_cbz(client: Client, message: Message):
     if message.reply_to_message:
-        file_id = message.document.file_id
         media = reply.document
+        og_media = getattr(reply, reply.media.value)
         file = await client.download_media(media)
         await message.reply_text("Downloading ......")
         pdf_file = open(file, "rb")
@@ -28,7 +28,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
         cbz_file.close()
         await client.send_document(message.chat.id, "output.cbz")
     else:
-        await message.reply("Please send a PDF file.")
+        await message.reply("Please send a PDF file with reply.")
 
 @Bot.on_message(filters=filters.command(['c2p'])) 
 async def convert_cbz_to_pdf(client, message):
