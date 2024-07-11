@@ -8,9 +8,11 @@ from bot import Bot
 
 @Bot.on_message(filters=filters.command(['p2c'])) 
 async def convert_pdf_to_cbz(client: Client, message: Message):
-    if message.reply_to_message == True:
+    if message.reply_to_message:
         file_id = message.document.file_id
-        file = await client.download_media(message.reply_to_message)
+        media = reply.document
+        file = await client.download_media(media)
+        await message.reply_text("Downloading ......")
         pdf_file = open(file, "rb")
         pdf_reader = PyPDF2.PdfFileReader(pdf_file)
         num_pages = pdf_reader.numPages
