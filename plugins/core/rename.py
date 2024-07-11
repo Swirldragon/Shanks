@@ -1,7 +1,7 @@
 import time, os
 from pyrogram import Client, filters, enums
 from pyrogram.types import Message
-from .utils import progress_for_pyrogram, humanbytes
+from .utils import progress_for_pyrogram, humanbytes, convert
 from bot import Bot 
 from database.db import db
 
@@ -32,27 +32,30 @@ async def rename_files(bot: Bot, msg: Message):
     # this idea's back end is MKN brain 🧠
   
   DOWNLOAD_LOCATION = f"downloads/{new_name}"
+  
+  c_thumb = await db.get_thumbnail(message.chat.id)
+  if c_thumb:
+    ph_path = await client.download_media(c_thumb)
+    print(f"Thumbnail downloaded successfully. Path: {ph_path}")
+  elif not type or msg.video.thumbs:
+    ph_path = await bot.download_media(message.video.thumbs[0].file_id)
+    
+  if ph_path:
+    Image.open(ph_path).convert("RGB").save(ph_path)
+    img = Image.open(ph_path)
+    img.resize((320, 320))
+    img.save(ph_path, "JPEG")  
 
-  dir = os.listdir(DOWNLOAD_LOCATION)
-  if len(dir) == 0:
-    file_thumb = await bot.download_media(og_media.thumbs[0].file_id) 
-    og_thumbnail = file_thumb
-  else:
-    try:
-      og_thumbnail = f"{user_id}/thumbnail.jpg"
-    except Exception as e:
-      print(e)          
-      og_thumbnail = None
         
   await sts.edit("Trying to Uploading")
   c_time = time.time()
   try:
-    await bot.send_document(msg.chat.id, document=downloaded, thumb=og_thumbnail, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))        
+    await bot.send_document(msg.chat.id, document=downloaded, thumb=ph_path, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))        
   except Exception as e:  
     return await sts.edit(f"Error {e}")                       
   try:
-    if file_thumb:
-      os.remove(file_thumb)
+    if ph_path:
+      os.remove(ph_path)
     os.remove(downloaded)      
   except:
     pass
