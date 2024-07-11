@@ -68,16 +68,20 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             )
       elif data == "caption":
             caption = await db.get_caption(user_id)
-            await query.message.edit_text(
-                  text = f"Your Caption : {caption}" if caption else "You Havenot Set Caption.\nSet It By /setcaption.",
-                  disable_web_page_preview = True,
-                  reply_markup = InlineKeyboardMarkup(
-                        [
-                              [InlineKeyboardButton("* Back *", callback_data = "s_back")],
-                              [InlineKeyboardButton("* Close *", callback_data = "close")],
-                              [InlineKeyboardButton(f"* Delete *" if caption else pass, callback_data = "c_delete")],
-                        ]          
-                  ))
+            if caption:
+                   await query.message.edit_text(
+                         text = f"Your Caption : {caption}",
+                         disable_web_page_preview = True,
+                         reply_markup = InlineKeyboardMarkup(
+                               [
+                                     [InlineKeyboardButton("* Back *", callback_data = "s_back")],
+                                     [InlineKeyboardButton("* Close *", callback_data = "close")],
+                                     [InlineKeyboardButton(f"* Delete *", callback_data = "c_delete")],
+                               ]
+                         ))
+            else:
+                  await query.answer("YOU HAVE NOT SET CAPTION .", show_alert=True)
+ 
       elif data == "c_delete":
             await db.set_caption(user_id, caption=None)
             await query.answer("YOUR CAPTION DELETED.", show_alert=True)
