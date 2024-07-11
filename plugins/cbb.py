@@ -152,10 +152,12 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "video":
             await db.set_mode(user_id, True)
             await query.answer("You Will Receive Video Format")
+            await query.message.delete()
                   
       elif data == "doc":
             await db.set_mode(user_id, None)
             await query.answer("You Will Receive Document Format")
+            await query.message.delete()
                   
       elif data == "close":
             await query.message.delete()
