@@ -33,7 +33,7 @@ async def addthumbs(client: Client, message: Message):
 	user_id = message.from_user.id
         thumb = await db.get_thumbnail(user_id)
 	if thumb:
-		await db.get_thumbnail(user_id, file_id=None)
+		await db.set_thumbnail(user_id, file_id=None)
                 file_id = str(message.photo.file_id)
                 await db.set_thumbnail(user_id, file_id)
                 return await message.reply("Your Thumbnali Have Been Change")
