@@ -62,7 +62,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                               [InlineKeyboardButton("* Request Approval *", callback_data = "ra")],
                               [InlineKeyboardButton("* PDf *", callback_data = "pdf")],
                               [InlineKeyboardButton("* Converter *", callback_data = "converter")],
-                              [InlineKeyboardButton("Close", callback_data = "close")],
+                              [InlineKeyboardButton(" Close", callback_data = "close")],
                         ]
                   )
             )
@@ -76,7 +76,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                                [
                                      [InlineKeyboardButton("* Back *", callback_data = "s_back")],
                                      [InlineKeyboardButton("* Close *", callback_data = "close")],
-                                     [InlineKeyboardButton(f"* Delete *", callback_data = "c_delete")],
+                                     [InlineKeyboardButton("* Delete *", callback_data = "c_delete")],
                                ]
                          ))
             else:
