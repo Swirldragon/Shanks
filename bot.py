@@ -1,7 +1,7 @@
 from pyrogram import Client
 from aiohttp import web
 from plugins import web_server
-from pyromod import listen
+import pyromod.listen
 
 API_ID = 18208497
 API_HASH = "b9f8cdba86d3406944419974334e34d5"
