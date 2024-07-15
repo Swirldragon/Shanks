@@ -4,7 +4,7 @@ import os
 import zipfile
 import PyPDF2
 from PIL import Image
-from bot import bot
+from bot import Bot
 from datetime import datetime
 
 p2c_operation = {}
