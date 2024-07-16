@@ -8,5 +8,5 @@ async def koyeb():
   bind_address = "0.0.0.0"
   await web.TCPSite(app, bind_address, PORT).start()
 
-koyeb()
+await koyeb()
 Bot.run()
