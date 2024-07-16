@@ -1,20 +1,5 @@
-# Use an official Python image as a base
-FROM python:3.9-slim
-
-# Set the working directory to /app
+FROM python:3.10
 WORKDIR /app
-
-# Copy the requirements file
-COPY requirements.txt .
-
-# Install the dependencies
+COPY . /app/
 RUN pip install -r requirements.txt
-
-# Copy the application code
-COPY . .
-
-# Expose the port
-EXPOSE 80 
-
-# Run the command to start the bot
-CMD ["python", "main"]
+CMD ["python", "bot.py"]
