@@ -8,7 +8,7 @@ import time
 
 # url = "https://insta-dl.hazex.workers.dev/?url=https://instagram.com/reel/ABC"
 
-@Bot.on_message(filters.text & filters.private)
+
 async def instra_reels(client: Client, message: Message):
   if "https://www.instagram.com/" in message.text:
     user_id = message.from_user.id
