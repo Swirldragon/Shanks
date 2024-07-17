@@ -19,8 +19,8 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
         filename = media.file_name
         file_id = media.file_id
 
-        if file_id in renaming_operations:
-            elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
+        if file_id in p2c_operation:
+            elapsed_time = (datetime.now() - p2c_operation[file_id]).seconds
             if elapsed_time < 10:
                 print("File is being ignored as it is currently being renamed or was renamed recently.")
                 return # Exit the handler if the file is being ignored
@@ -30,7 +30,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
             
         file = await client.download_media(media)
         await message.reply("Downloading....")
-        await asyncio.sleep(10)
+        await asyncio.sleep(6)
             
         pdf_file = open(file, "rb")
         pdf_reader = PyPDF2.PdfReader(pdf_file)
@@ -44,7 +44,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
         cbz_file = zipfile.ZipFile("filename.cbz", "w")
         
         await message.reply_text("Uploading........")
-        await asyncio.sleep(10)
+        await asyncio.sleep(6)
         
         for i, image in enumerate(images):
             image.save(f"page_{i+1}.jpg", "JPEG")
@@ -55,7 +55,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
     else:
         await message.reply("Please send a PDF file with reply.")
 
-@Bot.on_message(filters=filters.command(["p2c"]))
+@Bot.on_message(filters=filters.command(["c2p"]))
 async def convert_cbz_to_pdf(self, client, message):
     user_id = message.from_user.id
     if message.reply_to_message:
@@ -63,8 +63,8 @@ async def convert_cbz_to_pdf(self, client, message):
         file_id = reply.file_id
         filename = reply.file_name
         
-        if file_id in renaming_operations:
-            elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
+        if file_id in c2p_operation:
+            elapsed_time = (datetime.now() - c2p_operation[file_id]).seconds
             if elapsed_time < 10:
                 print("File is being ignored as it is currently being renamed or was renamed recently.")
                 return # Exit the handler if the file is being ignored
@@ -74,7 +74,7 @@ async def convert_cbz_to_pdf(self, client, message):
         
         file = await client.download_media(message.reply_to_message)
         await message.reply_text("Downloading........")
-        await asyncio.sleep(10)
+        await asyncio.sleep(6)
         
         cbz_file = zipfile.ZipFile(file, "r")
         images = []
@@ -86,7 +86,7 @@ async def convert_cbz_to_pdf(self, client, message):
         pdf_writer = PyPDF2.PdfWriter(pdf_file)
         
         await message.reply_text("Uploading........")
-        await asyncio.sleep(10)
+        await asyncio.sleep(6)
         
         for image in images:
             image.save("temp.jpg", "JPEG")
