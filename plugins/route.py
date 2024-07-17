@@ -4,7 +4,7 @@ routes = web.RouteTableDef()
 
 @routes.get("/", allow_head=True)
 async def root_route_handler(request):
-    return web.json_response("Ma Ta Devi Bro.")
+    return web.json_response("Hi Dai. How are You? Ma Nischal Ho.")
 
 
 async def web_server():
