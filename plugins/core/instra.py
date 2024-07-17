@@ -8,7 +8,7 @@ import json
 
 @Bot.on_message(filters.text & filters.private)
 async def instra_reels(client: Client, message: Message):
-  if "https://instagram.com/" in message.text:
+  if "https://www.instagram.com/" in message.text:
     await message.reply("Featching The Url")
     urls = message.text
     cget = create_scraper().request
