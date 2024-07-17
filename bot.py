@@ -12,31 +12,4 @@ DB_URL = "mongodb+srv://justatestsubject01:HzP5SK8ZiiLHcF3o@cluster0.wizfkbo.mon
 PORT = 8080
 ADMINS = 1880221341
 
-class Bot(Client):
-  
-  def __init__(self):
-    super().__init__(
-      "Shanks",
-       api_id=API_ID,
-        api_hash=API_HASH,
-        bot_token=BOT_TOKEN,
-        plugins=dict(root="plugins"),
-        workers=50,
-        sleep_threshold=10
-    )
-    
-  async def start(self):
-    
-    await super().start()
-    #web-response
-    app = web.AppRunner(await web_server())
-    await app.setup()
-    bind_address = "0.0.0.0"
-    await web.TCPSite(app, bind_address, PORT).start()
-    print('Bot Is Start')
-
-  async def stop(self, *args):
-    
-    await super().stop()
-    print('HHHHH')
-
+Bot = Client(name='Bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
