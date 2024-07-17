@@ -4,7 +4,6 @@ from pypdf import PdfReader, PdfWriter
 from io import BytesIO
 from bot import Bot 
 
-@Bot.on_message(filters=filters.command(["encryptPDF"]))
 async def encrypt_pdf(client: Client, message: Message):
     reply = message.reply_to_message
     if reply:
@@ -47,4 +46,8 @@ async def encrypt_pdf(client: Client, message: Message):
     else:
         await message.reply_text("Please reply to a PDF file with the /encryptPDF command.")
         
-        
+
+
+@Bot.on_message(filters=filters.command(["encryptPDF"]))
+async def handle_encrypt_pdf(client: Client, message: Message):
+    await encrypt_pdf(client, message)
