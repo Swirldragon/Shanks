@@ -1,9 +1,24 @@
+# Use an official Python runtime as a parent image
 FROM python:3.12
-WORKDIR /app
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+# Set environment variables for Python
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-COPY . .
+# Set the working directory to /code
+WORKDIR /code
 
-CMD python3 main.py
+# Copy only the requirements file
+COPY requirements.txt /code/
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the current directory contents into the container at /code
+COPY . /code/
+
+# Expose the port that the app will run on
+EXPOSE 8000
+
+# Run the application
+CMD ["python", "main.py"]
