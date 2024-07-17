@@ -4,6 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from .utils import progress_for_pyrogram, humanbytes, convert
 import json
+import time
 
 # url = "https://insta-dl.hazex.workers.dev/?url=https://instagram.com/reel/ABC"
 
