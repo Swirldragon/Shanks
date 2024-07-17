@@ -5,6 +5,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from .utils import progress_for_pyrogram, humanbytes, convert
 import json
 import time
+import asyncio
 
 # url = "https://insta-dl.hazex.workers.dev/?url=https://instagram.com/reel/ABC"
 
@@ -12,7 +13,7 @@ import time
 async def instra_reels(client: Client, message: Message):
   if "https://www.instagram.com/" in message.text:
     user_id = message.from_user.id
-    await message.reply("<code>Featching The Url....</code>")
+    msg = await message.reply("<code>Featching The Url....</code>")
     urls = message.text
     cget = create_scraper().request
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
@@ -21,6 +22,7 @@ async def instra_reels(client: Client, message: Message):
       vlink = vlinks["url"]
       caption = "<b>Doned By @ShanksXRobot</b>"
       await client.send_video(user_id, vlink, caption=caption)
-      
+      await msg.delete()
     except:
-      await message.reply_text("<b>Check Your Link is Private or Story.</b>")
+      msg = await message.reply_text("<b>Check Your Link is Private or Story.</b>")
+      await asyncio.sleep(6)
