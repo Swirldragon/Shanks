@@ -26,7 +26,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
                 return # Exit the handler if the file is being ignored
                 
          # Mark the file as currently being renamed
-        p2c_operations[file_id] = datetime.now()
+        p2c_operation[file_id] = datetime.now()
             
         file = await client.download_media(media)
         await message.reply("Downloading....")
@@ -70,7 +70,7 @@ async def convert_cbz_to_pdf(self, client, message):
                 return # Exit the handler if the file is being ignored
                 
          # Mark the file as currently being renamed
-        c2p_operations[file_id] = datetime.now()
+        c2p_operation[file_id] = datetime.now()
         
         file = await client.download_media(message.reply_to_message)
         await message.reply_text("Downloading........")
