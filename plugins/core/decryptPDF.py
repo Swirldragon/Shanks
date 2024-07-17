@@ -4,7 +4,7 @@ from pypdf import PdfReader, PdfWriter
 from io import BytesIO
 from bot import Bot
 
-@Bot.on_message(filters=filters.command(['decryptpdf']))
+@Bot.on_message(filters=filters.command(["decryptpdf"]))
 async def decrypt_pdf(client: Client, message: Message):
     reply = message.reply_to_message
     if reply.document == None:
