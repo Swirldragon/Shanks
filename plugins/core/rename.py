@@ -9,7 +9,7 @@ from datetime import datetime
 
 renaming_operation = {}
 
-@Bot.on_message(filters=filters.command(["rename"]))
+
 async def rename_files(bot: Bot, msg: Message):
   user_id = msg.from_user.id
   reply = msg.reply_to_message
