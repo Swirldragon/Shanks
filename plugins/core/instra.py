@@ -12,13 +12,10 @@ import time
 async def instra_reels(client: Client, message: Message):
   if "https://www.instagram.com/" in message.text:
     user_id = message.from_user.id
-    reply = message.text
-    msg = await message.reply("Featching The Url")
+    await message.reply("Featching The Url....")
     urls = message.text
     cget = create_scraper().request
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
     vlinks = rjson["result"]
     vlink = vlinks["url"]
     await client.send_video(user_id, vlink)
-    msg.delete()
-    
