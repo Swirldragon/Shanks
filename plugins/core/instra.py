@@ -18,4 +18,5 @@ async def instra_reels(client: Client, message: Message):
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
     vlinks = rjson["result"]
     vlink = vlinks["url"]
-    await client.send_video(user_id, vlink)
+    caption = "Doned By @ShanksXRobot"
+    await client.send_video(user_id, vlink, caption=caption)
