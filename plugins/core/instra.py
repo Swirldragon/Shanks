@@ -13,8 +13,13 @@ import asyncio
 async def instra_reels(client: Client, message: Message):
   if "https://www.instagram.com/" in message.text:
     user_id = message.from_user.id
-    msg = await message.reply("<code>Featching The Url....</code>")
     urls = message.text
+    msg = await message.reply("<code>Featching The Url....</code>")
+    try:
+      messages = await get_messages(client, ids)
+    except:
+      await message.reply_text("Something went wrong..!")
+      return
     cget = create_scraper().request
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
     try:
