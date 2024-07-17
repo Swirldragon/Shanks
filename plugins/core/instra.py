@@ -24,5 +24,5 @@ async def instra_reels(client: Client, message: Message):
       await client.send_video(user_id, vlink, caption=caption)
       await msg.delete()
     except:
-      msg = await message.reply_text("<b>Check Your Link is Private or Story.</b>")
+      exmsg = await message.reply_text("<b>Check Your Link is Private or Story.</b>")
       await asyncio.sleep(6)
