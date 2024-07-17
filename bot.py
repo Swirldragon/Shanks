@@ -10,6 +10,7 @@ BOT_TOKEN = "5170934938:AAHWTgb6FH676fzS-JI3lxxomESplXS8ai0"
 LOG_CHANNEL = -1001885135958
 DB_URL = "mongodb+srv://justatestsubject01:HzP5SK8ZiiLHcF3o@cluster0.wizfkbo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 PORT = 8080
+ADMINS = 1880221341
 
 class Bot(Client):
   
