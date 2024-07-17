@@ -12,6 +12,7 @@ import time
 async def instra_reels(client: Client, message: Message):
   if "https://www.instagram.com/" in message.text:
     user_id = message.from_user.id
+    reply = message.text
     msg = await message.reply("Featching The Url")
     urls = message.text
     cget = create_scraper().request
