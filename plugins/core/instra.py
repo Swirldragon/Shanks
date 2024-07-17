@@ -11,15 +11,15 @@ import time
 @Bot.on_message(filters.text & filters.private)
 async def instra_reels(client: Client, message: Message):
   if "https://www.instagram.com/" in message.text:
-    try:
-      user_id = message.from_user.id
-      await message.reply("Featching The Url....")
-      urls = message.text
-      cget = create_scraper().request
-      rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
-      vlinks = rjson["result"]
+    user_id = message.from_user.id
+    await message.reply("Featching The Url....")
+    urls = message.text
+    cget = create_scraper().request
+    rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
+    vlinks = rjson["result"]
+    if vlinks:
       vlink = vlinks["url"]
       caption = "<b>Doned By @ShanksXRobot</b>"
       await client.send_video(user_id, vlink, caption=caption)
-    except:
-      message.reply("<b>Check Link is Public or Private or story. I cannot send you private reels and story.</b>")
+    else:
+      await message.reply("<b>Check Link is Public or Private or story. I cannot send you private reels and story.</b>")
