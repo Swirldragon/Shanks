@@ -1,6 +1,6 @@
 from bot import Bot
 import random
-from pyrogram import Client, filters
+from pyrogram import Client, filters, __version__
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
 from database.add import add_user_to_database
