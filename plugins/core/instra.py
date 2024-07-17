@@ -23,4 +23,4 @@ async def instra_reels(client: Client, message: Message):
       await client.send_video(user_id, vlink, caption=caption)
       
     except:
-      await message.reply_text("<b>Check Link is Public or Private or story. I cannot send you private reels and story.</b>")
+      await message.reply_text("<b>Check Your Link is Private or Story.</b>")
