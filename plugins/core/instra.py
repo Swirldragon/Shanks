@@ -17,11 +17,9 @@ async def instra_reels(client: Client, message: Message):
     cget = create_scraper().request
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
     
-    try:
-      vlinks == rjson["result"]
-      vlink = vlinks["url"]
-      caption = "<b>Doned By @ShanksXRobot</b>"
-      await client.send_video(user_id, vlink, caption=caption)
+    vlinks == rjson["result"]
+    vlink = vlinks["url"]
+    caption = "<b>Doned By @ShanksXRobot</b>"
+    await client.send_video(user_id, vlink, caption=caption)
       
-    except:
-      await message.reply_text("<b>Check Link is Public or Private or story. I cannot send you private reels and story.</b>")
+    await message.reply_text("<b>Check Link is Public or Private or story. I cannot send you private reels and story.</b>")
