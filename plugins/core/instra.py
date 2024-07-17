@@ -23,6 +23,6 @@ async def instra_reels(client: Client, message: Message):
     downloaded = await reply.download(file_name=cap, progress=progress_for_pyrogram, progress_args=("Download Started.....", sts, c_time))
     await sts.edit("Trying to Uploading")
     c_time = time.time()
-    await bot.send_video(msg.chat.id, video=downloaded, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))
+    await bot.send_video(user_id, video=downloaded, caption=cap, progress=progress_for_pyrogram, progress_args=("Uploade Started.....", sts, c_time))
     msg.delete()
     
