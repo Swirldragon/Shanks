@@ -17,11 +17,14 @@ class Bot(Client):
   def __init__(self):
     super().__init__(
       "Shanks",
-       api_id=API_ID,
-        api_hash=API_HASH,
-        bot_token=BOT_TOKEN,
-        workers=50,
-        sleep_threshold=10
+      api_id=API_ID,
+      api_hash=API_HASH,
+      bot_token=BOT_TOKEN,
+      plugins={
+        "root": "plugins"
+      },
+      workers=50,
+      sleep_threshold=10
     )
     
   async def start(self):
