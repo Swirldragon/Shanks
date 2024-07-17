@@ -128,7 +128,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
       elif data == "auto":
             auto = await db.get_auto(user_id)
             await query.message.edit_text(
-                        text = f"Your Auto Mode: {"True" if auto else "False"}",
+                        text = f"Your Auto Mode: {'True' if auto else 'False'}",
                         disable_web_page_preview = True,
                         reply_markup = InlineKeyboardMarkup(
                               [
