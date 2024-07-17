@@ -6,7 +6,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 # url = "https://insta-dl.hazex.workers.dev/?url=https://instagram.com/reel/ABC"
 
 @Bot.on_message(filters.private & filters.text & filters.regex(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'))
-async def instra_reels(Client: client, Message: message):
+async def instra_reels(client: Client, message: Message):
   await message.reply("Featching The Url")
   urls = message.text
   try:
