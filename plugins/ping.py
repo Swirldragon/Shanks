@@ -1,6 +1,6 @@
 from bot import Bot
 import random
-from pyrogram import Client, filters, __version__
+from pyrogram import Client, filters
 import pyrogram.errors
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
 from database.add import add_user_to_database
@@ -24,7 +24,7 @@ gbutton = [[
     ]]
 
 
-@Bot.on_message(filters.command('start') & filters.private)
+@Bot.on_message(filters=filters.command(['start'])) 
 async def start_command(client: Client, message: Message):
            image = random.choice(photos)
            user_id = message.from_user.id
@@ -44,8 +44,7 @@ async def req_accept(client: Client, message: Message):
            except Exception as e: print(e)
 
 
-@Bot.on_message(filters=filters.command('start') & filters.group) 
+@Bot.on_message(filters=filters.command(['start']) & filters.group) 
 async def start_process(client: Client, message: Message):
            image = random.choice(photos)
            await client.send_photo(chat_id=message.chat.id, photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(gbutton))
-
