@@ -3,7 +3,7 @@ from plugins.start import photos
 from database.db import db
 
 import asyncio
-from pyrogram import types, errors, Client, filters
+from pyrogram import Client, filters, __version__
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, InputMediaDocument
 
 from bot import Bot
