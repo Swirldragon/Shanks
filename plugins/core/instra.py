@@ -15,6 +15,6 @@ async def instra_reels(client: Client, message: Message):
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
     vlink = rjson["url"]
     downloaded = await client.download(vlink)
-    msg.delete()
     await bot.send_video(message.from_user.id, video=downloaded)
+    msg.delete
     
