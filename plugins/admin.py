@@ -17,7 +17,7 @@ async def get_users(client: Client, message: Message):
 @Bot.on_message(filters.private & filters.command('broadcast') & filters.user(ADMINS))
 async def send_text(client: Bot, message: Message):
     if message.reply_to_message:
-        query = await get_all_users()
+        query = await db.get_all_users()
         broadcast_msg = message.reply_to_message
         total = 0
         successful = 0
