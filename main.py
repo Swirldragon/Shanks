@@ -1,5 +1,5 @@
 from bot import Bot
 
-bot = bot()
+bot = Bot()
 
 bot.run()
