@@ -10,7 +10,6 @@ from datetime import datetime
 p2c_operation = {}
 c2p_operation = {}
 
-@Bot.on_message(filters=filters.command(["p2c"]))
 async def convert_pdf_to_cbz(client: Client, message: Message):
     user_id = message.from_user.id
     if message.reply_to_message:
@@ -55,7 +54,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
     else:
         await message.reply("Please send a PDF file with reply.")
 
-@Bot.on_message(filters=filters.command(["c2p"]))
+
 async def convert_cbz_to_pdf(self, client, message):
     user_id = message.from_user.id
     if message.reply_to_message:
