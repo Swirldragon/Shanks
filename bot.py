@@ -12,7 +12,8 @@ DB_URL = "mongodb+srv://justatestsubject01:HzP5SK8ZiiLHcF3o@cluster0.wizfkbo.mon
 PORT = 8080
 ADMINS = 1880221341
 
-class Bot(Client):
+Bot = Client(api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN, plugins={"root": "plugins"})
+""" class Bot(Client):
 
   def __init__(self):
     super().__init__(
@@ -39,4 +40,4 @@ class Bot(Client):
   async def stop(self, *args):
 
     await super().stop()
-    print('HHHHH')
+    print('HHHHH') """
