@@ -1,24 +1,19 @@
 # Use an official Python runtime as a parent image
 FROM python:3.12
 
-# Set environment variables for Python
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Keeps Python from generating .pyc files in the container
+ENV PYTHONDONTWRITEBYTECODE=1
 
-# Set the working directory to /code
-WORKDIR /code
+# Turns off buffering for easier container logging
+ENV PYTHONUNBUFFERED=1
 
-# Copy only the requirements file
-COPY requirements.txt /code/
+WORKDIR /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+# Install pip requirements
+COPY requirements.txt .
+RUN python -m pip install --no-cache-dir -r requirements.txt
 
-# Copy the current directory contents into the container at /code
-COPY . /code/
+COPY . /app
 
-# Expose the port that the app will run on
-EXPOSE 8000
-
-# Run the application
-CMD ["python", "main.py"]
+# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
+CMD ["bash", "start.sh"]
