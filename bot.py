@@ -24,16 +24,17 @@ class Bot(Client):
         workers=50,
         sleep_threshold=10
     )
+    
+  async def start(self):
+
+    await super().start()
+    print('Bot Is Start')
     #web-response
     app = web.AppRunner(await web_server())
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
-
-  async def start(self):
-
-    await super().start()
-    print('Bot Is Start')
+    print("web Stites Pass")
 
   async def stop(self, *args):
 
