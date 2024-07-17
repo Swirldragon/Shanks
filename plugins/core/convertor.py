@@ -6,6 +6,7 @@ import PyPDF2
 from PIL import Image
 from bot import Bot
 from datetime import datetime
+import asyncio
 
 p2c_operation = {}
 c2p_operation = {}
