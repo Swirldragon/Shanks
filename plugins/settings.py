@@ -1,5 +1,5 @@
 import random
-from plugins.start import photos
+from plugins.ping import photos
 from database.db import db
 
 import asyncio
