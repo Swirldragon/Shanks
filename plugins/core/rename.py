@@ -18,6 +18,13 @@ async def rename_files(bot: Bot, msg: Message):
   elif reply.video:
     file_id = msg.video.file_id
     
+  CAPTION = await db.get_caption(user_id)
+  if len(msg.command) < 2 or not reply:
+    return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")   
+  media = reply.document or reply.audio or reply.video
+  if not media:
+    await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
+    
   if file_id in renaming_operations:
     elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
     if elapsed_time < 10:
@@ -27,12 +34,6 @@ async def rename_files(bot: Bot, msg: Message):
     # Mark the file as currently being renamed
   renaming_operations[file_id] = datetime.now()
 
-  CAPTION = await db.get_caption(user_id)
-  if len(msg.command) < 2 or not reply:
-    return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")   
-  media = reply.document or reply.audio or reply.video
-  if not media:
-    await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
   og_media = getattr(reply, reply.media.value)
   new_name = msg.text.split(" ", 1)[1]
   sts = await msg.reply_text("Trying to Downloading.....")
