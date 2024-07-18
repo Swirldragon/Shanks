@@ -13,15 +13,11 @@ renaming_operation = {}
 async def rename_files(bot: Bot, msg: Message):
   user_id = msg.from_user.id
   reply = msg.reply_to_message
-  if reply.document:
-    file_id = msg.document.file_id
-  elif reply.video:
-    file_id = msg.video.file_id
-    
   CAPTION = await db.get_caption(user_id)
   if len(msg.command) < 2 or not reply:
     return await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")   
   media = reply.document or reply.audio or reply.video
+  file_id = media.file_id
   if not media:
     await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
     
