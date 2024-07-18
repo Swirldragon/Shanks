@@ -17,7 +17,7 @@ async def handle_start(client: Client, message: Message):
 
 @Bot.on_message(filters=filters.command(["setting"]))
 async def handle_setting(client: Client, message: Message):
-  await on_set_caption(client, message)
+  await show_settings(client, message)
 
 @Bot.on_message(filters=filters.command(["sethumb"]))
 async def on_set_thumb(client: Client, message: Message):
