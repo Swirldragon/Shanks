@@ -24,7 +24,7 @@ gbutton = [[
     ]]
 
 
-@Bot.on_message(filters=filters.command(['start'])) 
+
 async def start_command(client: Client, message: Message):
            image = random.choice(photos)
            user_id = message.from_user.id
