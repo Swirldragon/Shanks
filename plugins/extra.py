@@ -5,7 +5,7 @@ from .core.encryptPDF import encrypt_pdf
 from .core.instra import instra_reels
 from .core.rename import rename_files
 from .ping import start_command
-from .settings import show_settings
+from .settings import show_settings, on_set_caption, mode
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -17,7 +17,24 @@ async def handle_start(client: Client, message: Message):
 
 @Bot.on_message(filters=filters.command(["setting"]))
 async def handle_setting(client: Client, message: Message):
-  await show_settings(client, message)
+  await on_set_caption(client, message)
+
+@Bot.on_message(filters=filters.command(["sethumb"]))
+async def on_set_thumb(client: Client, message: Message):
+	await message.reply("Send Me Your Thumbnali")
+
+@Bot.on_message(filters=filters.command(["setcaption"]))
+async def handle_captain(client: Client, message: Message):
+  await on_set_caption(client, message)
+
+@Bot.on_message(filters.private & filters.photo)
+async def addthumbs(client: Client, message: Message):
+	await db.set_thumbnail(message.from_user.id, file_id=message.photo.file_id)
+	await message.reply("You have set thumb")
+
+@Bot.on_message(filters=filters.command(["mode"]))
+async def handle_mode(client: Client, message: Message):
+  await on_set_mode(client, message)
   
 @Bot.on_message(filters=filters.command(["encryptPDF"]))
 async def handle_encrypt_pdf(client: Client, message: Message):
