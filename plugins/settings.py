@@ -22,9 +22,9 @@ mode_S = [
        ]
 
 
-async def show_settings(client: Client, message: Message)
-    image = random.choice(photos)
-    await client.send_photo(chat_id=message.from_user.id, photo=image, caption="List of Setting:", reply_markup=InlineKeyboardMarkup(setting_b))
+async def show_settings(client: Client, message: Message):
+        image = random.choice(photos)
+        await client.send_photo(chat_id=message.from_user.id, photo=image, caption="List of Setting:", reply_markup=InlineKeyboardMarkup(setting_b))
 
 
 async def on_set_caption(client: Client, message: Message):
