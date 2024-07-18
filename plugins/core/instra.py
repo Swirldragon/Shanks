@@ -25,4 +25,5 @@ async def instra_reels(client: Client, message: Message):
       await msg.delete()
     except:
       exmsg = await message.reply_text("<b>Check Your Link is Private or Story.</b>")
+      await msg.delete()
       await asyncio.sleep(6)
