@@ -11,6 +11,7 @@ from bot import *
 import os
 import time
 import re
+from bot import Bot
 
 renaming_operations = {}
 
@@ -136,7 +137,7 @@ episode_number = extract_episode_number(filename)
 print(f"Extracted Episode Number: {episode_number}")
 
 # Inside the handler for file uploads
-
+@Bot.on_message(filters.private & (filters.document | filters.video | filters.audio))
 async def auto_rename_files(client, message):
   user_id = message.from_user.id
   firstname = message.from_user.first_name
