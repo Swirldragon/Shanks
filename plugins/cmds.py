@@ -5,7 +5,7 @@ from .core.encryptPDF import encrypt_pdf
 from .core.instra import instra_reels
 from .core.rename import rename_files
 from .ping import start_command
-from .settings import show_settings, on_set_caption, mode
+from .settings import show_settings, on_set_caption, on_set_mode
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
