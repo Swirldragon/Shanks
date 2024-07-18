@@ -17,7 +17,7 @@ async def handle_start(client: Client, message: Message):
 
 @Bot.on_message(filters=filters.command(["setting"]))
 async def handle_setting(client: Client, message: Message):
-  await start_command(client, message)
+  await show_settings(client, message)
   
 @Bot.on_message(filters=filters.command(["encryptPDF"]))
 async def handle_encrypt_pdf(client: Client, message: Message):
