@@ -15,7 +15,6 @@ async def instra_reels(client: Client, message: Message):
     user_id = message.from_user.id
     urls = message.text
     msg = await message.reply("<code>Featching The Url....</code>")
-    await msg
     cget = create_scraper().request
     rjson = cget('GET', f'https://insta-dl.hazex.workers.dev/?url={urls}').json()
     try:
