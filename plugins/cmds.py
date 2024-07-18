@@ -10,6 +10,7 @@ from .settings import show_settings, on_set_caption, on_set_mode
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from bot import Bot
+from database.db import db
 
 @Bot.on_message(filters=filters.command(["start"]))
 async def handle_start(client: Client, message: Message):
