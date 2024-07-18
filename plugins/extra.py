@@ -4,11 +4,21 @@ from .core.decryptPDF import decrypt_pdf
 from .core.encryptPDF import encrypt_pdf
 from .core.instra import instra_reels
 from .core.rename import rename_files
+from .ping import start_command
+from .settings import show_settings
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from bot import Bot
 
+@Bot.on_message(filters=filters.command(["start"]))
+async def handle_start(client: Client, message: Message):
+  await start_command(client, message)
+
+@Bot.on_message(filters=filters.command(["setting"]))
+async def handle_setting(client: Client, message: Message):
+  await start_command(client, message)
+  
 @Bot.on_message(filters=filters.command(["encryptPDF"]))
 async def handle_encrypt_pdf(client: Client, message: Message):
   await encrypt_pdf(client, message)
@@ -34,6 +44,6 @@ async def handle_decryptpdf(client: Client, message: Message):
 async def handle_decryptpdf(client: Client, message: Message):
   await convert_cbz_to_pdf(client, message)
 
-@Bot.on_message(filters.private & (filters.document | filters.video | filters.audio))
+""" @Bot.on_message(filters.private & (filters.document | filters.video | filters.audio))
 async def auto_rename_files(client: Client, message: Message):
-  await auto_rename_files(client, message)
+  await auto_rename_files(client, message)"""
