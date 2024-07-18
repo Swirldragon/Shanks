@@ -30,7 +30,7 @@ async def handle_captain(client: Client, message: Message):
 
 @Bot.on_message(filters.private & filters.photo)
 async def addthumbs(client: Client, message: Message):
-	await db.set_thumbnail(message.from_user.id, file_id=message.photo.file_id)
+	await db.set_thumbnail(message.from_user.id, thumbnail=message.photo.file_id)
 	await message.reply("You have set thumb")
 
 @Bot.on_message(filters=filters.command(["mode"]))
