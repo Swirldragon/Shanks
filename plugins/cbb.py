@@ -10,6 +10,37 @@ setting_b = [
             [InlineKeyboardButton("* Close *", callback_data = "close")],
             ]
 
+HELP_TXT = """**🌟 Help Menu** 
+
+**__FOR PRIVATE CHATS__**
+
+__first send invite link of the chat (unnecessary if the account of string session already member of the chat)
+then send post/s link__
+
+
+**__FOR BOT CHATS__**
+
+__send link with '/b/', bot's username and message id, you might want to install some unofficial client to get the id like below__
+
+```
+https://t.me/b/botusername/4321
+```
+
+**__MULTI POSTS__**
+
+__send public/private posts link as explained above with formate "from - to" to send multiple messages like below__
+
+
+```
+https://t.me/xxxx/1001-1010
+
+https://t.me/c/xxxx/101 - 120
+```
+
+__note that space in between doesn't matter__"""
+
+
+
 @Bot.on_callback_query()
 async def cb_handler(client: Bot, query: CallbackQuery):
       user_id = query.from_user.id
@@ -23,12 +54,26 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                               [InlineKeyboardButton("* Rename *", callback_data = "ab_rename")],
                               [InlineKeyboardButton("* Request Approval *", callback_data = "ra")],
                               [InlineKeyboardButton("* PDf *", callback_data = "pdf")],
-                              [InlineKeyboardButton("* Converter *", callback_data = "converter")],
+                              [InlineKeyboardButton("* Save Restricted Content *", callback_data = "src")],
                               [InlineKeyboardButton("Close", callback_data = "close")],
                         ]
                   )
             )
-
+                  
+      elif data == "src":
+            await query.message.edit_text(
+                  text = HELP_TXT,
+                  disable_web_page_preview = True,
+                  reply_markup = InlineKeyboardMarkup(
+                        [
+                              [
+                                    InlineKeyboardButton("CLOSE", callback_data = "close"),
+                                    InlineKeyboardButton("BACK", callback_data = "back")
+                              ]
+                        ]
+                  )
+            )
+                  
       elif data == "ab_rename":
             await query.message.edit_text(
                   text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto. To Setup This Function Use <code>/setting</code>.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>\n\nMade By @Wizard_Bots.</b>",
