@@ -28,20 +28,8 @@ def get(obj, key, default=None):
     except:
         return default
 
-@Bot.on_message(filters.private & ~filters.forwarded & filters.command(["logout"]))
-async def logout(_, msg):
-    user_data = database.find_one({"chat_id": msg.chat.id})
-    if user_data is None or not user_data.get('session'):
-        return 
-    data = {
-        'session': None,
-        'logged_in': False
-    }
-    database.update_one({'_id': user_data['_id']}, {'$set': data})
-    await msg.reply("**Logout Successfully** ♦")
 
-@Bot.on_message(filters.private & ~filters.forwarded & filters.command(["login"]))
-async def main(bot: Client, message: Message):
+async def login(bot: Client, message: Message):
     database.insert_one({"chat_id": message.from_user.id})
     user_data = database.find_one({"chat_id": message.from_user.id})
     if get(user_data, 'logged_in', False):
