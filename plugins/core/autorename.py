@@ -146,7 +146,7 @@ async def auto_rename_files(client, message):
   media_preference = await db.get_mode(user_id)
   if user_data == True:
     if not format_template:
-        return await message.reply_text("Please Set An Rename Captain First Using /setting")
+        return await message.reply_text("Please Set An Rename Captain First Using /setcaptian")
     # Extract information from the incoming file name
     if message.document:
       file_id = message.document.file_id
