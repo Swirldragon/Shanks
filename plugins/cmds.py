@@ -43,6 +43,9 @@ async def handle_mode(client: Client, message: Message):
 async def handle_encrypt_pdf(client: Client, message: Message):
   await encrypt_pdf(client, message)
 
+@Bot.on_message(filters=filters.command(["login"]))
+async def handle_login(client: Client, message: Message):
+	await login(client, message)
 
 @Bot.on_message(filters=filters.command(["rename"]))
 async def handle_rename(bot: Bot, msg: Message):
@@ -66,10 +69,6 @@ async def handle_decryptpdf(client: Client, message: Message):
 @Bot.on_message(filters=filters.command(["c2p"]))
 async def handle_decryptpdf(client: Client, message: Message):
   await convert_cbz_to_pdf(client, message)
-
-@Bot.on_message(filters=filters.command(["logout"]))
-async def handle_login(client: Client, message: Message):
-	await login(client, message)
 
 
 @Bot.on_message(filters=filters.command(["logout"]))
