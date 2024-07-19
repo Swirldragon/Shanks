@@ -1,16 +1,13 @@
 from pyrogram.types import Message
 from pyrogram import Client, filters
-from pypdf import PdfReader, PdfWriter
-from io import BytesIO
+import fitz
 from bot import Bot 
 
 async def encrypt_pdf(client: Client, message: Message):
     reply = message.reply_to_message
     if reply:
         pdf_file = await client.download_media(reply.document)
-        pdf_reader = PdfReader(pdf_file)
-        num_pages = len(pdf_reader.pages)
-        
+
         password_message = await client.ask(text = "Please enter a password to encrypt the PDF file. Type `/cancel` to cancel.", timeout=60)
         
         if password_message.text == "/cancel":
@@ -28,21 +25,32 @@ async def encrypt_pdf(client: Client, message: Message):
         
         filename = filename_message.text
         
-        # Encrypt the PDF file
-        pdf_writer = PdfWriter()
+        try:
+            # Encrypt the PDF file
+            with fitz.open(pdf_file) as iNPUT:
+                number_of_pages = iNPUT.page_count
+                iNPUT.save(
+                    enpdf,
+                    encryption=fitz.PDF_ENCRYPT_AES_256,  # strongest algorithm
+                    owner_pw=auth,
+                    user_pw=f"{password}",
+                    permissions=int(
+                        fitz.PDF_PERM_ACCESSIBILITY
+                        | fitz.PDF_PERM_PRINT
+                        | fitz.PDF_PERM_COPY
+                        | fitz.PDF_PERM_ANNOTATE
+                    )
+                )
+            return True, output_path
+            
+        except Exception as Error:
+            logger.exception("🐞 %s: %s" % (file_name, Error), exc_info=True)
+            return False, Error
+
         
-        for page in pdf_reader.pages:
-            pdf_writer.add_page(page)
-        pdf_writer.encrypt(password)
-        
-        # Create a BytesIO object to store the encrypted PDF
-        encrypted_pdf = BytesIO()
-        pdf_writer.write(encrypted_pdf)
-        encrypted_pdf.seek(0)
-        # Reply to the original message with the encrypted PDF
-        await message.reply_to_message.reply_document(encrypted_pdf, file_name=filename)
+        await bot.send_document(message.from_user.id, document=enpdf, file_name=filename)
 
     
     else:
         await message.reply_text("Please reply to a PDF file with the /encryptPDF command.")
-        
+      
