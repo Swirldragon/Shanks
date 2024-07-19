@@ -50,7 +50,7 @@ async def upstatus(client: Client, statusfile, message):
         await asyncio.sleep(3)      
     while os.path.exists(statusfile):
         with open(statusfile, "r") as upread:
-            txt = upread.read()
+                fromID = int(temp[0].strip())
         try:
             await client.edit_message_text(message.chat.id, message.id, f"Uploaded : {txt}")
             await asyncio.sleep(10)
