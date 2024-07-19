@@ -50,13 +50,12 @@ async def upstatus(client: Client, statusfile, message):
         await asyncio.sleep(3)      
     while os.path.exists(statusfile):
         with open(statusfile, "r") as upread:
-                fromID = int(temp[0].strip())
+            txt = upread.read()
         try:
             await client.edit_message_text(message.chat.id, message.id, f"Uploaded : {txt}")
             await asyncio.sleep(10)
         except:
             await asyncio.sleep(5)
-
 
 # progress writer
 def progress(current, total, message, type):
