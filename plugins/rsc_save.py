@@ -224,13 +224,6 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
     await message.reply_text("Files will be deleted After 10 seconds, Save them to the Saved Message now !!")
     await asyncio.sleep(600)
 
-    for snt_msg in snt_msgs:
-	try:
-		await snt_msg.delete()
-        except:
-		pass  
-    return
-
 
 # get the type of message
 def get_message_type(msg: pyrogram.types.messages_and_media.message.Message):
