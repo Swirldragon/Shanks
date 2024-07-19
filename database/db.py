@@ -1,8 +1,10 @@
-
+from pymongo import MongoClient
 import datetime
 import motor.motor_asyncio
 from bot import DB_URL
 
+mongo_client = MongoClient(DB_URI)
+database = mongo_client.userdb.sessions
 
 class Database:
     def __init__(self, uri, database_name):
