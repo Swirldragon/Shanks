@@ -36,7 +36,7 @@ class Database:
 
     async def get_all_users(self):
          user_ids = []
-         for doc in self.db.users.find({}): # Assuming 'users' is your collection name
+         async for doc in self.db.users.find({}): # Assuming 'users' is your collection name
              user_docs.append(doc)
              
          return user_ids
