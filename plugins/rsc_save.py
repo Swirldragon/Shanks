@@ -80,8 +80,8 @@ async def save(client: Client, message: Message):
 			bot.send_message(message.chat.id,"**Chat alredy Joined**", reply_to_message_id=message.id)
 		except InviteHashExpired:
 			bot.send_message(message.chat.id,"**Invalid Link**", reply_to_message_id=message.id)
-
-        else:
+			
+	else:
 		datas = message.text.split("/")
                 temp = datas[-1].replace("?single","").split("-")
                 fromID = int(temp[0].strip())
