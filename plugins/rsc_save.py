@@ -99,17 +99,17 @@ async def save(client: Client, message: Message):
 					return
 				acc = Client("saverestricted", session_string=user_data['session'], api_hash=API_HASH, api_id=API_ID)
 				await acc.connect()
-                                chatid = int("-100" + datas[4])
-                                await handle_private(client, acc, message, chatid, msgid)
+				chatid = int("-100" + datas[4])
+				await handle_private(client, acc, message, chatid, msgid)
 				#bot
 			elif "https://t.me/b/" in message.text:
 				user_data = database.find_one({"chat_id": message.chat.id})
 				if not get(user_data, 'logged_in', False) or user_data['session'] is None:
 					await client.send_message(message.chat.id, strings['need_login'])
 					return
-                                acc = Client("saverestricted", session_string=user_data['session'], api_hash=API_HASH, api_id=API_ID)
-                                await acc.connect()
-                                username = datas[4]
+				acc = Client("saverestricted", session_string=user_data['session'], api_hash=API_HASH, api_id=API_ID)
+				await acc.connect()
+				username = datas[4]
 				try:
 					await handle_private(client, acc, message, username, msgid)
 				except Exception as e:
