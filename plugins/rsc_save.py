@@ -84,12 +84,12 @@ async def save(client: Client, message: Message):
 	else:
 		datas = message.text.split("/")
 		temp = datas[-1].replace("?single","").split("-")
-                fromID = int(temp[0].strip())
-                try:
+		fromID = int(temp[0].strip())
+		try:
 			toID = int(temp[1].strip())
 		except:
 			toID = fromID
-		
+			
                 for msgid in range(fromID, toID+1):
 			#private
 			if "https://t.me/c/" in message.text:
