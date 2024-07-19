@@ -7,11 +7,12 @@ from .core.rename import rename_files
 from .ping import start_command
 from .settings import show_settings, on_set_caption, on_set_mode
 from .rsc_save import save
+from .rsc_generate import login
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from bot import Bot
-from database.db import db
+from database.db import db, database
 
 @Bot.on_message(filters=filters.command(["start"]))
 async def handle_start(client: Client, message: Message):
@@ -66,6 +67,23 @@ async def handle_decryptpdf(client: Client, message: Message):
 async def handle_decryptpdf(client: Client, message: Message):
   await convert_cbz_to_pdf(client, message)
 
+@Bot.on_message(filters=filters.command(["logout"]))
+async def handle_login(client: Client, message: Message):
+	await login(client, message)
+
+
+@Bot.on_message(filters=filters.command(["logout"]))
+async def logout(_, msg):
+    user_data = database.find_one({"chat_id": msg.chat.id})
+    if user_data is None or not user_data.get('session'):
+        return 
+    data = {
+        'session': None,
+        'logged_in': False
+    }
+    database.update_one({'_id': user_data['_id']}, {'$set': data})
+    await msg.reply("**Logout Successfully** ♦")
+	
 """ @Bot.on_message(filters.private & (filters.document | filters.video | filters.audio))
 async def auto_rename_files(client: Client, message: Message):
   await auto_rename_files(client, message)"""
