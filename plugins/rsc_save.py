@@ -9,7 +9,7 @@ import threading
 import json
 from bot import API_ID, API_HASH
 from database.db import database 
-
+from bot import Bot
 
 strings = {
     'need_login': "U have to /login before using then bot can download restricted content ❕",
