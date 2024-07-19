@@ -3,7 +3,7 @@ import datetime
 import motor.motor_asyncio
 from bot import DB_URL
 
-mongo_client = MongoClient(DB_URI)
+mongo_client = MongoClient(DB_URL)
 database = mongo_client.userdb.sessions
 
 class Database:
