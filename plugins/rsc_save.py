@@ -174,7 +174,6 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
         
         try:
             xx = await client.send_video(chat, file, duration=msg.video.duration, width=msg.video.width, height=msg.video.height, thumb=ph_path, caption=caption, reply_to_message_id=message.id, progress=progress, progress_args=[message,"up"])
-	    xx.append(xx)	
         except Exception as e:
             await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
         if ph_path != None: os.remove(ph_path)
