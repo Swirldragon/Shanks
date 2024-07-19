@@ -65,7 +65,7 @@ def progress(current, total, message, type):
 
 async def save(client: Client, message: Message):
 	if "https://t.me/+" in message.text or "https://t.me/joinchat/" in message.text:
-		
+			
 		if acc is None:
 			bot.send_message(message.chat.id,f"**String Session is not Set**", reply_to_message_id=message.id)
 			return
@@ -81,7 +81,7 @@ async def save(client: Client, message: Message):
 		except InviteHashExpired:
 			bot.send_message(message.chat.id,"**Invalid Link**", reply_to_message_id=message.id)
 
-        elif "https://t.me/" in message.text:
+        else:
 		datas = message.text.split("/")
                 temp = datas[-1].replace("?single","").split("-")
                 fromID = int(temp[0].strip())
