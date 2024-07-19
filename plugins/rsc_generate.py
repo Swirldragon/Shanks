@@ -18,6 +18,7 @@ from pyrogram.errors import (
 from .rsc_save import strings
 from bot import API_ID, API_HASH
 from database.db import database
+from bot import Bot
 
 SESSION_STRING_SIZE = 351
 
