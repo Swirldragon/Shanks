@@ -53,7 +53,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         [
                               [InlineKeyboardButton("* Rename *", callback_data = "ab_rename")],
                               [InlineKeyboardButton("* Request Approval *", callback_data = "ra")],
-                              [InlineKeyboardButton("* PDf *", callback_data = "pdf")],
+                              [InlineKeyboardButton("* Instagram Reels *", callback_data = "ir")],
                               [InlineKeyboardButton("* Save Restricted Content *", callback_data = "src")],
                               [InlineKeyboardButton("Close", callback_data = "close")],
                         ]
@@ -76,7 +76,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                   
       elif data == "ab_rename":
             await query.message.edit_text(
-                  text = "<b>☆ Rename Function:\n\nWe Currently Have Three Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto. To Setup This Function Use <code>/setting</code>.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>\n\nMade By @Wizard_Bots.</b>",
+                  text = "<b>☆ Rename Function:\n\nWe Currently Have Two Modes In Our Bot..\n\n•Auto Mode : This Will Rename Your Files Auto. To Setup This Function Use <code>/setting</code>.\n\n• Manual: This Is Doned By <code>/rename Ch-123 @Manga_Arena.pdf</code>\n\nMade By @Wizard_Bots.</b>",
                   disable_web_page_preview = True,
                   reply_markup = InlineKeyboardMarkup(
                         [
@@ -87,7 +87,20 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         ]
                   )
             )
-
+      elif data == "ir":
+            await query.message.edit_text(
+                  text = "<b>☆ Instagram Reels:\n\n Send Any Instagram Reels Link And See Magic.\nDonot Send Private Reels Link.\n\nMade By @Wizard_Bots</b>",
+                    disable_web_page_preview = True,
+                    reply_markup = InlineKeyboardMarkup(
+                        [
+                              [
+                                    InlineKeyboardButton("CLOSE", callback_data = "close"),
+                                    InlineKeyboardButton("BACK", callback_data = "back")
+                              ]
+                        ]
+                  )
+            )
+                  
       elif data == "ra":
             await query.message.edit_text(
                   text = "<b>☆ Auto-ReqAccept:\n\n Add Me In Your Channel To Use\n I Auto Accept The Users To Channel\n\n Made By @Wizard_Bots.</b>",
@@ -101,6 +114,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                         ]
                   )
             )
+                  
       elif data == "back":
             await query.message.edit_text(
                   text = "<b>List of modules:</b>",
