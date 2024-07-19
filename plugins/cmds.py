@@ -6,6 +6,7 @@ from .core.instra import instra_reels
 from .core.rename import rename_files
 from .ping import start_command
 from .settings import show_settings, on_set_caption, on_set_mode
+from .rsc_save import save
 
 from pyrogram import Client, filters
 from pyrogram.types import Message
@@ -47,9 +48,12 @@ async def handle_rename(bot: Bot, msg: Message):
   await rename_files(bot, msg)
 
 @Bot.on_message(filters.text & filters.private)
-async def handle_instra_reels(client: Client, message: Message):
-  await instra_reels(client, message)
-
+async def handle_text(client: Client, message: Message):
+	if "https://t.me/" in message.text:
+		await save(client, message)
+	else:
+		await instra_reels(client, message)
+  
 @Bot.on_message(filters=filters.command(["decryptpdf"]))
 async def handle_decryptpdf(client: Client, message: Message):
   await decrypt_pdf(client, message)
