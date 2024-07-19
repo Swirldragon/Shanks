@@ -83,7 +83,7 @@ async def save(client: Client, message: Message):
 			
 	else:
 		datas = message.text.split("/")
-                temp = datas[-1].replace("?single","").split("-")
+		temp = datas[-1].replace("?single","").split("-")
                 fromID = int(temp[0].strip())
                 try:
 			toID = int(temp[1].strip())
