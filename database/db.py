@@ -35,12 +35,11 @@ class Database:
         return count
 
     async def get_all_users(self):
-        user_docs = self.db.find()
-        user_ids = []
-        for doc in user_docs:
-            user_ids.append(doc['id'])
-            
-        return user_ids
+         user_ids = []
+         for doc in self.db.users.find({}): # Assuming 'users' is your collection name
+             user_docs.append(doc)
+             
+         return user_ids
 
     async def delete_user(self, user_id):
         await self.col.delete_many({'id': int(user_id)})
