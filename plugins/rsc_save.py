@@ -64,7 +64,7 @@ def progress(current, total, message, type):
         fileup.write(f"{current * 100 / total:.1f}%")
 
 
-@Client.on_message(filters.text & filters.private)
+@Bot.on_message(filters.text & filters.private)
 async def save(client: Client, message: Message):
     if "https://t.me/" in message.text:
         datas = message.text.split("/")
