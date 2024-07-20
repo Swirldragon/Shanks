@@ -25,7 +25,7 @@ gbutton = [[
 
 
 
-async def start_command(client: Client, message: Message):
+async def start_command(client, message):
            image = random.choice(photos)
            user_id = message.from_user.id
            if not user_id:
