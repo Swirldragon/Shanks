@@ -136,4 +136,4 @@ async def convert_cbz_to_pdf(bot, message):
         except Exception as e:
             await message.reply_text(f'An error occurred: {e}')
     else:
-        await message.reply_text('Please send a valid .cbz file.')
+        await message.reply_text('Please send a valid .cbz file with reply.')
