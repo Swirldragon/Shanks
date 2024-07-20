@@ -128,9 +128,9 @@ async def save(client, message):
 # handle private
 async def handle_private(client: Client, acc, message: Message, chatid: int, msgid: int):
 	msg: Message = await acc.get_messages(chatid, msgid)
-        msg_type = get_message_type(msg)
-        chat = message.chat.id
-        if "Text" == msg_type:
+	msg_type = get_message_type(msg)
+	chat = message.chat.id
+	if "Text" == msg_type:
 		try:
 			await client.send_message(chat, msg.text, entities=msg.entities, reply_to_message_id=message.id)
 		except Exception as e:
