@@ -151,7 +151,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 	else:
 		caption = None
 
-	
+	xxx = []
 	if "Document" == msg_type:
 		try:
 			ph_path = await acc.download_media(msg.document.thumbs[0].file_id)
