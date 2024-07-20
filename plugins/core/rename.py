@@ -78,4 +78,4 @@ async def rename_files(bot: Bot, msg: Message):
     pass
   await sts.delete()
 
-  del renaming_operations[file_id]
+  del renaming_operation[file_id]
