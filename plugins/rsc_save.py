@@ -176,9 +176,9 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
-
-	
-        elif "Animation" == msg_type:
+			
+			
+	elif "Animation" == msg_type:
 		
                 try:
 			xx = await client.send_animation(chat, file, reply_to_message_id=message.id)
@@ -187,7 +187,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
 	
-        elif "Sticker" == msg_type:
+	elif "Sticker" == msg_type:
 		try:
 			xx = await client.send_sticker(chat, file, reply_to_message_id=message.id)
 			xx.append(xx)
