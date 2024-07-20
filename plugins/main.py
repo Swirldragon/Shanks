@@ -1,5 +1,4 @@
 from .core.autorename import auto_rename_files
-from .core.convertor import convert_pdf_to_cbz
 from .core.convertor import convert_cbz_to_pdf
 from .core.decryptPDF import decrypt_pdf
 from .core.encryptPDF import encrypt_pdf
@@ -15,6 +14,10 @@ from pyrogram.types import Message
 from bot import Bot
 from database.db import db, database
 
+@Bot.on_message(filters=filters.command(["c2p"]))
+async def handle_c2p(bot: Bot, message: Message):
+  await convert_cbz_to_pdf(bot, message)
+	
 @Bot.on_message(filters=filters.command(["start"]))
 async def handle_start(client: Client, message: Message):
   await start_command(client, message)
