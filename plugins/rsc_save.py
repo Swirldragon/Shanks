@@ -176,15 +176,6 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
-			
-			
-	elif "Animation" == msg_type:
-		
-                try:
-			xx = await client.send_animation(chat, file, reply_to_message_id=message.id)
-			xx.append(xx)
-                except Exception as e:
-			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
 	
 	elif "Sticker" == msg_type:
@@ -193,6 +184,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 			xx.append(xx)
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+		if ph_path != None: os.remove(ph_path)
 
 	
         elif "Voice" == msg_type:
@@ -200,7 +192,8 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 			xx = await client.send_voice(chat, file, caption=caption, caption_entities=msg.caption_entities, reply_to_message_id=message.id, progress=progress, progress_args=[message,"up"])
 			xx.append(xx)
                 except Exception as e:
-			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+			await client.send_messaif ph_path != None: os.remove(ph_path)ge(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+		
 
 	
         elif "Audio" == msg_type:
@@ -215,6 +208,14 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
 
+	elif "Animation" == msg_type:
+		try:
+			xx = await client.send_animation(chat, file, reply_to_message_id=message.id)
+			xx.append(xx)
+		except Exception as e:
+			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+		if ph_path != None: os.remove(ph_path)
+
 	
 	elif "Photo" == msg_type:
 		try:
@@ -222,6 +223,8 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 			xx.append(xx)
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
+
+	
 	if os.path.exists(f'{message.id}upstatus.txt'):
 		os.remove(f'{message.id}upstatus.txt')
 		os.remove(file)
