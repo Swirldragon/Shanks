@@ -25,7 +25,7 @@ def get(obj, key, default=None):
         return default
 
 
-async def login(bot: Client, message: Message):
+async def login(bot, message):
     database.insert_one({"chat_id": message.from_user.id})
     user_data = database.find_one({"chat_id": message.from_user.id})
     if get(user_data, 'logged_in', False):
