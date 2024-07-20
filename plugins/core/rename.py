@@ -20,14 +20,14 @@ async def rename_files(bot: Bot, msg: Message):
   if not media:
     await msg.reply_text("Please Reply To An File or video or audio With filename + .extension eg:-(`.mkv` or `.mp4` or `.zip`)")
     
-  if file_id in renaming_operations:
-    elapsed_time = (datetime.now() - renaming_operations[file_id]).seconds
+  if file_id in renaming_operation:
+    elapsed_time = (datetime.now() - renaming_operation[file_id]).seconds
     if elapsed_time < 10:
       print("File is being ignored as it is currently being renamed or was renamed recently.")
       return  # Exit the handler if the file is being ignored
 
     # Mark the file as currently being renamed
-  renaming_operations[file_id] = datetime.now()
+  renaming_operation[file_id] = datetime.now()
 
   og_media = getattr(reply, reply.media.value)
   new_name = msg.text.split(" ", 1)[1]
