@@ -67,8 +67,8 @@ async def handle_decryptpdf(client: Client, message: Message):
   await convert_pdf_to_cbz(client, message)
 
 @Bot.on_message(filters=filters.command(["c2p"]))
-async def handle_decryptpdf(client: Client, message: Message):
-  await convert_cbz_to_pdf(client, message)
+async def handle_decryptpdf(bot: Bot, message: Message):
+  await convert_cbz_to_pdf(bot, message)
 
 
 @Bot.on_message(filters=filters.command(["logout"]))
