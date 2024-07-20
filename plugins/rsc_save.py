@@ -194,8 +194,9 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
+
 	
-        elif "Audio" == msg_type:
+	elif "Audio" == msg_type:
 		try:
 			ph_path = await acc.download_media(msg.audio.thumbs[0].file_id)
 		except:
