@@ -10,7 +10,7 @@ import asyncio
 # url = "https://insta-dl.hazex.workers.dev/?url=https://instagram.com/reel/ABC"
 
 
-async def instra_reels(client: Client, message: Message):
+async def instra_reels(client, message):
   if "https://www.instagram.com/" in message.text:
     user_id = message.from_user.id
     urls = message.text
