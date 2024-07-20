@@ -14,6 +14,7 @@ motor
 pypdf
 PyPDF2
 Pillow
+fpdf
 # -- for pdf ---#
 pymupdf
 # -- for auto  rename --- #
