@@ -137,8 +137,8 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 			return
 	smsg = await client.send_message(message.chat.id, 'Downloading', reply_to_message_id=message.id)
-        dosta = asyncio.create_task(downstatus(client, f'{message.id}downstatus.txt', smsg))
-        try:
+	dosta = asyncio.create_task(downstatus(client, f'{message.id}downstatus.txt', smsg))
+	try:
 		file = await acc.download_media(msg, progress=progress, progress_args=[message,"down"])
 		os.remove(f'{message.id}downstatus.txt')
 		
