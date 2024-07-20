@@ -22,12 +22,12 @@ mode_S = [
        ]
 
 
-async def show_settings(client: Client, message: Message):
+async def show_settings(client, message):
         image = random.choice(photos)
         await client.send_photo(chat_id=message.from_user.id, photo=image, caption="List of Setting:", reply_markup=InlineKeyboardMarkup(setting_b))
 
 
-async def on_set_caption(client: Client, message: Message):
+async def on_set_caption(client, message):
             if len(message.command) == 1:
                         return await message.reply_text("**Give me a caption to set.\n\nExample:- `/setcaption File Name`\n\n For Auto Rename\n\nExample :</b> <code> /setcaption Naruto Shippuden S02 - EPepisode - quality  [Dual Audio] - @Wizard_Bots </code>**")
             caption = message.text.split(" ", 1)[1]
@@ -35,6 +35,6 @@ async def on_set_caption(client: Client, message: Message):
             await message.reply_text("**Your Caption successfully added ✅**")
 
 
-async def on_set_mode(client: Client, message: Message):
+async def on_set_mode(client, message):
 	mode = await db.get_mode(message.from_user.id)
 	await message.reply(f"<b>Your File Mode: {'Video' if mode else 'Document'}</b>", reply_markup=InlineKeyboardMarkup(mode_S))
