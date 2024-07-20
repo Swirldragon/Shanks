@@ -63,7 +63,7 @@ def progress(current, total, message, type):
         fileup.write(f"{current * 100 / total:.1f}%")
 
 
-async def save(client: Client, message: Message):
+async def save(client, message):
     if "https://t.me/" in message.text:
         datas = message.text.split("/")
         temp = datas[-1].replace("?single","").split("-")
