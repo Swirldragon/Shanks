@@ -182,6 +182,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		
                 try:
 
+			
 			xx = await client.send_animation(chat, file, reply_to_message_id=message.id)
 			xx.append(xx)
                 except Exception as e:
