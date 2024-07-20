@@ -58,7 +58,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
 
 async def convert_cbz_to_pdf(bot, message):
     user_id = message.from_user.id
-    if message.reply_to_message::
+    if message.reply_to_message:
         reply = message.reply_to_message
         file = reply.document
         start_time = time.time()
