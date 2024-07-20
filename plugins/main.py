@@ -1,5 +1,6 @@
 from .core.autorename import auto_rename_files
-from .core.convertor import convert_pdf_to_cbz, convert_cbz_to_pdf
+from .core.convertor import convert_pdf_to_cbz
+from .core.convertor import convert_cbz_to_pdf
 from .core.decryptPDF import decrypt_pdf
 from .core.encryptPDF import encrypt_pdf
 from .core.instra import instra_reels
