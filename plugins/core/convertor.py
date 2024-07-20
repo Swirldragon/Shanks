@@ -7,11 +7,12 @@ from PIL import Image
 from datetime import datetime
 import asyncio
 import time
+from bot import Bot
 
 p2c_operation = {}
 c2p_operation = {}
 
-async def convert_pdf_to_cbz(client: Client, message: Message):
+""" async def convert_pdf_to_cbz(client: Client, message: Message):
     user_id = message.from_user.id
     if message.reply_to_message:
         reply = message.reply_to_message
@@ -53,7 +54,7 @@ async def convert_pdf_to_cbz(client: Client, message: Message):
         await client.send_document(user_id, "filename.cbz")
             
     else:
-        await message.reply("Please send a PDF file with reply.")
+        await message.reply("Please send a PDF file with reply.") """
 
 
 async def convert_cbz_to_pdf(bot, message):
