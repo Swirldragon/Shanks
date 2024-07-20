@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 import fitz
 from bot import Bot 
 
-async def encrypt_pdf(client: Client, message: Message):
+async def encrypt_pdf(client, message):
     reply = message.reply_to_message
     if reply:
         pdf_file = await client.download_media(reply.document)
