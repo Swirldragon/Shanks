@@ -191,7 +191,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		try:
 			xx = await client.send_voice(chat, file, caption=caption, caption_entities=msg.caption_entities, reply_to_message_id=message.id, progress=progress, progress_args=[message,"up"])
 			xx.append(xx)
-                except Exception as e:
+		except Exception as e:
 			await client.send_messaif ph_path != None: os.remove(ph_path)ge(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
 	
@@ -203,7 +203,8 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		try:
 			xx = await client.send_audio(chat, file, thumb=ph_path, caption=caption, reply_to_message_id=message.id, progress=progress, progress_args=[message,"up"])
 			xx.append(xx)
-                except Exception as e:
+			
+		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
 
@@ -211,6 +212,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		try:
 			xx = await client.send_animation(chat, file, reply_to_message_id=message.id)
 			xx.append(xx)
+			
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 		if ph_path != None: os.remove(ph_path)
@@ -220,6 +222,7 @@ async def handle_private(client: Client, acc, message: Message, chatid: int, msg
 		try:
 			xx = await client.send_photo(chat, file, caption=caption, reply_to_message_id=message.id)
 			xx.append(xx)
+			
 		except Exception as e:
 			await client.send_message(message.chat.id, f"Error: {e}", reply_to_message_id=message.id)
 
