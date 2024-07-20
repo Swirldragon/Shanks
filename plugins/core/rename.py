@@ -10,7 +10,7 @@ from datetime import datetime
 renaming_operation = {}
 
 
-async def rename_files(bot: Bot, msg: Message):
+async def rename_files(bot, msg):
   user_id = msg.from_user.id
   reply = msg.reply_to_message
   if len(msg.command) < 2 or not reply:
