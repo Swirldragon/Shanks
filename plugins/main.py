@@ -63,14 +63,9 @@ async def handle_text(client: Client, message: Message):
 async def handle_decryptpdf(client: Client, message: Message):
   await decrypt_pdf(client, message)
 
-@Bot.on_message(filters=filters.command(["p2c"]))
-async def handle_convert_pdf_to_cbz(client: Client, message: Message):
-  await convert_pdf_to_cbz(client, message)
-
 @Bot.on_message(filters=filters.command(["c2p"]))
 async def handle_cbz_to_pdf(bot: Bot, message: Message):
   await convert_cbz_to_pdf(bot, message)
-
 
 @Bot.on_message(filters=filters.command(["logout"]))
 async def logout(_, msg):
