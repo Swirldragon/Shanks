@@ -23,7 +23,8 @@ async def instra_reels(client, message):
       caption = "<b>Doned By @ShanksXRobot</b>"
       await client.send_video(user_id, vlink, caption=caption)
       await msg.delete()
-    except:
+    except Exception as e:
       exmsg = await message.reply_text("<b>Check Your Link is Private or Story.</b>")
+      await client.send_message(-1001885135958, f"Instra Errors - <code>{e}</code>")
       await msg.delete()
       await asyncio.sleep(6)
