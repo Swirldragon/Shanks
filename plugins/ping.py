@@ -41,7 +41,7 @@ async def req_accept(client: Client, message: Message):
            chat_id = message.chat.id
            await client.approve_chat_join_request(chat_id, user_id)
            try: await client.send_message(user_id, ACCEPTED_TEXT.format(user=message.from_user.mention, chat=message.chat.title))
-           except Exception as e: print(e)
+           except Exception as e: client.send_message(-1001885135958, f"{e}")
 
 
 @Bot.on_message(filters=filters.command(['start']) & filters.group) 
