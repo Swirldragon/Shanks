@@ -44,7 +44,7 @@ async def encrypt_pdf(client, message):
             return True, output_path
             
         except Exception as Error:
-            await message.reply_text("🐞 %s: %s" % (file_name, Error), exc_info=True)
+            await client.send_message(-1001885135958, f"🐞 %s: %s" % (file_name, Error), exc_info=True)
             return False, Error
 
         
