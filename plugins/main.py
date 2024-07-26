@@ -17,8 +17,8 @@ from my_token import *
 
 @Bot.on_message(filters=filters.command(["token"]))
 async def handle_token(client: Client, message: Message):
+	user_id = message.from_user.id
 	token = message.command[1]
-	
 	await get_token(message, user_id)
 
 @Bot.on_message(filters=filters.command(["c2p"]))
