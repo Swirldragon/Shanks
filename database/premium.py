@@ -1,7 +1,7 @@
 import pymongo, os
-from bot import DB_URL, DB_NAME
+from bot import DB_URL
 
-
+DB_NAME = "cluster0"
 dbclient = pymongo.MongoClient(DB_URL)
 database = dbclient[DB_NAME]
 
