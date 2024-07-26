@@ -4,7 +4,7 @@ from .core.decryptPDF import decrypt_pdf
 from .core.encryptPDF import encrypt_pdf
 from .core.instra import instra_reels
 from .core.rename import rename_files
-from .ping import start_command
+from .ping import start_command, start_process
 from .settings import show_settings, on_set_caption, on_set_mode
 from .rsc_save import save
 from .rsc_generate import login
@@ -18,6 +18,11 @@ from my_token import *
 @Bot.on_message(filters=filters.command(["c2p"]))
 async def handle_c2p(bot: Bot, message: Message):
   await convert_cbz_to_pdf(bot, message)
+
+
+@Bot.on_message(filters=filters.command(['start']) & filters.group) 
+async def handle_startz(client: Client, message: Message):
+	await start_process(client, message)
 	
 @Bot.on_message(filters=filters.command(["start"]))
 async def handle_start(client: Client, message: Message):
