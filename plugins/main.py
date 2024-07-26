@@ -71,9 +71,12 @@ async def handle_rename(bot: Bot, msg: Message):
 
 @Bot.on_message(filters.text & filters.private)
 async def handle_text(client: Client, message: Message):
-	user_data = verify_token(message.from_user.id)
+	user_id = message.from_user.id
+	user_data = verify_token(user_id)
 	if "https://t.me/" in message.text:
 		if user_data == True:
+			await save(client, message)
+		elif user_id == 1880221341:
 			await save(client, message)
 		else:
 			await message.reply("<b> Get Your Token By <code>/token</code>.<b/>")
