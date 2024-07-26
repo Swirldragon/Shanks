@@ -59,9 +59,9 @@ async def handle_login(bot: Client, message: Message):
 
 @Bot.on_message(filters=filters.command(["token"]))
 async def handle_token(bot: Bot, msg: Message):
+	
 	token = message.command[1]
-        print(f"Received token: {token} for user: {user_id}")
-        await message.reply("Invalid or expired token. Requesting a new one...")
+	print(f"Received token: {token} for user: {user_id}")
         await get_token(message, user_id)
 
 
