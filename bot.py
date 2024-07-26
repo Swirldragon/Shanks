@@ -9,7 +9,6 @@ API_HASH = "b9f8cdba86d3406944419974334e34d5"
 BOT_TOKEN = "5170934938:AAHWTgb6FH676fzS-JI3lxxomESplXS8ai0"
 LOG_CHANNEL = -1001885135958
 DB_URL = "mongodb+srv://justatestsubject01:HzP5SK8ZiiLHcF3o@cluster0.wizfkbo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-DB_NAME = "Shanks"
 PORT = 8080
 ADMINS = 1880221341
 
