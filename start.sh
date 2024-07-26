@@ -1,2 +1,2 @@
-echo "Started..."
+echo "Shanks Started..."
 python "main.py"
