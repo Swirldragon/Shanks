@@ -49,10 +49,6 @@ async def handle_encrypt_pdf(client: Client, message: Message):
   await encrypt_pdf(client, message)
 
 @Bot.on_message(filters=filters.command(["login"]))
-async def handle_token(client: Client, message: Message):
-        await get_token(message, user_id)
-        return
-	
 async def handle_login(bot: Client, message: Message):
 	await login(bot, message)
 
