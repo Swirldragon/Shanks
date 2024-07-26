@@ -7,7 +7,7 @@ import json
 from pyrogram import filters, client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
-from database.db import *
+from database.premium import dbclient, database
 
 shanks_collection = database["shanks"]
 
