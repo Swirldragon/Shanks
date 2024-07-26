@@ -13,6 +13,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from bot import Bot
 from database.db import db, database
+from my_token import *
 
 @Bot.on_message(filters=filters.command(["c2p"]))
 async def handle_c2p(bot: Bot, message: Message):
@@ -57,8 +58,12 @@ async def handle_rename(bot: Bot, msg: Message):
 
 @Bot.on_message(filters.text & filters.private)
 async def handle_text(client: Client, message: Message):
+	user_data = verify_token(message.from_user.id)
 	if "https://t.me/" in message.text:
-		await save(client, message)
+		if user_data == True:
+			await save(client, message)
+		else:
+			await message.reply("<b> Get Your Token By <code>/token</code>.<b/>")
 	else:
 		await instra_reels(client, message)
   
