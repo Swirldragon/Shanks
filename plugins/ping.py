@@ -26,6 +26,12 @@ gbutton = [[
 
 
 async def start_command(client, message):
+           user_id = message.from_user.id
+           if len(message.command) > 1:
+                      if verify_token_memory(user_id, token):
+                                 await message.reply("Token verified! You can now use the bot.")
+                                 save_token(user_id, token, dr)
+                                 global_tokens.pop(user_id, None)
            image = random.choice(photos)
            user_id = message.from_user.id
            if not user_id:
@@ -44,7 +50,7 @@ async def req_accept(client: Client, message: Message):
            except Exception as e: await client.send_message(-1001885135958, f"{e}")
 
 
-@Bot.on_message(filters=filters.command(['start']) & filters.group) 
+
 async def start_process(client: Client, message: Message):
            image = random.choice(photos)
            await client.send_photo(chat_id=message.chat.id, photo=image, caption=GROUP_TEXT.format(message.from_user.mention), reply_markup=InlineKeyboardMarkup(gbutton))
