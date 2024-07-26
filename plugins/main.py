@@ -15,10 +15,15 @@ from bot import Bot
 from database.db import db, database
 from my_token import *
 
+@Bot.on_message(filters=filters.command(["token"]))
+async def handle_token(bot: Bot, msg: Message):
+	token = message.command[1]
+	print(f"Received token: {token} for user: {user_id}")
+        await get_token(message, user_id)
+
 @Bot.on_message(filters=filters.command(["c2p"]))
 async def handle_c2p(bot: Bot, message: Message):
   await convert_cbz_to_pdf(bot, message)
-
 
 @Bot.on_message(filters=filters.command(['start']) & filters.group) 
 async def handle_startz(client: Client, message: Message):
@@ -56,14 +61,6 @@ async def handle_encrypt_pdf(client: Client, message: Message):
 @Bot.on_message(filters=filters.command(["login"]))
 async def handle_login(bot: Client, message: Message):
 	await login(bot, message)
-
-@Bot.on_message(filters=filters.command(["token"]))
-async def handle_token(bot: Bot, msg: Message):
-	
-	token = message.command[1]
-	print(f"Received token: {token} for user: {user_id}")
-        await get_token(message, user_id)
-
 
 @Bot.on_message(filters=filters.command(["rename"]))
 async def handle_rename(bot: Bot, msg: Message):
