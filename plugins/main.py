@@ -57,6 +57,13 @@ async def handle_login(bot: Client, message: Message):
 	await login(bot, message)
 
 @Bot.on_message(filters=filters.command(["token"]))
+async def handle_token(bot: Bot, msg: Message):
+	token = message.command[1]
+        print(f"Received token: {token} for user: {user_id}")
+        await message.reply("Invalid or expired token. Requesting a new one...")
+        await get_token(message, user_id)
+
+
 @Bot.on_message(filters=filters.command(["rename"]))
 async def handle_rename(bot: Bot, msg: Message):
   await rename_files(bot, msg)
